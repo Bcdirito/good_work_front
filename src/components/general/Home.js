@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
+import GoalContainer from "../goals/GoalContainer"
 
-export default class Home extends Component {
+class Home extends Component {
   render() {
     return (
       <div>
-        You've made it home.
+        <GoalContainer />
       </div>
     )
   }
 }
+
+export default Home

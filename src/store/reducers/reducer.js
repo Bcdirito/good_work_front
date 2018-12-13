@@ -27,7 +27,7 @@ const reducer = (state = initialState, action) => {
         
         case "UPDATE_TASK":
             console.log("Triggered Edit Task", action.task)
-            return
+            return state
 
         case "DELETE_TASK":
             console.log("Triggered Delete Task", action.task)

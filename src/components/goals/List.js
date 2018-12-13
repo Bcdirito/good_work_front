@@ -51,6 +51,7 @@ class List extends Component {
             {this.state.clicked === false ?<button onClick={this.buttonHandler}>Add A Task</button> : null}
             <div>{this.state.clicked === true ? this.renderForm() : null}</div>
             <button onClick={this.deleteHandler}>Delete List</button>
+            <TaskCard/>
         </div>
         )
     }

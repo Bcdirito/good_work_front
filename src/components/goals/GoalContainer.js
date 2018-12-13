@@ -24,7 +24,7 @@ class GoalContainer extends Component {
     submitHandler = e => {
         e.preventDefault()
         this.props.addGoal(this.state.formData)
-        this.setState({ formData: { title: "" } })
+        this.setState({ clicked: false, formData: { title: "" } })
     }
 
     renderForm = () => {
@@ -40,7 +40,6 @@ class GoalContainer extends Component {
     }
 
   render() {
-    console.log(this.props)
     // let allGoals = this.props.user.goals.map(goal => {
     //     return <Goal
     //             key={goal.id}

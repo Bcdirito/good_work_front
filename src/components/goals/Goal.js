@@ -29,7 +29,7 @@ class Goal extends Component {
     submitHandler = (e) => {
         e.preventDefault()
         this.props.addList(this.state.formData)
-        this.setState({ formData: { title: "" } })
+        this.setState({ clicked: false, formData: { title: "" } })
     }
 
     renderForm = () => {
@@ -41,7 +41,6 @@ class Goal extends Component {
     }
 
     render() {
-        console.log(this.props)
         //   const allLists = this.props.lists.map{list => {
         //       return (<List
         //                 key={list.id}

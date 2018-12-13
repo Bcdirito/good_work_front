@@ -12,6 +12,14 @@ const reducer = (state = initialState, action) => {
         case "DELETE_GOAL":
             console.log("Triggered Delete Goal", action.goal)
             return state
+        
+        case "ADD_LIST":
+            console.log("Triggered Add List", action.list)
+            return state
+        
+        case "DELETE_LIST":
+            console.log("Triggered Delete List", action.list)
+            return state
 
         default:
             return state

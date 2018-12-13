@@ -24,12 +24,13 @@ class GoalContainer extends Component {
     submitHandler = e => {
         e.preventDefault()
         this.props.addGoal(this.state.formData)
+        this.setState({ formData: { title: "" } })
     }
 
     renderForm = () => {
         return <form onSubmit={e => this.submitHandler(e)}>
                 <label>Title</label>
-                    <input type="text" name="title" value={this.state.formData.title} placeholder="Add Title Here" onChange={e => this.changeHandler(e)}/>
+                    <input type="text" name="title" value={this.state.formData.title} placeholder="Goal Title" onChange={e => this.changeHandler(e)}/>
                 <input type="submit"></input>
                 </form>
     }
@@ -52,7 +53,7 @@ class GoalContainer extends Component {
         This is the GoalContainer
         {this.state.clicked === false ? <button onClick={this.buttonHandler}>Add Goal</button>: null}
         <div>{this.state.clicked === true ? this.renderForm() : null}</div>
-        <Goal deleteGoal={this.props.deleteGoal} />
+        <Goal />
       </div>
     )
   }
@@ -66,8 +67,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addGoal: goal => dispatch({type: "ADD_GOAL", goal}),
-        deleteGoal: goal => dispatch({type: "DELETE_GOAL", goal})
+        addGoal: goal => dispatch({type: "ADD_GOAL", goal})
     }
 }
 

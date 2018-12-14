@@ -4,6 +4,7 @@ import NavBar from "./components/general/NavBar"
 import NoMatch from "./components/general/NoMatch"
 import Home from "./components/general/Home"
 import './App.css';
+import LoginPage from './components/general/LoginPage';
 
 class App extends Component {
   render() {
@@ -14,6 +15,7 @@ class App extends Component {
           <Route exact path="/" render={(props) => (
             <Home {...props}/>
           )}/>
+          <Route exact path="/login" component={LoginPage} />
           <Route component={NoMatch}/>
         </Switch>
       </div>

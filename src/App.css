@@ -30,3 +30,11 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  background-image:url("https://images.pexels.com/photos/747964/pexels-photo-747964.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") !important
+}
+
+#navbar {
+  background-color: #f7f7d9
+}

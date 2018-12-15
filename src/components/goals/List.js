@@ -31,10 +31,10 @@ class List extends Component {
     submitHandler = e => {
         e.preventDefault()
         this.props.addTask(this.state.formData)
-        this.resetForm()
+        this.resetComponent()
     }
 
-    resetForm = () => {
+    resetComponent = () => {
         this.setState({
             clicked: !this.state.clicked,
             formData: {

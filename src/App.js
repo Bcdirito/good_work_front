@@ -11,13 +11,13 @@ class App extends Component {
     return (
       <div className="App">
       <NavBar />
-        <Switch>
-          <Route exact path="/" render={(props) => (
-            <Home {...props}/>
-          )}/>
-          <Route exact path="/login" component={LoginPage} />
-          <Route component={NoMatch}/>
-        </Switch>
+          <Switch>
+            <Route exact path="/" render={(props) => (
+              <Home {...props}/>
+            )}/>
+            <Route exact path="/login" component={LoginPage} />
+            <Route component={NoMatch}/>
+          </Switch>
       </div>
     );
   }

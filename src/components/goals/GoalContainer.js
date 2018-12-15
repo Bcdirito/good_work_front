@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Goal from "./Goal"
 import {connect} from "react-redux"
+import {Button, Form} from "semantic-ui-react"
 
 class GoalContainer extends Component {
     state = {
@@ -28,11 +29,13 @@ class GoalContainer extends Component {
     }
 
     renderForm = () => {
-        return <form onSubmit={e => this.submitHandler(e)}>
-                <label>Title</label>
-                    <input type="text" name="title" value={this.state.formData.title} placeholder="Goal Title" onChange={e => this.changeHandler(e)}/>
-                <input type="submit"></input>
-                </form>
+        return <Form onSubmit={e => this.submitHandler(e)}>
+                    <Form.Field>
+                        <label>Title</label>
+                        <input type="text" name="title" value={this.state.formData.title} placeholder="Goal Title" onChange={e => this.changeHandler(e)}/>
+                    </Form.Field>
+                    <Button type="submit">Add Goal!</Button>
+                </Form>
     }
 
     deleteGoal = (goal) => {
@@ -50,7 +53,7 @@ class GoalContainer extends Component {
     return (
       <div>
         This is the GoalContainer
-        {this.state.clicked === false ? <button onClick={this.buttonHandler}>Add Goal</button>: null}
+        {this.state.clicked === false ? <Button onClick={this.buttonHandler}>Add Goal</Button>: null}
         <div>{this.state.clicked === true ? this.renderForm() : null}</div>
         <Goal />
       </div>

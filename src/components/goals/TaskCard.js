@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux"
+import {Form, Button} from "semantic-ui-react"
 
 class TaskCard extends Component {
     state = {
@@ -24,7 +25,13 @@ class TaskCard extends Component {
     submitHandler = e => {
         e.preventDefault()
         this.props.updateTask(this.state.editData)
-        this.setState({ editData: { title: "", content: "" }})
+        this.resetComponent()
+    }
+
+    resetComponent = () => {
+        this.setState({ 
+            clicked: false,
+            editData: { title: "", content: "" }})
     }
 
     deleteHandler = () => {
@@ -32,26 +39,29 @@ class TaskCard extends Component {
     }
 
     renderForm = () => {
-        return <form onSubmit={e => this.submitHandler(e)}>
-                <label>Task Title</label>
-                    <input type="text" name="title"
-                    placeholder={this.props.content} value={this.state.editData.title}
-                    onChange={e => this.changeHandler(e)}/>
-                <label>Task Content</label>
-                <input type="text" name="content"
-                    placeholder={this.props.content} value={this.state.editData.content}
-                    onChange={e => this.changeHandler(e)}/>
-                <input type="submit" />
-                </form>
+        return <Form onSubmit={e => this.submitHandler(e)}>
+                    <Form.Field></Form.Field>
+                        <label>Task Title</label>
+                            <input type="text" name="title"
+                            placeholder={this.props.content} value={this.state.editData.title}
+                            onChange={e => this.changeHandler(e)}/>
+                    <Form.Field>
+                        <label>Task Content</label>
+                        <input type="text" name="content"
+                            placeholder={this.props.content} value={this.state.editData.content}
+                            onChange={e => this.changeHandler(e)}/>
+                    </Form.Field>
+                    <Button type="submit" >Update Task</Button>
+                </Form>
     }
     
     render() {
         return (
         <div>
             This will display the Task Title and Content
-        {this.state.clicked === false ? <button onClick={this.buttonHandler}>Edit Task</button> : null}
+        {this.state.clicked === false ? <Button onClick={this.buttonHandler}>Edit Task</Button> : null}
         <div>{this.state.clicked === true ? this.renderForm() : null}</div>
-        <button onClick={this.deleteHandler}>Delete Task</button>
+        <Button onClick={this.deleteHandler}>Delete Task</Button>
         </div>
         )
     }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import List from "./List"
 import {connect} from "react-redux"
+import {Button, Form} from "semantic-ui-react"
 
 class Goal extends Component {
     state = {
@@ -33,11 +34,13 @@ class Goal extends Component {
     }
 
     renderForm = () => {
-        return <form onSubmit={e => this.submitHandler(e)}>
-                <label>List Title</label>
-                    <input type="text" name="title" value={this.state.formData.title} placeholder="List Title" onChange={e => this.changeHandler(e)}/>
-                <input type="submit"></input>
-                </form>
+        return <Form onSubmit={e => this.submitHandler(e)}>
+                    <Form.Field>
+                        <label>List Title</label>
+                        <input type="text" name="title" value={this.state.formData.title} placeholder="Enter Title Here" onChange={e => this.changeHandler(e)}/>
+                    </Form.Field>
+                    <Button type="submit">Add List</Button>
+                </Form>
     }
 
     render() {
@@ -50,8 +53,8 @@ class Goal extends Component {
         return (
         <div>
             This will be a Goal Component. It will house the lists belonging to this goal.
-            <button onClick={this.deleteHandler}>Delete Me!</button>
-            {this.state.clicked === false ? <button onClick={this.buttonHandler}>Add List</button>: null}
+            <Button onClick={this.deleteHandler}>Delete Me!</Button>
+            {this.state.clicked === false ? <Button onClick={this.buttonHandler}>Add List</Button>: null}
             <div>{this.state.clicked === true ? this.renderForm() : null}</div>
             <List />
         </div>

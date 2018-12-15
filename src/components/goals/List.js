@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux"
 import TaskCard from "./TaskCard"
+import {Form, Button} from "semantic-ui-react"
 
 class List extends Component {
     state = {
@@ -30,27 +31,40 @@ class List extends Component {
     submitHandler = e => {
         e.preventDefault()
         this.props.addTask(this.state.formData)
-        this.setState({ formData: { title: "", content:"" }
+        this.resetForm()
+    }
+
+    resetForm = () => {
+        this.setState({
+            clicked: !this.state.clicked,
+            formData: {
+                title: "",
+                content: ""
+            }
         })
     }
 
     renderForm = () => {
-        return <form onSubmit={e => this.submitHandler(e)}>
-                <label>Task Title</label>
-                    <input type="text" name="title" value={this.state.formData.title} placeholder="Task Title" onChange={e => this.changeHandler(e)}/>
-                <label>Task Content</label>
-                    <input type="text" name="content" value={this.state.formData.content} placeholder="Task Content" onChange={e => this.changeHandler(e)}/>
-                <input type="submit"></input>
-                </form>
+        return <Form onSubmit={e => this.submitHandler(e)}>
+                    <Form.Field>
+                        <label>Task Title</label>
+                            <input type="text" name="title" value={this.state.formData.title} placeholder="Task Title" onChange={e => this.changeHandler(e)}/>
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Task Content</label>
+                            <input type="text" name="content" value={this.state.formData.content} placeholder="Task Content" onChange={e => this.changeHandler(e)}/>
+                    </Form.Field>
+                    <Button type="submit">Add Task</Button>
+                </Form>
     }
 
     render() {
         return (
         <div>
             This is a List Component. It will hold all individual TaskCards for that list.
-            {this.state.clicked === false ?<button onClick={this.buttonHandler}>Add A Task</button> : null}
+            {this.state.clicked === false ?<Button onClick={this.buttonHandler}>Add A Task</Button> : null}
             <div>{this.state.clicked === true ? this.renderForm() : null}</div>
-            <button onClick={this.deleteHandler}>Delete List</button>
+            <Button onClick={this.deleteHandler}>Delete List</Button>
             <TaskCard/>
         </div>
         )

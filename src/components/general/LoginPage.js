@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
-import {Form, Button, Input} from "semantic-ui-react"
+import { Button } from "semantic-ui-react"
 import LoginForm from './LoginForm';
 import SignUp from './SignUp'
+import { connect } from "react-redux"
 
-export default class LoginPage extends Component {
+class LoginPage extends Component {
     state = {
         clicked: false,
         form: "",
     }
+
+    
 
     buttonHandler = e => {
         this.setState({
@@ -18,9 +21,25 @@ export default class LoginPage extends Component {
 
     renderForm = () => {
         if (this.state.form === "login"){
-            return (<LoginForm />)
+            return (<LoginForm submitHandler={this.submitHandler}/>)
         } else if (this.state.form === "sign up"){
-            return (<SignUp/>)
+            return (<SignUp submitHandler={this.submitHandler}/>)
+        }
+    }
+
+    submitHandler = (e, data) => {
+        e.preventDefault()
+
+        this.formHandler(data)
+
+        this.resetContainer()
+    }
+
+    formHandler = (data) => {
+        if (this.state.form === "login"){
+            this.props.login(data)
+        } else if (this.state.form === "sign up"){
+            this.props.signUp(data)
         }
     }
 
@@ -47,3 +66,12 @@ export default class LoginPage extends Component {
         )
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        login: user => dispatch({type: "LOGIN_USER", user}),
+        signUp: user => dispatch({type: "CREATE_USER", user})
+    }
+}
+
+export default connect(null, mapDispatchToProps)(LoginPage)

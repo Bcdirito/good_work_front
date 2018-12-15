@@ -33,6 +33,18 @@ const reducer = (state = initialState, action) => {
             console.log("Triggered Delete Task", action.task)
             return state
 
+        case "LOGIN_USER":
+            console.log("Triggered User Login", action)
+            return state
+
+        case "LOGOUT_USER":
+            console.log("Triggered User Logout", action)
+            return state
+
+        case "CREATE_USER":
+            console.log("Triggered Create User", action)
+            return state
+
         default:
             return state
     }

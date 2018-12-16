@@ -54,7 +54,7 @@ class List extends Component {
                         <label>Task Content</label>
                             <input type="text" name="content" value={this.state.formData.content} placeholder="Task Content" onChange={e => this.changeHandler(e)}/>
                     </Form.Field>
-                    <Button type="submit">Add Task</Button>
+                    <Button type="submit">Create New Task</Button>
                 </Form>
     }
 
@@ -62,9 +62,9 @@ class List extends Component {
         return (
         <div>
             This is a List Component. It will hold all individual TaskCards for that list.
-            {this.state.clicked === false ?<Button onClick={this.buttonHandler}>Add A Task</Button> : null}
             <div>{this.state.clicked === true ? this.renderForm() : null}</div>
-            <Button onClick={this.deleteHandler}>Delete List</Button>
+                {this.state.clicked === false ?<Button onClick={this.buttonHandler}>Add A Task</Button> : <Button onClick={this.buttonHandler}>Go Back</Button>}
+                {this.state.clicked === false ? <Button onClick={this.deleteHandler}>Delete List</Button> : null}
             <TaskCard/>
         </div>
         )

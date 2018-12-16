@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {Route, Switch} from 'react-router-dom'
-import NavBar from "./components/general/NavBar"
-import NoMatch from "./components/general/NoMatch"
-import Home from "./components/general/Home"
+import NavBar from "./general/NavBar"
+import NoMatch from "./general/NoMatch"
+import Home from "./general/Home"
 import './App.css';
-import LoginPage from './components/general/LoginPage';
+import LoginPage from './general/LoginPage';
 
 class App extends Component {
   render() {

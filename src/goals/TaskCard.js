@@ -59,9 +59,9 @@ class TaskCard extends Component {
         return (
         <div>
             This will display the Task Title and Content
-        {this.state.clicked === false ? <Button onClick={this.buttonHandler}>Edit Task</Button> : null}
-        <div>{this.state.clicked === true ? this.renderForm() : null}</div>
-        <Button onClick={this.deleteHandler}>Delete Task</Button>
+            <div>{this.state.clicked === true ? this.renderForm() : null}</div>
+                {this.state.clicked === false ? <Button onClick={this.buttonHandler}>Edit Task</Button> : <Button onClick={this.buttonHandler}>Go Back</Button>}
+                {this.state.clicked === true ?<Button onClick={this.deleteHandler}>Delete Task</Button> : null}
         </div>
         )
     }

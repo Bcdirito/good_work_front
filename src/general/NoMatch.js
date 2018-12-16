@@ -1,5 +1,5 @@
 import React from 'react'
-import wrongPup from "/Users/BrianDiRito/Development/Flatiron/good_work_front/src/media/wrongPup.jpg"
+import wrongPup from "../media/wrongPup.jpg"
 
 const NoMatch = props => {
     return (

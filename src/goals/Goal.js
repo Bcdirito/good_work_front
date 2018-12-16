@@ -33,14 +33,24 @@ class Goal extends Component {
         this.setState({ clicked: false, formData: { title: "" } })
     }
 
+    resetContainer = () => {
+        this.setState({
+            clicked: false,
+            formData: {
+                title: ""
+            }
+        })
+    }
+
     renderForm = () => {
         return <Form onSubmit={e => this.submitHandler(e)}>
                     <Form.Field>
                         <label>List Title</label>
                         <input type="text" name="title" value={this.state.formData.title} placeholder="Enter Title Here" onChange={e => this.changeHandler(e)}/>
                     </Form.Field>
-                    <Button type="submit">Add List</Button>
+                    <Button type="submit">Create New List</Button>
                 </Form>
+
     }
 
     render() {
@@ -53,9 +63,9 @@ class Goal extends Component {
         return (
         <div>
             This will be a Goal Component. It will house the lists belonging to this goal.
-            <Button onClick={this.deleteHandler}>Delete Me!</Button>
-            {this.state.clicked === false ? <Button onClick={this.buttonHandler}>Add List</Button>: null}
             <div>{this.state.clicked === true ? this.renderForm() : null}</div>
+            {this.state.clicked === false ? <Button onClick={this.buttonHandler}>Add List</Button>: <Button onClick={this.resetContainer}>Go Back</Button>}
+            {this.state.clicked === false ? <Button onClick={this.deleteHandler}>Delete Me!</Button> : null}
             <List />
         </div>
         )

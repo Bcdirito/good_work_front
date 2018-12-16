@@ -34,7 +34,7 @@ class GoalContainer extends Component {
                         <label>Title</label>
                         <input type="text" name="title" value={this.state.formData.title} placeholder="Goal Title" onChange={e => this.changeHandler(e)}/>
                     </Form.Field>
-                    <Button type="submit">Add Goal!</Button>
+                    <Button type="submit">Create New Goal</Button>
                 </Form>
     }
 
@@ -53,8 +53,8 @@ class GoalContainer extends Component {
     return (
       <div>
         This is the GoalContainer
-        {this.state.clicked === false ? <Button onClick={this.buttonHandler}>Add Goal</Button>: null}
         <div>{this.state.clicked === true ? this.renderForm() : null}</div>
+        {this.state.clicked === false ? <Button onClick={this.buttonHandler}>Add Goal</Button>: <Button onClick={this.buttonHandler}>Go Back</Button> }
         <Goal />
       </div>
     )

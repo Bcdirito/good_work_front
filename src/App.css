@@ -32,9 +32,32 @@
 }
 
 body {
-  background-image:url("https://images.pexels.com/photos/747964/pexels-photo-747964.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") !important
+  background-image: url('./media/good_work_background.jpeg') !important
 }
 
 #navbar {
-  background-color: #f7f7d9
+  background-color: #fcfcca
+}
+
+a:link {
+  color: #5656fc
+}
+
+a:hover {
+  color: white 
+}
+
+a:active {
+  color: white
+}
+
+a:visited {
+  color: #5656fc
+}
+
+h1 {
+  background-color: #cacafc;
+  color: rgb(214, 255, 255);
+  width: 25%;
+  border-radius: 10px
 }

@@ -42,8 +42,15 @@ const reducer = (state = initialState, action) => {
             return state
 
         case "CREATE_USER":
-            console.log("Triggered Create User", action)
-            return state
+            console.log(action.user)
+            return {
+                ...state,
+                user: {
+                    id: action.user.user.id,
+                    user: action.user.user,
+                    token: action.user.jwt
+                }
+            }
 
         default:
             return state

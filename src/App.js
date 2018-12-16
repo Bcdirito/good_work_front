@@ -15,7 +15,9 @@ class App extends Component {
             <Route exact path="/" render={(props) => (
               <Home {...props}/>
             )}/>
-            <Route exact path="/login" component={LoginPage} />
+            <Route exact path="/login" render={(props) => (
+              <LoginPage {...props} />
+            )} />
             <Route component={NoMatch}/>
           </Switch>
       </div>

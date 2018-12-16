@@ -40,24 +40,39 @@ body {
 }
 
 a:link {
-  color: #5656fc
+  color: rgb(70, 129, 238) 
 }
 
 a:hover {
-  color: #5656fc 
+  color: rgb(70, 129, 238) 
 }
 
 a:active {
-  color: #5656fc
+  color: rgb(70, 129, 238)
 }
 
 a:visited {
-  color: #5656fc
+  color: rgb(70, 129, 238)
 }
 
 h1 {
+  display: flex;
+  justify-content: center;
   background-color: #cacafc;
-  color: rgb(214, 255, 255);
-  width: 25%;
-  border-radius: 10px
+  color: #010203;
+  width: 50%;
+  border-radius: 10px;
+  text-align: center
+}
+
+#welcome {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  align-items: center;
+}
+
+.button {
+  background-color: #d1d1ff !important;
+  color: #010203 !important
 }

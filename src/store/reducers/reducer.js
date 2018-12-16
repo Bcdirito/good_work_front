@@ -47,7 +47,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 user: {
                     id: action.user.user.id,
-                    user: action.user.user,
+                    user: action.user.user.username,
                     token: action.user.jwt
                 }
             }

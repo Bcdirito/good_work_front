@@ -10,20 +10,21 @@ class Home extends Component {
   }
 
   homeRender = () => {
-    if (this.props.user.length === undefined) {
-      return (<div>
-                <div id="welcome">
-                      <Button name="login" onClick={e => this.clickHandler(e)} color="blue">Login/Sign Up</Button>
-                      <Button name="doctors" onClick={e => this.clickHandler(e)} color="blue">Find A Doctor</Button>
-                </div>
-              </div>)
-    } else {
+    if (this.props.user.id) {
       return <GoalContainer />
+    } else {
+      return (<div>
+        <div id="welcome">
+              <Button name="login" onClick={e => this.clickHandler(e)} color="blue">Login/Sign Up</Button>
+              <Button name="doctors" onClick={e => this.clickHandler(e)} color="blue">Find A Doctor</Button>
+        </div>
+      </div>)
     }
   }
 
   render() {
-    console.log(this.props)
+    let props = this.props.user
+    // debugger
     return (
       <div>
         <h1>Welcome to Good Work</h1>

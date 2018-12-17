@@ -27,14 +27,6 @@ const reducer = (state = initialState, action) => {
                 lists: [...state.lists, action.list]
             }
         
-        case "ADD_LIST":
-            console.log("Triggered Add List", action.list)
-            debugger
-            return {
-                ...state,
-                lists: [...state.lists, action.list.data]
-            }
-        
         case "DELETE_LIST":
             console.log("Triggered Delete List", action.list)
             return state

@@ -9,7 +9,8 @@ class List extends Component {
         formData: {
             title: "",
             content: ""
-        }
+        },
+        tasks: []
     }
 
     buttonHandler = () => {
@@ -59,9 +60,11 @@ class List extends Component {
     }
 
     render() {
+        const list = this.props.list
+        console.log(list)
         return (
         <div>
-            This is a List Component. It will hold all individual TaskCards for that list.
+            <h3>{list.attributes.name}</h3>
             <div>{this.state.clicked === true ? this.renderForm() : null}</div>
                 {this.state.clicked === false ?<Button onClick={this.buttonHandler}>Add A Task</Button> : <Button onClick={this.buttonHandler}>Go Back</Button>}
                 {this.state.clicked === false ? <Button onClick={this.deleteHandler}>Delete List</Button> : null}

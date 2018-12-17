@@ -3,7 +3,7 @@ import List from "./List"
 import {connect} from "react-redux"
 import {Button, Form} from "semantic-ui-react"
 import { destroyGoal } from '../store/actions/goalActions'
-import {createList, getLists} from "../store/actions/listActions"
+import {createList} from "../store/actions/listActions"
 
 class Goal extends Component {
     state = {
@@ -15,8 +15,32 @@ class Goal extends Component {
     }
 
     componentDidMount = () => {
-        this.props.getLists(this.props.goal)
+        const id = this.props.goal.id
+        fetch("http://localhost:3000/api/v1/lists", {
+            headers: {
+                "Content-Type": "application/json",
+                "Accepts": "application/json"
+            }
+        })
+        .then(res => res.json())
+        .then(res => {
+            if (res.errors){
+                alert(res.errors)
+            } else {
+                res.data.forEach(list => {
+                    if (Number(list.relationships.goal.data.id)
+                    === id){
+                        this.setState({
+                            ...this.state,
+                            lists: [...this.state.lists, list]
+                        })
+                    }
+                })
+            }}
+        )
+        .catch(console.error)
     }
+
 
     buttonHandler = () => {
         this.setState({ clicked: !this.state.clicked})
@@ -61,8 +85,9 @@ class Goal extends Component {
     }
 
     createListComps = () => {
-        if (this.props.lists.length > 0){
-            return this.props.lists.map(list => {
+        if (this.state.lists.length > 0){
+            debugger
+            return this.state.lists.map(list => {
                 return (<List
                           key={list.id}
                           list={list}
@@ -76,7 +101,7 @@ class Goal extends Component {
         const allLists = this.createListComps()
         return (
             <div>
-                <h3>{goal.name}</h3>
+                <h2>{goal.name}</h2>
                 <div>{this.state.clicked === true ? this.renderForm() : null}</div>
                 {this.state.clicked === false ? <Button onClick={this.buttonHandler}>Add List</Button>: <Button onClick={this.resetContainer}>Go Back</Button>}
                 {this.state.clicked === false ? <Button onClick={this.deleteHandler}>Delete Me!</Button> : null}
@@ -86,18 +111,12 @@ class Goal extends Component {
   }
 }
 
-const mapStateToProps = state => {
-    return {
-        user: state.user,
-        lists: state.lists
-    }
-}
 
 const mapDispatchToProps = dispatch => {
     return {
         deleteGoal: goal => dispatch(destroyGoal(goal)),
         addList: (list, user) => dispatch(createList(list, user)),
-        getLists: user => dispatch(getLists(user))
+        // getLists: user => dispatch(getLists(user))
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Goal)
+export default connect(null, mapDispatchToProps)(Goal)

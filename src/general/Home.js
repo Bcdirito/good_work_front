@@ -23,7 +23,6 @@ class Home extends Component {
   }
 
   render() {
-    console.log(this.props.user.id)
     return (
       <div>
         <h1>Welcome to Good Work</h1>

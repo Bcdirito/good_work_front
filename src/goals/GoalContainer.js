@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Goal from "./Goal"
 import {connect} from "react-redux"
 import {Button, Form} from "semantic-ui-react"
+import {createGoal} from "../store/actions/goalActions"
 
 class GoalContainer extends Component {
     state = {
@@ -24,7 +25,9 @@ class GoalContainer extends Component {
 
     submitHandler = e => {
         e.preventDefault()
-        this.props.addGoal(this.state.formData)
+
+        this.props.createGoal(this.state.formData, this.props.user)
+
         this.setState({ clicked: false, formData: { title: "" } })
     }
 
@@ -43,19 +46,20 @@ class GoalContainer extends Component {
     }
 
   render() {
-    // let allGoals = this.props.user.goals.map(goal => {
-    //     return <Goal
-    //             key={goal.id}
-    //             goal={goal}
-    //             deleteGoal={this.props.deleteGoal}
-    //             />
-    // })
+    let allGoals = this.props.goals.map(goal => {
+        return <Goal
+                key={goal.id}
+                goal={goal}
+                deleteGoal={this.props.deleteGoal}
+                />
+    })
     return (
       <div>
-        This is the GoalContainer
-        <div>{this.state.clicked === true ? this.renderForm() : null}</div>
-        {this.state.clicked === false ? <Button onClick={this.buttonHandler}>Add Goal</Button>: <Button onClick={this.buttonHandler}>Go Back</Button> }
-        <Goal />
+          <h2>My Goals</h2>
+            {allGoals}
+            <div>{this.state.clicked === true ? this.renderForm() : null}</div>
+            {this.state.clicked === false ? <Button onClick={this.buttonHandler}>Add Goal</Button>: <Button onClick={this.buttonHandler}>Go Back</Button> }
+            <Goal />
       </div>
     )
   }
@@ -63,13 +67,14 @@ class GoalContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        user: state.user
+        user: state.user,
+        goals: state.goals
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        addGoal: goal => dispatch({type: "ADD_GOAL", goal})
+        createGoal: (goal, user) => dispatch(createGoal(goal, user))
     }
 }
 

@@ -1,19 +1,18 @@
-export const createUser = user => ({type: "CREATE_USER", user})
+export const addGoal = goal => ({type: "ADD_GOAL", goal})
 
-export const loginUser = user => ({type: "LOGIN_USER", user})
+export const deleteGoal = goal => ({type: "DELETE_GOAL", goal})
 
-export const signUpUser = (user) => {
+export const createGoal = (goal, user) => {
     return (dispatch) => {
-        return fetch("http://localhost:3000/api/v1/users", {
+        return fetch("http://localhost:3000/api/v1/goals", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                username: user.username,
-                password_digest: user.password,
-                email: user.email
+                user_id: user.id,
+                name: goal.title
             })
         })
         .then(res => res.json())
@@ -23,7 +22,7 @@ export const signUpUser = (user) => {
                     alert(error)
                 })
             } else {
-                dispatch(createUser(res))
+                dispatch(addGoal(res))
             }
         })
         .catch(console.error)

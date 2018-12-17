@@ -17,7 +17,17 @@ export const signUpUser = (user) => {
             })
         })
         .then(res => res.json())
-        .then((res) => dispatch(createUser(res)))
-        .catch(console.error)
+        .then((res) => {
+            if (res.error){
+                res.error.forEach(error => {
+                    alert(error)
+                })
+            } else {
+                dispatch(createUser(res))
+            }
+        })
+        .catch((error) => {
+            alert("Invalid Login")
+        })
     }
 }

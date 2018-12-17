@@ -45,13 +45,13 @@ const reducer = (state = initialState, action) => {
             }
 
         case "CREATE_USER":
-            console.log(action.user)
+            // console.log(action.user)
+            localStorage.setItem("token", action.user.jwt)
             return {
                 ...state,
                 user: {
                     id: action.user.user.id,
                     user: action.user.user.username,
-                    token: action.user.jwt
                 }
             }
 

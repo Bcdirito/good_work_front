@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import {connect} from "react-redux"
 import TaskCard from "./TaskCard"
 import {Form, Button} from "semantic-ui-react"
-import {addTask} from "../store/actions/taskActions"
+import {createTask} from "../store/actions/taskActions"
 
 class List extends Component {
     state = {
         clicked: false,
+        featuredClick: false,
         formData: {
             title: "",
             content: ""
@@ -74,16 +75,6 @@ class List extends Component {
         })
     }
 
-    renderTasks = () => {
-        if (this.state.tasks.length > 0){
-            this.state.tasks.forEach(task => {
-                return (<li onClick={this.renderTaskCard()}>
-                        <h4>task.name</h4>
-                </li>)
-            })
-        }
-    }
-
     renderForm = () => {
         return <Form onSubmit={e => this.submitHandler(e)}>
                     <Form.Field>
@@ -101,12 +92,27 @@ class List extends Component {
     renderTaskItems = () => {
         if (this.state.tasks.length > 0) {
             return this.state.tasks.map(task => {
-                return <li key={task.id}>{task.attributes.title} - {task.attributes.content}</li>
+                return <li key={task.id} onClick={()=> this.featureTaskCard(task)}>{task.attributes.title} - {task.attributes.content}</li>
             })
         }
     }
 
+    featureTaskCard = (task) => {
+        this.setState({
+            ...this.state,
+            featuredClick: !this.state.featuredClick,
+            featuredTask: task
+        })
+    }
+
+    renderTaskCard = (task) => {
+        if (this.state.featuredClick === true){
+            return <TaskCard task={this.state.featuredTask}/>
+        }
+    }
+
     render() {
+        console.log(this.state.tasks)
         const list = this.props.list
         const allTasks = this.renderTaskItems()
         return (
@@ -116,7 +122,7 @@ class List extends Component {
             <div>{this.state.clicked === true ? this.renderForm() : null}</div>
                 {this.state.clicked === false ?<Button onClick={this.buttonHandler}>Add A Task</Button> : <Button onClick={this.buttonHandler}>Go Back</Button>}
                 {this.state.clicked === false ? <Button onClick={this.deleteHandler}>Delete List</Button> : null}
-            <TaskCard/>
+                {this.renderTaskCard()}
         </div>
         )
     }
@@ -124,7 +130,7 @@ class List extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addTask: (task, list, goalId) => dispatch(addTask(task, list, goalId)),
+        addTask: (task, list, goalId) => dispatch(createTask(task, list)),
         deleteList: list => dispatch({type: "DELETE_LIST", list})
     }
 }

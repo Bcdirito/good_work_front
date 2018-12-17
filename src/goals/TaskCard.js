@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux"
 import {Form, Button} from "semantic-ui-react"
+import {destroyTask} from "../store/actions/taskActions"
 
 class TaskCard extends Component {
     state = {
@@ -56,9 +57,12 @@ class TaskCard extends Component {
     }
     
     render() {
+        let task = this.props.task
+        console.log(task)
         return (
         <div>
-            This will display the Task Title and Content
+            <h3>{task.attributes.title}</h3>
+            <h4>{task.attributes.content}</h4>
             <div>{this.state.clicked === true ? this.renderForm() : null}</div>
                 {this.state.clicked === false ? <Button onClick={this.buttonHandler}>Edit Task</Button> : <Button onClick={this.buttonHandler}>Go Back</Button>}
                 {this.state.clicked === true ?<Button onClick={this.deleteHandler}>Delete Task</Button> : null}
@@ -69,7 +73,7 @@ class TaskCard extends Component {
 
 const mapDispatchToState = dispatch => {
     return {
-        deleteTask: task => dispatch({type: "DELETE_TASK", task}),
+        deleteTask: task => dispatch(destroyTask(task)),
         updateTask: task => dispatch({type: "UPDATE_TASK", task})
     }
 }

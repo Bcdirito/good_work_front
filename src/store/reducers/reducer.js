@@ -14,7 +14,13 @@ const reducer = (state = initialState, action) => {
     
         case "DELETE_GOAL":
             console.log("Triggered Delete Goal", action.goal)
-            return state
+            debugger
+            return {
+                ...state,
+                goals: [...state.goals].filter(goal => {
+                    return goal.id !== action.goal.id
+                })
+            }
         
         case "ADD_LIST":
             console.log("Triggered Add List", action.list)
@@ -37,11 +43,16 @@ const reducer = (state = initialState, action) => {
             return state
 
         case "LOGIN_USER":
-            console.log("Triggered User Login", action)
-            return state
+            console.log("Triggered User Login", action.user) 
+            return {
+                ...state,
+                user: {
+                    id: action.user.user.id,
+                    user: action.user.user.username
+                }
+            }
 
         case "LOGOUT_USER":
-            console.log("Triggered User Logout", action)
             return {
                 user: {},
                 doctors: []

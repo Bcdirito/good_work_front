@@ -28,3 +28,26 @@ export const createGoal = (goal, user) => {
         .catch(console.error)
     }
 }
+
+export const destroyGoal = goal => {
+    const id = goal.id
+    return (dispatch) => {
+        return fetch(`http://localhost:3000/api/v1/goals/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+        })
+        .then(res => res.json())
+        .then((res) => {
+            if (res.error){
+                res.error.forEach(error => {
+                    alert(error)
+                })
+            } else {
+                dispatch(deleteGoal(id))
+            }
+        })
+    }
+}

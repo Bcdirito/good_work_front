@@ -54,19 +54,20 @@ class Goal extends Component {
     }
 
     render() {
-        //   const allLists = this.props.lists.map{list => {
-        //       return (<List
-        //                 key={list.id}
-        //                 list={list}
-        //                 />)
-        //   }}
+        let goal = this.props.goal
+        const allLists = this.props.lists.map(list => {
+              return (<List
+                        key={list.id}
+                        list={list}
+                        />)
+          })
         return (
         <div>
-            This will be a Goal Component. It will house the lists belonging to this goal.
+            <h3>{goal.attributes.name}</h3>
             <div>{this.state.clicked === true ? this.renderForm() : null}</div>
             {this.state.clicked === false ? <Button onClick={this.buttonHandler}>Add List</Button>: <Button onClick={this.resetContainer}>Go Back</Button>}
             {this.state.clicked === false ? <Button onClick={this.deleteHandler}>Delete Me!</Button> : null}
-            <List />
+            {allLists}
         </div>
         )
   }

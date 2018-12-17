@@ -29,3 +29,29 @@ export const signUpUser = (user) => {
         .catch(console.error)
     }
 }
+
+export const createSession = user => {
+    return (dispatch) => {
+        return fetch("http://localhost:3000/api/v1/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                user: user
+            })
+        })
+        .then(res => res.json())
+        .then(res => {
+            if (res.error){
+                res.error.forEach(error => {
+                    alert(error)
+                })
+            } else {
+                dispatch(loginUser(res))
+            }
+        })
+        .catch(console.error)
+    }
+}

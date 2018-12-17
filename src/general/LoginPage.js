@@ -3,7 +3,7 @@ import { Button } from "semantic-ui-react"
 import LoginForm from './LoginForm';
 import SignUp from './SignUp'
 import { connect } from "react-redux"
-import {signUpUser} from "../store/actions/userActions"
+import {signUpUser, createSession} from "../store/actions/userActions"
 
 class LoginPage extends Component {
     state = {
@@ -39,8 +39,8 @@ class LoginPage extends Component {
             this.props.login(data)
         } else if (this.state.form === "sign up"){
             this.props.signUp(data)
-            this.props.history.replace("/")
         }
+        this.props.history.replace("/")
     }
 
     resetContainer = () => {
@@ -69,7 +69,7 @@ class LoginPage extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        login: user => dispatch({type: "LOGIN_USER", user}),
+        login: user => dispatch(createSession(user)),
         signUp: user => dispatch(signUpUser(user))
     }
 }

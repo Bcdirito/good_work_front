@@ -4,6 +4,12 @@ import { Menu } from "semantic-ui-react"
 import { connect } from "react-redux"
 
 class NavBar extends Component {
+
+  handleLogout = () => {
+    localStorage.clear()
+    this.props.logout()
+  }
+
   render() {
     return (
         <Menu id="navbar">
@@ -21,7 +27,7 @@ class NavBar extends Component {
 
           <Menu.Menu position="right">
             <Menu.Item>
-              <NavLink to="/login" onClick={this.props.logout}>{this.props.user.keys === undefined ? "Login" : "Logout "}</NavLink>
+                {this.props.user.id === undefined ? <NavLink to="/login">Login</NavLink> : <NavLink to="/" onClick={this.handleLogout}>Logout</NavLink>}
             </Menu.Item>
           </Menu.Menu>
         </Menu>

@@ -23,8 +23,7 @@ class Home extends Component {
   }
 
   render() {
-    let props = this.props.user
-    // debugger
+    console.log(this.props.user.id)
     return (
       <div>
         <h1>Welcome to Good Work</h1>

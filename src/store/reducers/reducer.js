@@ -39,7 +39,10 @@ const reducer = (state = initialState, action) => {
 
         case "LOGOUT_USER":
             console.log("Triggered User Logout", action)
-            return state
+            return {
+                user: {},
+                doctors: []
+            }
 
         case "CREATE_USER":
             console.log(action.user)

@@ -3,7 +3,7 @@ import { Button } from "semantic-ui-react"
 import LoginForm from './LoginForm';
 import SignUp from './SignUp'
 import { connect } from "react-redux"
-import {signUpUser, createUser} from "../store/actions/userActions"
+import {signUpUser} from "../store/actions/userActions"
 
 class LoginPage extends Component {
     state = {

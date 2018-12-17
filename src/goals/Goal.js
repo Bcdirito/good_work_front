@@ -2,13 +2,20 @@ import React, { Component } from 'react'
 import List from "./List"
 import {connect} from "react-redux"
 import {Button, Form} from "semantic-ui-react"
+import { destroyGoal } from '../store/actions/goalActions'
+import {createList, getLists} from "../store/actions/listActions"
 
 class Goal extends Component {
     state = {
         clicked: false,
         formData: {
             title: ""
-        }
+        },
+        lists: []
+    }
+
+    componentDidMount = () => {
+        this.props.getLists(this.props.goal)
     }
 
     buttonHandler = () => {
@@ -29,7 +36,7 @@ class Goal extends Component {
 
     submitHandler = (e) => {
         e.preventDefault()
-        this.props.addList(this.state.formData)
+        this.props.addList(this.state.formData, this.props.goal)
         this.setState({ clicked: false, formData: { title: "" } })
     }
 
@@ -53,30 +60,44 @@ class Goal extends Component {
 
     }
 
+    createListComps = () => {
+        if (this.props.lists.length > 0){
+            return this.props.lists.map(list => {
+                return (<List
+                          key={list.id}
+                          list={list}
+                          />)
+            })
+        }
+    }
+
     render() {
-        let goal = this.props.goal
-        const allLists = this.props.lists.map(list => {
-              return (<List
-                        key={list.id}
-                        list={list}
-                        />)
-          })
+        const goal = this.props.goal
+        const allLists = this.createListComps()
         return (
-        <div>
-            <h3>{goal.attributes.name}</h3>
-            <div>{this.state.clicked === true ? this.renderForm() : null}</div>
-            {this.state.clicked === false ? <Button onClick={this.buttonHandler}>Add List</Button>: <Button onClick={this.resetContainer}>Go Back</Button>}
-            {this.state.clicked === false ? <Button onClick={this.deleteHandler}>Delete Me!</Button> : null}
-            {allLists}
-        </div>
+            <div>
+                <h3>{goal.name}</h3>
+                <div>{this.state.clicked === true ? this.renderForm() : null}</div>
+                {this.state.clicked === false ? <Button onClick={this.buttonHandler}>Add List</Button>: <Button onClick={this.resetContainer}>Go Back</Button>}
+                {this.state.clicked === false ? <Button onClick={this.deleteHandler}>Delete Me!</Button> : null}
+                {allLists}
+            </div>
         )
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
     return {
-        deleteGoal: goal => dispatch({type: "DELETE_GOAL", goal}),
-        addList: list => dispatch({type: "ADD_LIST", list})
+        user: state.user,
+        lists: state.lists
     }
 }
-export default connect(null, mapDispatchToProps)(Goal)
+
+const mapDispatchToProps = dispatch => {
+    return {
+        deleteGoal: goal => dispatch(destroyGoal(goal)),
+        addList: (list, user) => dispatch(createList(list, user)),
+        getLists: user => dispatch(getLists(user))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Goal)

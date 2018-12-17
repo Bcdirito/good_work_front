@@ -55,3 +55,4 @@ export const createSession = user => {
         .catch(console.error)
     }
 }
+

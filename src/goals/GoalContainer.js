@@ -44,15 +44,23 @@ class GoalContainer extends Component {
     deleteGoal = (goal) => {
         this.props.deleteGoal(goal)
     }
+    
+    createGoalComps = () => {
+        if (this.props.goals.length > 0){
+            const goals = Array.from(this.props.goals[0])
+            return goals.map(goal => {
+                return <Goal
+                        key={goal.id}
+                        goal={goal}
+                        deleteGoal={this.props.deleteGoal}
+                        />
+            })
+        }
+    }
 
   render() {
-    let allGoals = this.props.goals.map(goal => {
-        return <Goal
-                key={goal.id}
-                goal={goal}
-                deleteGoal={this.props.deleteGoal}
-                />
-    })
+    let allGoals = this.createGoalComps()
+
     return (
       <div>
           <h2>My Goals</h2>

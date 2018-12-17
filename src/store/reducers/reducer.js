@@ -1,7 +1,8 @@
 const initialState = {
     user: {},
     goals: [],
-    doctors: []
+    lists: [],
+    tasks: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -13,18 +14,26 @@ const reducer = (state = initialState, action) => {
             }
     
         case "DELETE_GOAL":
-            console.log("Triggered Delete Goal", action.goal)
-            debugger
             return {
                 ...state,
                 goals: [...state.goals].filter(goal => {
                     return goal.id !== action.goal.id
                 })
             }
+
+        case "LOAD_LIST":
+            return {
+                ...state,
+                lists: [...state.lists, action.list]
+            }
         
         case "ADD_LIST":
             console.log("Triggered Add List", action.list)
-            return state
+            debugger
+            return {
+                ...state,
+                lists: [...state.lists, action.list.data]
+            }
         
         case "DELETE_LIST":
             console.log("Triggered Delete List", action.list)
@@ -43,13 +52,14 @@ const reducer = (state = initialState, action) => {
             return state
 
         case "LOGIN_USER":
-            console.log("Triggered User Login", action.user) 
+            localStorage.setItem("token", action.user.jwt)
             return {
                 ...state,
                 user: {
                     id: action.user.user.id,
                     user: action.user.user.username
-                }
+                },
+                goals: [...state.goals, action.user.user.goals],
             }
 
         case "LOGOUT_USER":

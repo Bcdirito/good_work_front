@@ -30,7 +30,7 @@ export const createGoal = (goal, user) => {
 }
 
 export const destroyGoal = goal => {
-    const id = goal.id
+    const id = goal.goal.id
     return (dispatch) => {
         return fetch(`http://localhost:3000/api/v1/goals/${id}`, {
             method: "DELETE",
@@ -42,9 +42,7 @@ export const destroyGoal = goal => {
         .then(res => res.json())
         .then((res) => {
             if (res.error){
-                res.error.forEach(error => {
-                    alert(error)
-                })
+                alert(res.error)
             } else {
                 dispatch(deleteGoal(id))
             }

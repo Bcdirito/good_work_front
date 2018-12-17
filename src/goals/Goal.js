@@ -86,10 +86,10 @@ class Goal extends Component {
 
     createListComps = () => {
         if (this.state.lists.length > 0){
-            debugger
             return this.state.lists.map(list => {
                 return (<List
                           key={list.id}
+                          goalId={this.props.goal.id}
                           list={list}
                           />)
             })

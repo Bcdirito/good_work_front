@@ -48,9 +48,13 @@ class GoalContainer extends Component {
     }
 
   render() {
-    const goals = Array.from(this.props.goals[0])
+    let goals;
+    let goalComps
 
-    const goalComps = goals.map(goal => {
+    if (this.props.goals.length > 0){
+        goals = Array.from(this.props.goals[0])
+    }
+    goalComps = goals.map(goal => {
         return (<div className="goalTiles">
                     <Grid.Column>
                         <GoalTile

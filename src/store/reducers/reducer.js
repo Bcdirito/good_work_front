@@ -37,6 +37,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 lists: [...state.lists, action.list]
             }
+        
+        case "ADD_LIST":
+            return {
+                ...state,
+                lists: [...state.lists, action.list]
+            }
 
         case "CLEAR_LISTS":
             console.log("Made It To CLEAR_LISTS")
@@ -60,9 +66,16 @@ const reducer = (state = initialState, action) => {
             console.log("Triggered Add Task", action.task)
             return state
         
-        case "UPDATE_TASK":
+        case "EDIT_TASK":
             console.log("Triggered Edit Task", action.task)
-            return state
+            return {
+                ...state,
+                tasks: [...state.tasks].forEach(task => {
+                    if (action.task.id === task.id) {
+                        return action.task
+                    }
+                })
+            }
 
         case "DELETE_TASK":
             console.log("Triggered Delete Task", action.task)

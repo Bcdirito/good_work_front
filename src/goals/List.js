@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux"
 import TaskCard from "./TaskCard"
-import {Form, Button} from "semantic-ui-react"
-import {createTask, getTasks} from "../store/actions/taskActions"
+import {Form, Button, Table} from "semantic-ui-react"
+import {createTask, getTasks, destroyTask} from "../store/actions/taskActions"
 
 class List extends Component {
     state = {
@@ -12,13 +12,21 @@ class List extends Component {
             title: "",
             content: ""
         },
+        tasks: [],
         featuredTask: {}
     }
 
     componentDidMount = () => {
-        if (this.props.tasks.length === 0){
+        if (this.props.tasks === undefined || this.props.tasks.length === 0){
             this.props.getTasks(this.props.list)
         }
+
+        this.setState({
+            ...this.state,
+            tasks: [...this.props.tasks].filter(task => {
+                return this.props.list.id === Number(task.relationships.list.data.id)
+            })
+        })
     }
 
     buttonHandler = () => {
@@ -37,6 +45,18 @@ class List extends Component {
         this.props.deleteList(this.props)
     }
 
+    finishTask = (e) => {
+        console.log(e.target)
+        const id = Number(e.target.parentElement.parentElement.id)
+        let result = window.confirm("Did You Finish This Task, You Rock Star?")
+        if (result === true) {
+            alert("I'm So Proud of You! You Amaze Me!")
+            this.props.deleteTask(id)
+        } else {
+            alert("Keep Going! I Know You Can Do It!")
+        }
+    }
+
     submitHandler = e => {
         e.preventDefault()
         this.props.addTask(this.state.formData, this.props.list)
@@ -49,7 +69,9 @@ class List extends Component {
             formData: {
                 title: "",
                 content: ""
-            }
+            },
+            featuredClick: false,
+            featuredTask: {}
         })
     }
 
@@ -67,37 +89,62 @@ class List extends Component {
                 </Form>
     }
 
-    featureTaskCard = (task) => {
+    featureTaskCard = (e) => {
         this.setState({
             ...this.state,
             featuredClick: !this.state.featuredClick,
-            featuredTask: task
+            featuredTask: this.props.tasks.find(task => {
+                return task.id === e.target.parentElement.parentElement.id
+            })
         })
     }
 
-    renderTaskCard = (task) => {
-        if (this.state.featuredClick === true){
-            return <TaskCard task={this.state.featuredTask}/>
-        }
+    renderTaskCard = () => {
+        return <TaskCard task={this.state.featuredTask} resetComponent={this.resetComponent} listId={this.props.list.id}/>
     }
+    
 
     render() {
         const list = this.props.list
-        const tasks = this.props.tasks
-        const taskComps = tasks.map(task => {
-            if(Number(task.relationships.list.data.id) === Number(this.props.list.id)) {
-                return (<li key={task.id}
-                    onClick={this.featureTaskCard}>{task.attributes.title} - {task.attributes.content}</li>)
-            }
-        })
+        let tasks; 
+        let taskComps; 
+
+        if (this.props.tasks !== undefined){
+            tasks = this.props.tasks
+        }
+        
+        if (tasks !== undefined) {
+            taskComps = tasks.map(task => {
+                if(Number(task.relationships.list.data.id) === Number(this.props.list.id)) {
+                    return (
+                        <Table.Row key={task.id} id={task.id}>
+                            <Table.Cell>{task.attributes.title}</Table.Cell>
+                            <Table.Cell>{task.attributes.content}</Table.Cell>
+                            <Table.Cell><Button onClick={e => this.featureTaskCard(e)}>Edit Task</Button><Button color="green" className="finished" onClick={e => this.finishTask(e)}> Finished! </Button></Table.Cell>
+                        </Table.Row>)
+                }
+            })
+        }
+        
+        console.log(this.state.featuredTask)
         return (
         <div>
             <h3>{list.attributes.name}</h3>
-            {<ul>{taskComps}</ul>}
+            <Table celled>
+                <Table.Header className="tableHeader">
+                    <Table.Row>
+                        <Table.HeaderCell>Task</Table.HeaderCell>
+                        <Table.HeaderCell>Content</Table.HeaderCell>
+                        <Table.HeaderCell>Status</Table.HeaderCell>
+                    </Table.Row>
+                </Table.Header>
+                {taskComps}
+            </Table>
+            
             <div>{this.state.clicked === true ? this.renderForm() : null}</div>
                 {this.state.clicked === false ?<Button onClick={this.buttonHandler}>Add A Task</Button> : <Button onClick={this.buttonHandler}>Go Back</Button>}
-                {this.state.clicked === false ? <Button onClick={this.deleteHandler}>Delete List</Button> : null}
-                {this.renderTaskCard()}
+                {this.props.tasks === undefined ? <Button onClick={this.deleteHandler}>Delete List</Button> : null}
+                {this.state.featuredTask.id ? this.renderTaskCard() : null}
         </div>
         )
     }
@@ -111,9 +158,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addTask: (task, list, goalId) => dispatch(createTask(task, list)),
+        addTask: (task, list) => dispatch(createTask(task, list)),
         deleteList: list => dispatch({type: "DELETE_LIST", list}),
-        getTasks: list => dispatch(getTasks(list))
+        getTasks: list => dispatch(getTasks(list)),
+        deleteTask: task => dispatch(destroyTask(task))
+
     }
 }
 

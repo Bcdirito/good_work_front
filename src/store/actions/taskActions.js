@@ -4,6 +4,8 @@ export const deleteTask = task => ({type: "DELETE_TASK", task})
 
 export const loadTask = task => ({type: "LOAD_TASK", task})
 
+export const editTask = task => ({type: "EDIT_TASK", task})
+
 export const getTasks = list => {
     const id = list.id
     return (dispatch) => {
@@ -47,8 +49,7 @@ export const createTask = (task, list) => {
     .catch(console.error)
 }}
 
-export const destroyTask = task => {
-    const id = task.task.id
+export const destroyTask = id => {
     return (dispatch) => {
         return fetch(`http://localhost:3000/api/v1/tasks/${id}`, {
             method: "DELETE",
@@ -65,5 +66,26 @@ export const destroyTask = task => {
                 dispatch(deleteTask(id))
             }
         })
+    }
+}
+
+export const updateTask = (data, id, listId) => {
+    return (dispatch) => {
+        return fetch(`http://localhost:3000/api/v1/tasks/${id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                list_id: listId,
+                title: data.title,
+                content: data.content
+            })
+        })
+        .then(res => res.json())
+        .then(res => {
+            dispatch(editTask(res.data))})
+        .catch(console.error)
     }
 }

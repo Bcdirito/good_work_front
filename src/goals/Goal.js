@@ -12,6 +12,7 @@ class Goal extends Component {
         formData: {
             title: ""
         },
+        featuredList: {}
     }
 
     componentWillMount = () => {
@@ -54,8 +55,13 @@ class Goal extends Component {
             clicked: false,
             formData: {
                 title: ""
-            }
+            },
+            featuredList: {}
         })
+    }
+
+    featureList = (list) => {
+        this.setState({ featuredList: list})
     }
 
     renderForm = () => {
@@ -75,7 +81,7 @@ class Goal extends Component {
         const goal = this.props.featuredGoal
         const lists = this.props.lists
 
-        console.log(lists)
+        console.log(this.state.featuredList)
 
         const listComps = lists.map(list => {
             if(Number(list.relationships.goal.data.id) === Number(this.props.featuredGoal.id)) {
@@ -85,6 +91,7 @@ class Goal extends Component {
                                 key={list.id}
                                 listId={list.id}
                                 list={list}
+                                featureList={this.featureList}
                                 />
                             </Grid.Column>
                         </div>)
@@ -93,16 +100,16 @@ class Goal extends Component {
         return (
             <div>
                 <h2>{goal.attributes ?  goal.attributes.name : null}</h2>
-                    <div className="listContainer">
+                    {this.state.featuredList.id ? <List list={this.state.featuredList}/>: <div className="listContainer">
                         <Grid>
                             <Grid.Row>
                                 {listComps}
                             </Grid.Row>
                         </Grid>
-                    </div>
+                    </div>}
                 <div>{this.state.clicked === true ? this.renderForm() : null}</div>
-                {this.state.clicked === false ? <Button onClick={this.buttonHandler}>Add List</Button>: <Button onClick={this.resetContainer}>Go Back</Button>}
-                {this.state.clicked === false ? <Button onClick={this.deleteHandler}>Delete Me!</Button> : null}
+                {this.state.clicked === false && this.state.featuredList.id === undefined ? <Button onClick={this.buttonHandler}>Add List</Button>: <Button onClick={this.resetContainer}>Go Back</Button>}
+                {this.state.clicked === false && this.state.featuredList.id === undefined ? <Button onClick={this.deleteHandler}>Delete Me!</Button> : null}
             </div>
         )
   }

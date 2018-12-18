@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux"
 import {Form, Button} from "semantic-ui-react"
-import {destroyTask} from "../store/actions/taskActions"
+import {updateTask} from "../store/actions/taskActions"
 
 class TaskCard extends Component {
     state = {
-        clicked: false,
         editData: {
-            title: "",
-            content: ""
+            title: this.props.task.attributes.title,
+            content: this.props.task.attributes.content
         }
     }
 
@@ -20,52 +19,42 @@ class TaskCard extends Component {
         this.setState({ editData: {
             ...this.state.editData,
             [e.target.name]: e.target.value
-        }})
+            }
+        })
     }
 
     submitHandler = e => {
         e.preventDefault()
-        this.props.updateTask(this.state.editData)
+        this.props.updateTask(this.state.editData, Number(this.props.task.id), Number(this.props.listId))
         this.resetComponent()
     }
 
     resetComponent = () => {
         this.setState({ 
-            clicked: false,
-            editData: { title: "", content: "" }})
-    }
-
-    deleteHandler = () => {
-        this.props.deleteTask(this.props)
-    }
-
-    renderForm = () => {
-        return <Form onSubmit={e => this.submitHandler(e)}>
-                    <Form.Field></Form.Field>
-                        <label>Task Title</label>
-                            <input type="text" name="title"
-                            placeholder={this.props.content} value={this.state.editData.title}
-                            onChange={e => this.changeHandler(e)}/>
-                    <Form.Field>
-                        <label>Task Content</label>
-                        <input type="text" name="content"
-                            placeholder={this.props.content} value={this.state.editData.content}
-                            onChange={e => this.changeHandler(e)}/>
-                    </Form.Field>
-                    <Button type="submit" >Update Task</Button>
-                </Form>
+            editData: {
+                title: this.props.task.attributes.title, 
+                content: this.props.task.attributes.content
+            }}, () => this.props.resetComponent())
     }
     
     render() {
-        let task = this.props.task
-        console.log(task)
+        console.log(this.props)
         return (
-        <div>
-            <h3>{task.attributes.title}</h3>
-            <h4>{task.attributes.content}</h4>
-            <div>{this.state.clicked === true ? this.renderForm() : null}</div>
-                {this.state.clicked === false ? <Button onClick={this.buttonHandler}>Edit Task</Button> : <Button onClick={this.buttonHandler}>Go Back</Button>}
-                {this.state.clicked === true ?<Button onClick={this.deleteHandler}>Delete Task</Button> : null}
+            <div>
+                <Form onSubmit={e => this.submitHandler(e)}>
+                <Form.Field></Form.Field>
+                    <label>Task Title</label>
+                        <input type="text" name="title"
+                        placeholder={this.props.content} value={this.state.editData.title}
+                        onChange={e => this.changeHandler(e)}/>
+                <Form.Field>
+                    <label>Task Content</label>
+                    <input type="text" name="content"
+                        placeholder={this.props.content} value={this.state.editData.content}
+                        onChange={e => this.changeHandler(e)}/>
+                </Form.Field>
+                <Button type="submit" >Update Task</Button>
+            </Form>
         </div>
         )
     }
@@ -73,8 +62,7 @@ class TaskCard extends Component {
 
 const mapDispatchToState = dispatch => {
     return {
-        deleteTask: task => dispatch(destroyTask(task)),
-        updateTask: task => dispatch({type: "UPDATE_TASK", task})
+        updateTask: (data, id, listId) => dispatch(updateTask(data, id, listId))
     }
 }
 

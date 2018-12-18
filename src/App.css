@@ -107,3 +107,7 @@ ul {
   justify-content: center;
   align-items: center
 }
+
+.finished {
+  background-color: rgb(24, 236, 24) !important
+}

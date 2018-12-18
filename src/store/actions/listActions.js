@@ -18,7 +18,6 @@ export const getLists = goalId => {
                 console.log(res.errors)
             } else {
                 res.data.forEach(list => {
-                    debugger
                     if (list.relationships.goal.data !== null && Number(list.relationships.goal.data.id)
                     === goalId){
                         dispatch(loadList(list))
@@ -51,7 +50,7 @@ export const createList = (list, goal) => {
                     alert(error)
                 })
             } else {
-                dispatch(addList(res))
+                dispatch(addList(res.data))
             }
         })
     }

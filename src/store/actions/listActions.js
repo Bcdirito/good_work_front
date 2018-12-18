@@ -4,8 +4,7 @@ export const deleteList = list => ({type: "DELETE_LIST", list})
 
 export const loadList = list=> ({type: "LOAD_LIST", list})
 
-export const getLists = goal => {
-    const id = goal.id
+export const getLists = goalId => {
     return (dispatch) => {
         return fetch("http://localhost:3000/api/v1/lists", {
             headers: {
@@ -20,7 +19,7 @@ export const getLists = goal => {
             } else {
                 res.data.forEach(list => {
                     if (Number(list.relationships.goal.data.id)
-                    === id){
+                    === goalId){
                         dispatch(loadList(list))
                     }
                 })

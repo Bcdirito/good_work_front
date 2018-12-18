@@ -2,6 +2,23 @@ export const addGoal = goal => ({type: "ADD_GOAL", goal})
 
 export const deleteGoal = goal => ({type: "DELETE_GOAL", goal})
 
+export const featureGoal = goal => ({type: "FEATURE_GOAL", goal})
+
+export const selectGoal = id => {
+    return (dispatch) => {
+        return fetch(`http://localhost:3000/api/v1/goals/${id}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            dispatch(featureGoal(data))
+        })
+    }
+}
+
 export const createGoal = (goal, user) => {
     return (dispatch) => {
         return fetch("http://localhost:3000/api/v1/goals", {

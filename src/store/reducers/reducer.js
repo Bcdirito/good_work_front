@@ -1,6 +1,7 @@
 const initialState = {
     user: {},
     goals: [],
+    featuredGoal: {},
     lists: [],
     tasks: []
 }
@@ -20,6 +21,13 @@ const reducer = (state = initialState, action) => {
                     return goal.id !== action.goal.id
                 })
             }
+        
+        case "FEATURE_GOAL":
+            console.log("Made It To FEATURE_GOAL")
+            return {
+                ...state,
+                featuredGoal: action.goal.data
+            }
 
         case "LOAD_LIST":
             // debugger
@@ -27,6 +35,14 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 lists: [...state.lists, action.list]
             }
+
+        case "CLEAR_LISTS":
+            console.log("Made It To CLEAR_LISTS")
+            return {
+                ...state,
+                lists: []
+            }
+            
         
         case "DELETE_LIST":
             console.log("Triggered Delete List", action.list)

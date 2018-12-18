@@ -3,7 +3,7 @@ import List from "./List"
 import {connect} from "react-redux"
 import {Button, Form} from "semantic-ui-react"
 import { destroyGoal } from '../store/actions/goalActions'
-import {createList} from "../store/actions/listActions"
+import {createList, getLists} from "../store/actions/listActions"
 
 class Goal extends Component {
     state = {
@@ -11,36 +11,11 @@ class Goal extends Component {
         formData: {
             title: ""
         },
-        lists: []
     }
 
     componentDidMount = () => {
-        const id = this.props.goal.id
-        fetch("http://localhost:3000/api/v1/lists", {
-            headers: {
-                "Content-Type": "application/json",
-                "Accepts": "application/json"
-            }
-        })
-        .then(res => res.json())
-        .then(res => {
-            if (res.errors){
-                alert(res.errors)
-            } else {
-                res.data.forEach(list => {
-                    if (Number(list.relationships.goal.data.id)
-                    === id){
-                        this.setState({
-                            ...this.state,
-                            lists: [...this.state.lists, list]
-                        })
-                    }
-                })
-            }}
-        )
-        .catch(console.error)
+        this.props.getLists(this.props.goal)
     }
-
 
     buttonHandler = () => {
         this.setState({ clicked: !this.state.clicked})
@@ -84,39 +59,44 @@ class Goal extends Component {
 
     }
 
-    createListComps = () => {
-        if (this.state.lists.length > 0){
-            return this.state.lists.map(list => {
-                return (<List
-                          key={list.id}
-                          goalId={this.props.goal.id}
-                          list={list}
-                          />)
-            })
-        }
-    }
+
 
     render() {
         const goal = this.props.goal
-        const allLists = this.createListComps()
+        const lists = this.props.lists
+        const listComps = lists.map(list => {
+            if(Number(list.relationships.goal.data.id) === Number(this.props.goal.id)) {
+                return (<List
+                    key={list.id}
+                    goalId={this.props.goal.id}
+                    list={list}
+                    />)
+                }        
+        })
+        
         return (
             <div>
                 <h2>{goal.name}</h2>
                 <div>{this.state.clicked === true ? this.renderForm() : null}</div>
                 {this.state.clicked === false ? <Button onClick={this.buttonHandler}>Add List</Button>: <Button onClick={this.resetContainer}>Go Back</Button>}
                 {this.state.clicked === false ? <Button onClick={this.deleteHandler}>Delete Me!</Button> : null}
-                {allLists}
+                {listComps}
             </div>
         )
   }
 }
 
+const mapStateToProps = state => {
+    return {
+        lists: state.lists
+    }
+}
 
 const mapDispatchToProps = dispatch => {
     return {
         deleteGoal: goal => dispatch(destroyGoal(goal)),
         addList: (list, user) => dispatch(createList(list, user)),
-        // getLists: user => dispatch(getLists(user))
+        getLists: goal => dispatch(getLists(goal))
     }
 }
-export default connect(null, mapDispatchToProps)(Goal)
+export default connect(mapStateToProps, mapDispatchToProps)(Goal)

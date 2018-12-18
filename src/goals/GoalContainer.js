@@ -12,6 +12,7 @@ class GoalContainer extends Component {
         }
     }
 
+    
     buttonHandler = () => {
         this.setState({ clicked: !this.state.clicked})
     }

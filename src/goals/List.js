@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {connect} from "react-redux"
 import TaskCard from "./TaskCard"
 import {Form, Button} from "semantic-ui-react"
-import {createTask} from "../store/actions/taskActions"
+import {createTask, getTasks} from "../store/actions/taskActions"
 
 class List extends Component {
     state = {
@@ -12,35 +12,11 @@ class List extends Component {
             title: "",
             content: ""
         },
-        tasks: [],
         featuredTask: {}
     }
 
     componentDidMount = () => {
-        const id = this.props.list.id
-        fetch("http://localhost:3000/api/v1/tasks", {
-            headers: {
-                "Content-Type": "application/json",
-                "Accepts": "application/json"
-            }
-        })
-        .then(res => res.json())
-        .then(res => {
-            if (res.errors){
-                alert(res.errors)
-            } else {
-                res.data.forEach(task => {
-                    if(task.relationships.list.data.id
-                    === id){
-                        this.setState({
-                            ...this.state,
-                            tasks: [...this.state.tasks, task]
-                        })
-                    }
-                })
-            }}
-        )
-        .catch(console.error)
+        this.props.getTasks(this.props.list)
     }
 
     buttonHandler = () => {
@@ -89,14 +65,6 @@ class List extends Component {
                 </Form>
     }
 
-    renderTaskItems = () => {
-        if (this.state.tasks.length > 0) {
-            return this.state.tasks.map(task => {
-                return <li key={task.id} onClick={()=> this.featureTaskCard(task)}>{task.attributes.title} - {task.attributes.content}</li>
-            })
-        }
-    }
-
     featureTaskCard = (task) => {
         this.setState({
             ...this.state,
@@ -112,13 +80,13 @@ class List extends Component {
     }
 
     render() {
-        console.log(this.state.tasks)
         const list = this.props.list
-        const allTasks = this.renderTaskItems()
+        const tasks = this.props.tasks
+        console.log(this.props.tasks)
         return (
         <div>
             <h3>{list.attributes.name}</h3>
-            <ul>{allTasks}</ul>
+            {/* <ul>{allTasks}</ul> */}
             <div>{this.state.clicked === true ? this.renderForm() : null}</div>
                 {this.state.clicked === false ?<Button onClick={this.buttonHandler}>Add A Task</Button> : <Button onClick={this.buttonHandler}>Go Back</Button>}
                 {this.state.clicked === false ? <Button onClick={this.deleteHandler}>Delete List</Button> : null}
@@ -128,11 +96,18 @@ class List extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
     return {
-        addTask: (task, list, goalId) => dispatch(createTask(task, list)),
-        deleteList: list => dispatch({type: "DELETE_LIST", list})
+        tasks: state.tasks
     }
 }
 
-export default connect(null, mapDispatchToProps)(List)
+const mapDispatchToProps = dispatch => {
+    return {
+        addTask: (task, list, goalId) => dispatch(createTask(task, list)),
+        deleteList: list => dispatch({type: "DELETE_LIST", list}),
+        getTasks: list => dispatch(getTasks(list))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(List)

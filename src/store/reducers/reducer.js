@@ -22,6 +22,7 @@ const reducer = (state = initialState, action) => {
             }
 
         case "LOAD_LIST":
+            // debugger
             return {
                 ...state,
                 lists: [...state.lists, action.list]
@@ -31,6 +32,13 @@ const reducer = (state = initialState, action) => {
             console.log("Triggered Delete List", action.list)
             return state
         
+        case "LOAD_TASK":
+            debugger
+            return {
+                ...state,
+                tasks: [...state.tasks, action.task]
+            }
+
         case "ADD_TASK":
             console.log("Triggered Add Task", action.task)
             return state

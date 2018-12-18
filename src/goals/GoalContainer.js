@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import Goal from "./Goal"
 import {connect} from "react-redux"
-import {Button, Form} from "semantic-ui-react"
+import {Button, Form, Grid} from "semantic-ui-react"
 import {createGoal} from "../store/actions/goalActions"
+import GoalTile from './GoalTile';
 
 class GoalContainer extends Component {
     state = {
@@ -50,11 +51,15 @@ class GoalContainer extends Component {
         if (this.props.goals.length > 0){
             const goals = Array.from(this.props.goals[0])
             return goals.map(goal => {
-                return <Goal
-                        key={goal.id}
-                        goal={goal}
-                        deleteGoal={this.props.deleteGoal}
-                        />
+                return (<div className="groupTile">
+                            <Grid.Column>
+                                <GoalTile
+                                key={goal.id}
+                                goal={goal}
+                                deleteGoal={this.props.deleteGoal}
+                                />
+                            </Grid.Column>
+                        </div>)
             })
         }
     }
@@ -65,7 +70,11 @@ class GoalContainer extends Component {
     return (
       <div>
           <h2>My Goals</h2>
-            {allGoals}
+            <Grid>
+                <Grid.Row>
+                    {allGoals}
+                </Grid.Row>
+            </Grid>
             <div>{this.state.clicked === true ? this.renderForm() : null}</div>
             {this.state.clicked === false ? <Button onClick={this.buttonHandler}>Add Goal</Button>: <Button onClick={this.buttonHandler}>Go Back</Button> }
       </div>

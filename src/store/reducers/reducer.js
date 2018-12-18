@@ -33,7 +33,6 @@ const reducer = (state = initialState, action) => {
             return state
         
         case "LOAD_TASK":
-            debugger
             return {
                 ...state,
                 tasks: [...state.tasks, action.task]

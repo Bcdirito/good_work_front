@@ -19,8 +19,7 @@ export const getTasks = list => {
                 console.log(res.errors)
             } else {
                 res.data.forEach(task => {
-                    // debugger
-                    if (Number(task.relationships.list.data.id) === id){
+                    if (task.relationships.list.data.id === id){
                         dispatch(loadTask(task))
                     }
                 })

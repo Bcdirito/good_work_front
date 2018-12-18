@@ -16,7 +16,9 @@ class List extends Component {
     }
 
     componentDidMount = () => {
-        this.props.getTasks(this.props.list)
+        if (this.props.tasks.length === 0){
+            this.props.getTasks(this.props.list)
+        }
     }
 
     buttonHandler = () => {
@@ -82,11 +84,16 @@ class List extends Component {
     render() {
         const list = this.props.list
         const tasks = this.props.tasks
-        console.log(this.props.tasks)
+        const taskComps = tasks.map(task => {
+            if(Number(task.relationships.list.data.id) === Number(this.props.list.id)) {
+                return (<li key={task.id}
+                    onClick={this.featureTaskCard}>{task.attributes.title} - {task.attributes.content}</li>)
+            }
+        })
         return (
         <div>
             <h3>{list.attributes.name}</h3>
-            {/* <ul>{allTasks}</ul> */}
+            {<ul>{taskComps}</ul>}
             <div>{this.state.clicked === true ? this.renderForm() : null}</div>
                 {this.state.clicked === false ?<Button onClick={this.buttonHandler}>Add A Task</Button> : <Button onClick={this.buttonHandler}>Go Back</Button>}
                 {this.state.clicked === false ? <Button onClick={this.deleteHandler}>Delete List</Button> : null}

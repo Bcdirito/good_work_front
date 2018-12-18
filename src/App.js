@@ -6,8 +6,10 @@ import Home from "./general/Home"
 import Goal from "./goals/Goal"
 import './App.css';
 import LoginPage from './general/LoginPage';
+import { connect } from "react-redux"
 
 class App extends Component {
+
   render() {
     return (
       <div className="App">
@@ -28,5 +30,7 @@ class App extends Component {
     );
   }
 }
+
+
 
 export default App;

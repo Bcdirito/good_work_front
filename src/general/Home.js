@@ -2,8 +2,27 @@ import React, { Component } from 'react'
 import GoalContainer from "../goals/GoalContainer"
 import { connect } from "react-redux"
 import { Button } from 'semantic-ui-react';
+import { createSession } from "../store/actions/userActions"
 
 class Home extends Component {
+
+    componentDidMount = () => {
+      const userToken = localStorage.getItem("token")
+      if(userToken) {
+        fetch(`http://localhost:3000/api/v1/profile`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Accepts": "application/json",
+            "Authorization": `${userToken}`
+          }
+        })
+        .then(res => res.json())
+        .then(res => {
+          this.props.login(res.user)
+        })
+        .catch(console.error)
+      }
+    }
 
   clickHandler = e => {
     this.props.history.replace(`/${e.target.name}`)
@@ -38,4 +57,9 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Home)
+const mapDispatchToProps = dispatch => {
+  return {
+    login: user => dispatch(createSession(user))
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

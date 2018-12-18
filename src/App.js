@@ -3,6 +3,7 @@ import {Route, Switch} from 'react-router-dom'
 import NavBar from "./general/NavBar"
 import NoMatch from "./general/NoMatch"
 import Home from "./general/Home"
+import Goal from "./goals/Goal"
 import './App.css';
 import LoginPage from './general/LoginPage';
 
@@ -17,6 +18,9 @@ class App extends Component {
             )}/>
             <Route exact path="/login" render={(props) => (
               <LoginPage {...props} />
+            )} />
+            <Route exact path="/goals/:id" render={(props) => (
+              <Goal {...props} />
             )} />
             <Route component={NoMatch}/>
           </Switch>

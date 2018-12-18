@@ -11,7 +11,7 @@ class Home extends Component {
 
   homeRender = () => {
     if (this.props.user.id) {
-      return <GoalContainer />
+      return <GoalContainer history={this.props.history}/>
     } else {
       return (<div>
         <div id="welcome">

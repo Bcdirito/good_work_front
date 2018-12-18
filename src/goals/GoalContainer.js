@@ -57,6 +57,7 @@ class GoalContainer extends Component {
                                 key={goal.id}
                                 goal={goal}
                                 deleteGoal={this.props.deleteGoal}
+                                history={this.props.history}
                                 />
                             </Grid.Column>
                         </div>)

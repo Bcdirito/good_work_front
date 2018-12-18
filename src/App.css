@@ -84,3 +84,26 @@ h3 {
 ul {
   background-color: antiquewhite !important
 }
+
+.goalTiles {
+  margin-left: 5em;
+  margin-top: 5em;
+  margin-right: 5em;
+}
+
+.listTiles {
+  margin-left: 5em;
+  margin-right: 5em;
+  margin-top: 5em;
+}
+
+.goalContainer {
+  display: flex;
+  justify-content: center
+}
+
+.listContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center
+}

@@ -9,6 +9,8 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch(action.type) {
         case "ADD_GOAL":
+            console.log("Made it to ADD_GOAL")
+            debugger
             return {
                 ...state,
                 goals: [...state.goals, action.goal.data]
@@ -80,7 +82,12 @@ const reducer = (state = initialState, action) => {
         case "LOGOUT_USER":
             return {
                 user: {},
-                doctors: []
+                goals: [],
+                featuredGoal: {},
+                lists: [],
+                tasks: [],
+            
+
             }
 
         case "CREATE_USER":

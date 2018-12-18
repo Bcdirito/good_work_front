@@ -47,7 +47,7 @@ export const createGoal = (goal, user) => {
 }
 
 export const destroyGoal = goal => {
-    const id = goal.goal.id
+    const id = Number(goal.id)
     return (dispatch) => {
         return fetch(`http://localhost:3000/api/v1/goals/${id}`, {
             method: "DELETE",

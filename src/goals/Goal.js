@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import List from "./List"
+import ListTile from "./ListTile"
 import {connect} from "react-redux"
-import {Button, Form} from "semantic-ui-react"
+import {Button, Form, Grid} from "semantic-ui-react"
 import { destroyGoal, selectGoal } from '../store/actions/goalActions'
 import {createList, getLists} from "../store/actions/listActions"
 
@@ -26,10 +27,12 @@ class Goal extends Component {
 
     buttonHandler = () => {
         this.setState({ clicked: !this.state.clicked})
+        
     }
 
     deleteHandler = () => {
-        this.props.deleteGoal(this.props)
+        this.props.deleteGoal(this.props.featuredGoal)
+        this.props.history.replace("/")
     }
 
     changeHandler = e => {
@@ -42,7 +45,7 @@ class Goal extends Component {
 
     submitHandler = (e) => {
         e.preventDefault()
-        this.props.addList(this.state.formData, this.props.goal)
+        this.props.addList(this.state.formData, this.props.featuredGoal)
         this.setState({ clicked: false, formData: { title: "" } })
     }
 
@@ -76,20 +79,30 @@ class Goal extends Component {
 
         const listComps = lists.map(list => {
             if(Number(list.relationships.goal.data.id) === Number(this.props.featuredGoal.id)) {
-                return (<List
-                    key={list.id}
-                    goalId={this.props.featuredGoal.id}
-                    list={list}
-                    />)
+                return (<div classname="listTiles">
+                            <Grid.Column>
+                                <ListTile
+                                key={list.id}
+                                listId={list.id}
+                                list={list}
+                                />
+                            </Grid.Column>
+                        </div>)
                 }        
         })
         return (
             <div>
                 <h2>{goal.attributes ?  goal.attributes.name : null}</h2>
+                    <div className="listContainer">
+                        <Grid>
+                            <Grid.Row>
+                                {listComps}
+                            </Grid.Row>
+                        </Grid>
+                    </div>
                 <div>{this.state.clicked === true ? this.renderForm() : null}</div>
                 {this.state.clicked === false ? <Button onClick={this.buttonHandler}>Add List</Button>: <Button onClick={this.resetContainer}>Go Back</Button>}
                 {this.state.clicked === false ? <Button onClick={this.deleteHandler}>Delete Me!</Button> : null}
-                {listComps}
             </div>
         )
   }
@@ -105,7 +118,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         deleteGoal: goal => dispatch(destroyGoal(goal)),
-        addList: (list, user) => dispatch(createList(list, user)),
+        addList: (list, goal) => dispatch(createList(list, goal)),
         getLists: id => dispatch(getLists(id)),
         clearLists: () => dispatch({type: "CLEAR_LISTS"}),
         selectGoal: id => dispatch(selectGoal(id))

@@ -46,37 +46,35 @@ class GoalContainer extends Component {
     deleteGoal = (goal) => {
         this.props.deleteGoal(goal)
     }
-    
-    createGoalComps = () => {
-        if (this.props.goals.length > 0){
-            const goals = Array.from(this.props.goals[0])
-            return goals.map(goal => {
-                return (<div className="groupTile">
-                            <Grid.Column>
-                                <GoalTile
-                                key={goal.id}
-                                goal={goal}
-                                deleteGoal={this.props.deleteGoal}
-                                history={this.props.history}
-                                />
-                            </Grid.Column>
-                        </div>)
-            })
-        }
-    }
 
   render() {
-    let allGoals = this.createGoalComps()
+    const goals = Array.from(this.props.goals[0])
+
+    const goalComps = goals.map(goal => {
+        return (<div className="goalTiles">
+                    <Grid.Column>
+                        <GoalTile
+                        key={goal.id}
+                        goal={goal}
+                        deleteGoal={this.props.deleteGoal}
+                        history={this.props.history}
+                        />
+                    </Grid.Column>
+                </div>)
+    })
 
     return (
       <div>
           <h2>My Goals</h2>
-            <Grid>
-                <Grid.Row>
-                    {allGoals}
-                </Grid.Row>
-            </Grid>
+            <div className="goalContainer">
+                <Grid>
+                    <Grid.Row>
+                        {goalComps}
+                    </Grid.Row>
+                </Grid>
+            </div>
             <div>{this.state.clicked === true ? this.renderForm() : null}</div>
+            <br></br>
             {this.state.clicked === false ? <Button onClick={this.buttonHandler}>Add Goal</Button>: <Button onClick={this.buttonHandler}>Go Back</Button> }
       </div>
     )

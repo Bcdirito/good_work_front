@@ -18,7 +18,8 @@ export const getLists = goalId => {
                 console.log(res.errors)
             } else {
                 res.data.forEach(list => {
-                    if (Number(list.relationships.goal.data.id)
+                    debugger
+                    if (list.relationships.goal.data !== null && Number(list.relationships.goal.data.id)
                     === goalId){
                         dispatch(loadList(list))
                     }
@@ -30,6 +31,7 @@ export const getLists = goalId => {
 }
 
 export const createList = (list, goal) => {
+
     return (dispatch) => {
         return fetch("http://localhost:3000/api/v1/lists", {
             method: "POST",

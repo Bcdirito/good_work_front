@@ -7,7 +7,6 @@ class GoalTile extends Component {
     }
 
     render() {
-        console.log(this.props)
         return (
             <div className="ui card three wide column" onClick={this.pushToGoal}>
                 <div className="content">

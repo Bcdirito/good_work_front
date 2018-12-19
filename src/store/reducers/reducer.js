@@ -60,8 +60,12 @@ const reducer = (state = initialState, action) => {
             
         
         case "DELETE_LIST":
-            console.log("Triggered Delete List", action.list)
-            return state
+            return {
+                ...state,
+                lists: state.lists.filter(list => {
+                    return list.id !== action.list
+                })
+            }
         
         case "LOAD_TASK":
             return {

@@ -80,7 +80,7 @@ class Goal extends Component {
     render() {
         const goal = this.props.featuredGoal
         const lists = this.props.lists
-        
+
         const listComps = lists.map(list => {
             if(Number(list.relationships.goal.data.id) === Number(this.props.featuredGoal.id)) {
                 return (<div classname="listTiles">
@@ -98,7 +98,7 @@ class Goal extends Component {
         return (
             <div>
                 <h2>{goal.attributes ?  goal.attributes.name : null}</h2>
-                    {this.state.featuredList.id ? <List list={this.state.featuredList}/>: <div className="listContainer">
+                    {this.state.featuredList.id ? <List list={this.state.featuredList} resetContainer={this.resetContainer}/>: <div className="listContainer">
                         <Grid>
                             <Grid.Row>
                                 {listComps}

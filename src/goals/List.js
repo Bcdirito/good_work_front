@@ -3,6 +3,7 @@ import {connect} from "react-redux"
 import TaskCard from "./TaskCard"
 import {Form, Button, Table} from "semantic-ui-react"
 import {createTask, getTasks, destroyTask} from "../store/actions/taskActions"
+import {destroyList} from "../store/actions/listActions"
 
 class List extends Component {
     state = {
@@ -17,6 +18,7 @@ class List extends Component {
     }
 
     componentDidMount = () => {
+
         if (this.props.tasks === undefined || this.props.tasks.length === 0){
             this.props.getTasks(this.props.list)
         }
@@ -43,6 +45,7 @@ class List extends Component {
 
     deleteHandler = () => {
         this.props.deleteList(this.props)
+        this.props.resetContainer()
     }
 
     finishTask = (e) => {
@@ -60,7 +63,7 @@ class List extends Component {
     submitHandler = e => {
         e.preventDefault()
         this.props.addTask(this.state.formData, this.props.list)
-        this.resetComponent()
+        this.props.resetComponent()
     }
 
     resetComponent = () => {
@@ -112,8 +115,6 @@ class List extends Component {
         if (this.props.tasks !== undefined){
             tasks = this.props.tasks
         }
-
-        console.log(tasks)
         
         if (tasks !== undefined) {
             taskComps = tasks.map(task => {
@@ -128,7 +129,6 @@ class List extends Component {
             })
         }
         
-        console.log(tasks)
         return (
         <div>
             <h3>{list.attributes.name}</h3>
@@ -145,7 +145,7 @@ class List extends Component {
             
             <div>{this.state.clicked === true ? this.renderForm() : null}</div>
                 {this.state.clicked === false ?<Button onClick={this.buttonHandler}>Add A Task</Button> : <Button onClick={this.buttonHandler}>Go Back</Button>}
-                {this.props.tasks === undefined ? <Button onClick={this.deleteHandler}>Delete List</Button> : null}
+                {taskComps[0] === undefined ? <Button onClick={this.deleteHandler}>Delete List</Button> : null}
                 {this.state.featuredTask.id ? this.renderTaskCard() : null}
         </div>
         )
@@ -161,7 +161,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         addTask: (task, list) => dispatch(createTask(task, list)),
-        deleteList: list => dispatch({type: "DELETE_LIST", list}),
+        deleteList: list => dispatch(destroyList(list)),
         getTasks: list => dispatch(getTasks(list)),
         deleteTask: task => dispatch(destroyTask(task))
 

@@ -55,3 +55,26 @@ export const createList = (list, goal) => {
         })
     }
 }
+
+export const destroyList = list => {
+
+    const id = list.list.id
+
+    return (dispatch) => {
+        return fetch(`http://localhost:3000/api/v1/lists/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        })
+        .then(res => res.json())
+        .then(res => {
+            if (res.error){
+                alert(res.error)
+            } else {
+                dispatch(deleteList(id))
+            }
+        })
+    }
+}

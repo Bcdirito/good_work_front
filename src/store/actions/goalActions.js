@@ -41,12 +41,7 @@ export const createGoal = (goal, user) => {
                     alert(error)
                 })
             } else {
-                const newGoal ={
-                    id: Number(res.data.id),
-                    name: res.data.attributes.name
-                }
-                console.log(newGoal)
-                dispatch(addGoal(newGoal))
+                dispatch(addGoal(res.data))
             }
         })
         .catch(console.error)

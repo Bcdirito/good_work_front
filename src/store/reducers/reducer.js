@@ -15,25 +15,17 @@ const reducer = (state = initialState, action) => {
             }
 
         case "ADD_GOAL":
-            console.log("Made it to ADD_GOAL")
-            const newGoals = state.goals[0].concat(action.goal)
             return {
                 ...state,
-                goals: newGoals
+                goals: [...state.goals, action.goal]
             }
     
         case "DELETE_GOAL":
-            let goalsArray;
-            if (state.goals.length === 1){
-                goalsArray = state.goals[0]
-            } else if (state.goals[state.goals.length -1].length !== undefined){
-                const newArr = Array.from(state.goals.slice(0, (state.goals.length - 1)))
-                goalsArray = newArr
-            }
+            console.log(action.goal)
             return {
                 ...state,
-                goals: goalsArray.filter(goal => {
-                    return goal.id !== action.goal
+                goals: state.goals.filter(goal => {
+                    return Number(goal.id) !== action.goal
                 })
             }
         

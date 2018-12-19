@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import Goal from "./Goal"
 import {connect} from "react-redux"
 import {Button, Form, Grid} from "semantic-ui-react"
-import {createGoal} from "../store/actions/goalActions"
+import {createGoal, getGoals} from "../store/actions/goalActions"
 import GoalTile from './GoalTile';
 
 class GoalContainer extends Component {
@@ -13,8 +12,14 @@ class GoalContainer extends Component {
         }
     }
 
+    componentDidMount(){
+        if (this.props.goals.length === 0 && this.props.user){
+            this.props.getGoals(this.props.user)
+        }
+    }
+
     componentDidUpdate(){
-        console.log("Made it to Update!")
+        console.log(this.props.goals)
     }
 
     
@@ -55,28 +60,22 @@ class GoalContainer extends Component {
     let goals;
     let goalComps
 
-    if (this.props.goals.length === 1){
-        goals = Array.from(this.props.goals[0])
-    } else if (this.props.goals.length > 1 && this.props.goals.length[this.props.goals.length - 1] !== undefined){
-        debugger
-        const newArr = Array.from(this.props.goals.slice(0, (this.props.goals.length - 1)))
-        goals = newArr
-    } else if (this.props.goals.length > 1 && this.props.goals.length[this.props.goals.length - 1] === undefined){
-        goals = this.props.goals
-    }
+    goals = this.props.goals
 
-    goalComps = goals.map(goal => {
-        return (<div className="goalTiles">
-                    <Grid.Column>
-                        <GoalTile
-                        key={goal.id}
-                        goal={goal}
-                        deleteGoal={this.props.deleteGoal}
-                        history={this.props.history}
-                        />
-                    </Grid.Column>
-                </div>)
-    })
+    if (goals !== undefined || goals.length > 0) {
+        goalComps = goals.map(goal => {
+            return (<div className="goalTiles">
+                        <Grid.Column>
+                            <GoalTile
+                            key={goal.id}
+                            goal={goal}
+                            deleteGoal={this.props.deleteGoal}
+                            history={this.props.history}
+                            />
+                        </Grid.Column>
+                    </div>)
+        })
+    }
 
     return (
       <div>
@@ -105,6 +104,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        getGoals: (user) => dispatch(getGoals(user)),
         createGoal: (goal, user) => dispatch(createGoal(goal, user))
     }
 }

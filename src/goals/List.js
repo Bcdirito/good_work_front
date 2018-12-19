@@ -63,7 +63,7 @@ class List extends Component {
     submitHandler = e => {
         e.preventDefault()
         this.props.addTask(this.state.formData, this.props.list)
-        this.props.resetComponent()
+        this.resetComponent()
     }
 
     resetComponent = () => {
@@ -144,6 +144,7 @@ class List extends Component {
             </Table>
             
             <div>{this.state.clicked === true ? this.renderForm() : null}</div>
+                <br></br>
                 {this.state.clicked === false ?<Button onClick={this.buttonHandler}>Add A Task</Button> : <Button onClick={this.buttonHandler}>Go Back</Button>}
                 {taskComps[0] === undefined ? <Button onClick={this.deleteHandler}>Delete List</Button> : null}
                 {this.state.featuredTask.id ? this.renderTaskCard() : null}

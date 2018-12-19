@@ -4,6 +4,8 @@ export const deleteGoal = goal => ({type: "DELETE_GOAL", goal})
 
 export const featureGoal = goal => ({type: "FEATURE_GOAL", goal})
 
+export const loadGoal = goal => ({type: "LOAD_GOAL", goal})
+
 export const selectGoal = id => {
     return (dispatch) => {
         return fetch(`http://localhost:3000/api/v1/goals/${id}`, {
@@ -67,6 +69,29 @@ export const destroyGoal = goal => {
                 alert(res.error)
             } else {
                 dispatch(deleteGoal(id))
+            }
+        })
+    }
+}
+
+export const getGoals = user => {
+    return (dispatch) => {
+        return fetch("http://localhost:3000/api/v1/goals", {
+            headers: {
+                "Content-Type": "application/json",
+                "Accepts": "application/json"
+            }
+        })
+        .then(res => res.json())
+        .then(res => {
+            if (res.errors){
+                console.log(res.errors)
+            } else {
+                res.data.forEach(goal => {
+                    if (Number(goal.relationships.user.data.id) === user.id){
+                        dispatch(loadGoal(goal))
+                    }
+                })
             }
         })
     }

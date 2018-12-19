@@ -106,7 +106,8 @@ class Goal extends Component {
                         </Grid>
                     </div>}
                 <div>{this.state.clicked === true ? this.renderForm() : null}</div>
-                {this.state.clicked === false && this.state.featuredList.id === undefined ? <Button onClick={this.buttonHandler}>Add List</Button>: <Button onClick={this.resetContainer}>Go Back</Button>}
+                <br></br>
+                {this.state.clicked === false && this.state.featuredList.id === undefined ? <Button onClick={this.buttonHandler}>Add List</Button>: <Button onClick={this.resetContainer}>Back to Goal</Button>}
                 {this.state.clicked === false && this.state.featuredList.id === undefined ? <Button onClick={this.deleteHandler}>Delete Me!</Button> : null}
             </div>
         )

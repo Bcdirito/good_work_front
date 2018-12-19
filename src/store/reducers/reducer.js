@@ -8,6 +8,12 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch(action.type) {
+        case "LOAD_GOAL":
+            return {
+                ...state,
+                goals: [...state.goals, action.goal]
+            }
+
         case "ADD_GOAL":
             console.log("Made it to ADD_GOAL")
             const newGoals = state.goals[0].concat(action.goal)
@@ -111,7 +117,6 @@ const reducer = (state = initialState, action) => {
                     id: action.user.user.id,
                     user: action.user.user.username
                 },
-                goals: [...state.goals, action.user.user.goals],
             }
 
         case "LOGOUT_USER":

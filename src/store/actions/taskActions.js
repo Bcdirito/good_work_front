@@ -45,7 +45,7 @@ export const createTask = (task, list) => {
         })
     })
     .then(res => res.json())
-    .then(data => dispatch(addTask(data)))
+    .then(res => dispatch(addTask(res.data)))
     .catch(console.error)
 }}
 

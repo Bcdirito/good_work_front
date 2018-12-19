@@ -38,7 +38,7 @@ class TaskCard extends Component {
     }
     
     render() {
-        console.log(this.props)
+        // console.log(this.props)
         return (
             <div>
                 <Form onSubmit={e => this.submitHandler(e)}>

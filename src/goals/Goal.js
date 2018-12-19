@@ -80,9 +80,7 @@ class Goal extends Component {
     render() {
         const goal = this.props.featuredGoal
         const lists = this.props.lists
-
-        console.log(this.state.featuredList)
-
+        
         const listComps = lists.map(list => {
             if(Number(list.relationships.goal.data.id) === Number(this.props.featuredGoal.id)) {
                 return (<div classname="listTiles">

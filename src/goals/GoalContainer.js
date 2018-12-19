@@ -13,6 +13,10 @@ class GoalContainer extends Component {
         }
     }
 
+    componentDidUpdate(){
+        console.log("Made it to Update!")
+    }
+
     
     buttonHandler = () => {
         this.setState({ clicked: !this.state.clicked})
@@ -51,9 +55,16 @@ class GoalContainer extends Component {
     let goals;
     let goalComps
 
-    if (this.props.goals.length > 0){
+    if (this.props.goals.length === 1){
         goals = Array.from(this.props.goals[0])
+    } else if (this.props.goals.length > 1 && this.props.goals.length[this.props.goals.length - 1] !== undefined){
+        debugger
+        const newArr = Array.from(this.props.goals.slice(0, (this.props.goals.length - 1)))
+        goals = newArr
+    } else if (this.props.goals.length > 1 && this.props.goals.length[this.props.goals.length - 1] === undefined){
+        goals = this.props.goals
     }
+
     goalComps = goals.map(goal => {
         return (<div className="goalTiles">
                     <Grid.Column>

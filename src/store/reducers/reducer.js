@@ -10,17 +10,24 @@ const reducer = (state = initialState, action) => {
     switch(action.type) {
         case "ADD_GOAL":
             console.log("Made it to ADD_GOAL")
-            debugger
+            const newGoals = state.goals[0].concat(action.goal)
             return {
                 ...state,
-                goals: [...state.goals, action.goal.data]
+                goals: newGoals
             }
     
         case "DELETE_GOAL":
+            let goalsArray;
+            if (state.goals.length === 1){
+                goalsArray = state.goals[0]
+            } else if (state.goals[state.goals.length -1].length !== undefined){
+                const newArr = Array.from(state.goals.slice(0, (state.goals.length - 1)))
+                goalsArray = newArr
+            }
             return {
                 ...state,
-                goals: [...state.goals].filter(goal => {
-                    return goal.id !== action.goal.id
+                goals: goalsArray.filter(goal => {
+                    return goal.id !== action.goal
                 })
             }
         
@@ -63,23 +70,34 @@ const reducer = (state = initialState, action) => {
             }
 
         case "ADD_TASK":
-            console.log("Triggered Add Task", action.task)
-            return state
+            const newTasks = state.tasks.concat(action.task)
+            return {
+                ...state,
+                tasks: newTasks
+            }
         
         case "EDIT_TASK":
             console.log("Triggered Edit Task", action.task)
+            const editedTasks = state.tasks.map(task => {
+                if (action.task.id === task.id) {
+                    return {...task, ...action.task}
+                }
+                return task
+            })
+            console.log(editedTasks)
             return {
                 ...state,
-                tasks: [...state.tasks].forEach(task => {
-                    if (action.task.id === task.id) {
-                        return action.task
-                    }
-                })
+                tasks: editedTasks
             }
 
         case "DELETE_TASK":
             console.log("Triggered Delete Task", action.task)
-            return state
+            return {
+                ...state,
+                tasks: state.tasks.filter(task => {
+                    return Number(task.id) !== action.task
+                })
+            }
 
         case "LOGIN_USER":
             localStorage.setItem("token", action.user.jwt)

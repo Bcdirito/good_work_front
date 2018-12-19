@@ -112,6 +112,8 @@ class List extends Component {
         if (this.props.tasks !== undefined){
             tasks = this.props.tasks
         }
+
+        console.log(tasks)
         
         if (tasks !== undefined) {
             taskComps = tasks.map(task => {
@@ -126,7 +128,7 @@ class List extends Component {
             })
         }
         
-        console.log(this.state.featuredTask)
+        console.log(tasks)
         return (
         <div>
             <h3>{list.attributes.name}</h3>

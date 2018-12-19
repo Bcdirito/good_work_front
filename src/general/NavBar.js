@@ -22,7 +22,7 @@ class NavBar extends Component {
           </Menu.Item>
 
           <Menu.Item>
-            <NavLink to="/groups" className="nav-item">Groups</NavLink>
+            <NavLink to="/goals" className="nav-item">Goals</NavLink>
           </Menu.Item>
 
           <Menu.Menu position="right">

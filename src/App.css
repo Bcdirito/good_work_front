@@ -56,8 +56,9 @@ a:visited {
 }
 
 h1 {
-  display: flex;
+  display: block;
   justify-content: center;
+  align-items: center;
   background-color: #cacafc;
   color: #010203;
   width: 50%;
@@ -110,4 +111,15 @@ ul {
 
 .finished {
   background-color: rgb(24, 236, 24) !important
+}
+
+#wrongPlace {
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
+.header {
+  display: flex;
+  justify-content: center;
 }

@@ -20,7 +20,7 @@ class List extends Component {
     componentDidMount = () => {
 
         if (this.props.tasks === undefined || this.props.tasks.length === 0){
-            this.props.getTasks(this.props.list)
+            this.props.getTasks(this.props.list, this.props.user)
         }
 
         this.setState({
@@ -54,7 +54,7 @@ class List extends Component {
         let result = window.confirm("Did You Finish This Task, You Rock Star?")
         if (result === true) {
             alert("I'm So Proud of You! You Amaze Me!")
-            this.props.deleteTask(id)
+            this.props.deleteTask(id, this.props.user)
         } else {
             alert("Keep Going! I Know You Can Do It!")
         }
@@ -62,7 +62,7 @@ class List extends Component {
 
     submitHandler = e => {
         e.preventDefault()
-        this.props.addTask(this.state.formData, this.props.list)
+        this.props.addTask(this.state.formData, this.props.list, this.props.user)
         this.resetComponent()
     }
 
@@ -155,16 +155,17 @@ class List extends Component {
 
 const mapStateToProps = state => {
     return {
-        tasks: state.tasks
+        tasks: state.tasks,
+        user: state.user
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        addTask: (task, list) => dispatch(createTask(task, list)),
-        deleteList: list => dispatch(destroyList(list)),
-        getTasks: list => dispatch(getTasks(list)),
-        deleteTask: task => dispatch(destroyTask(task))
+        addTask: (task, list, user) => dispatch(createTask(task, list, user)),
+        deleteList: (list, user) => dispatch(destroyList(list, user)),
+        getTasks: (list, user) => dispatch(getTasks(list, user)),
+        deleteTask: (task, user) => dispatch(destroyTask(task, user))
 
     }
 }

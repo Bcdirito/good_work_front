@@ -25,7 +25,7 @@ class TaskCard extends Component {
 
     submitHandler = e => {
         e.preventDefault()
-        this.props.updateTask(this.state.editData, Number(this.props.task.id), Number(this.props.listId))
+        this.props.updateTask(this.state.editData, Number(this.props.task.id), Number(this.props.listId), this.props.user)
         this.resetComponent()
     }
 
@@ -44,13 +44,11 @@ class TaskCard extends Component {
                 <Form onSubmit={e => this.submitHandler(e)}>
                 <Form.Field></Form.Field>
                     <label>Task Title</label>
-                        <input type="text" name="title"
-                        placeholder={this.props.content} value={this.state.editData.title}
+                        <input type="text" name="title" value={this.state.editData.title}
                         onChange={e => this.changeHandler(e)}/>
                 <Form.Field>
                     <label>Task Content</label>
-                    <input type="text" name="content"
-                        placeholder={this.props.content} value={this.state.editData.content}
+                    <input type="text" name="content" value={this.state.editData.content}
                         onChange={e => this.changeHandler(e)}/>
                 </Form.Field>
                 <Button type="submit" >Update Task</Button>
@@ -60,10 +58,16 @@ class TaskCard extends Component {
     }
 }
 
-const mapDispatchToState = dispatch => {
+const mapStateToProps = state => {
     return {
-        updateTask: (data, id, listId) => dispatch(updateTask(data, id, listId))
+        user: state.user
     }
 }
 
-export default connect(null, mapDispatchToState)(TaskCard)
+const mapDispatchToState = dispatch => {
+    return {
+        updateTask: (data, id, listId, userId) => dispatch(updateTask(data, id, listId, userId))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToState)(TaskCard)

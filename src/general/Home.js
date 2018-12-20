@@ -8,7 +8,8 @@ class Home extends Component {
 
     componentDidMount = () => {
       const userToken = localStorage.getItem("token")
-      if(userToken) {
+      console.log(userToken)
+      if(userToken && userToken !== "undefined") {
         fetch(`http://localhost:3000/api/v1/profile`, {
           headers: {
             "Content-Type": "application/json",
@@ -18,9 +19,14 @@ class Home extends Component {
         })
         .then(res => res.json())
         .then(res => {
+          if (res.message){
+            alert(res.message)
+          }
           this.props.login(res.user)
         })
         .catch(console.error)
+      } else {
+        localStorage.clear()
       }
     }
 

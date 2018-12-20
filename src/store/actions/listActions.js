@@ -4,12 +4,13 @@ export const deleteList = list => ({type: "DELETE_LIST", list})
 
 export const loadList = list=> ({type: "LOAD_LIST", list})
 
-export const getLists = goalId => {
+export const getLists = (goalId, user) => {
     return (dispatch) => {
         return fetch("http://localhost:3000/api/v1/lists", {
             headers: {
                 "Content-Type": "application/json",
-                "Accepts": "application/json"
+                "Accepts": "application/json",
+                "Authorization": `${user.token}`
             }
         })
         .then(res => res.json())
@@ -29,14 +30,14 @@ export const getLists = goalId => {
     }
 }
 
-export const createList = (list, goal) => {
-
+export const createList = (list, goal, user) => {
     return (dispatch) => {
         return fetch("http://localhost:3000/api/v1/lists", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Accept": "application/json",
+                "Authorization": `${user.token}`
             },
             body: JSON.stringify({
                 goal_id: goal.id,
@@ -56,10 +57,9 @@ export const createList = (list, goal) => {
     }
 }
 
-export const destroyList = list => {
-
+export const destroyList = (list, user) => {
     const id = list.list.id
-
+    debugger
     return (dispatch) => {
         return fetch(`http://localhost:3000/api/v1/lists/${id}`, {
             method: "DELETE",

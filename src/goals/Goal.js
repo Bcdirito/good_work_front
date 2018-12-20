@@ -20,9 +20,9 @@ class Goal extends Component {
 
         if (this.props.lists.length > 0){
             this.props.clearLists()
-        } else {
-            this.props.selectGoal(id)
-            this.props.getLists(id)
+        } else if (this.props.lists.length === 0 && this.props.user.id) {
+            this.props.selectGoal(id, this.props.user)
+            this.props.getLists(id, this.props.user)
         }
     }
 
@@ -32,7 +32,7 @@ class Goal extends Component {
     }
 
     deleteHandler = () => {
-        this.props.deleteGoal(this.props.featuredGoal)
+        this.props.deleteGoal(this.props.featuredGoal, this.props.user)
         this.props.history.replace("/")
     }
 
@@ -46,7 +46,7 @@ class Goal extends Component {
 
     submitHandler = (e) => {
         e.preventDefault()
-        this.props.addList(this.state.formData, this.props.featuredGoal)
+        this.props.addList(this.state.formData, this.props.featuredGoal, this.props.user)
         this.setState({ clicked: false, formData: { title: "" } })
     }
 
@@ -116,6 +116,7 @@ class Goal extends Component {
 
 const mapStateToProps = state => {
     return {
+        user: state.user,
         featuredGoal: state.featuredGoal,
         lists: state.lists
     }
@@ -123,11 +124,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        deleteGoal: goal => dispatch(destroyGoal(goal)),
-        addList: (list, goal) => dispatch(createList(list, goal)),
-        getLists: id => dispatch(getLists(id)),
+        deleteGoal: (goal, user) => dispatch(destroyGoal(goal, user)),
+        addList: (list, goal, user) => dispatch(createList(list, goal, user)),
+        getLists: (id, user) => dispatch(getLists(id, user)),
         clearLists: () => dispatch({type: "CLEAR_LISTS"}),
-        selectGoal: id => dispatch(selectGoal(id))
+        selectGoal: (id, user) => dispatch(selectGoal(id, user))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Goal)

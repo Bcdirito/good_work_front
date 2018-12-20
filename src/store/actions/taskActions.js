@@ -6,13 +6,14 @@ export const loadTask = task => ({type: "LOAD_TASK", task})
 
 export const editTask = task => ({type: "EDIT_TASK", task})
 
-export const getTasks = list => {
+export const getTasks = (list, user) => {
     const id = list.id
     return (dispatch) => {
         return fetch ("http://localhost:3000/api/v1/tasks", {
             headers: {
                 "Content-Type": "application/json",
-                "Accepts": "application/json"
+                "Accepts": "application/json",
+                "Authorization": `${user.token}`
             }
         })
         .then(res => res.json())
@@ -30,13 +31,14 @@ export const getTasks = list => {
     }
 }
 
-export const createTask = (task, list) => {
+export const createTask = (task, list, user) => {
     return (dispatch) => {
         return fetch("http://localhost:3000/api/v1/tasks", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Accept": "application/json"
+            "Accept": "application/json",
+            "Authorization": `${user.token}`
         },
         body: JSON.stringify({
             list_id: list.id,
@@ -49,13 +51,14 @@ export const createTask = (task, list) => {
     .catch(console.error)
 }}
 
-export const destroyTask = id => {
+export const destroyTask = (id, user) => {
     return (dispatch) => {
         return fetch(`http://localhost:3000/api/v1/tasks/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Accept": "application/json",
+                "Authorization": `${user.token}`
             },
         })
         .then(res => res.json())
@@ -69,13 +72,14 @@ export const destroyTask = id => {
     }
 }
 
-export const updateTask = (data, id, listId) => {
+export const updateTask = (data, id, listId, user) => {
     return (dispatch) => {
         return fetch(`http://localhost:3000/api/v1/tasks/${id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Accept": "application/json",
+                "Authorization": `${user.token}`
             },
             body: JSON.stringify({
                 list_id: listId,

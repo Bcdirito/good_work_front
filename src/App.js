@@ -6,7 +6,6 @@ import Home from "./general/Home"
 import Goal from "./goals/Goal"
 import './App.css';
 import LoginPage from './general/LoginPage';
-import { connect } from "react-redux"
 
 class App extends Component {
 
@@ -29,6 +28,7 @@ class App extends Component {
       </div>
     );
   }
+  
 }
 
 

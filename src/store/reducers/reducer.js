@@ -1,5 +1,6 @@
 const initialState = {
     user: {},
+    partner: {},
     goals: [],
     featuredGoal: {},
     lists: [],
@@ -133,6 +134,33 @@ const reducer = (state = initialState, action) => {
                     user: action.user.user.username,
                     token: action.user.jwt
                 }
+            }
+
+        case "ADD_PARTNER":
+            return {
+                ...state,
+                partner: {
+                    id: action.partner.id,
+                    name: action.partner.attributes.name
+                    ,
+                    email: action.partner.attributes.email}
+            }
+
+        case "EDIT_PARTNER":
+            const partnerEdit = action.partner.attributes
+            return {
+                ...state,
+                partner: {
+                    id: action.partner.id,
+                    name: partnerEdit.name,
+                    email: partnerEdit.email
+                }
+            }
+
+        case "DELETE_PARTNER":
+            return {
+                ...state,
+                partner: {}
             }
 
         default:

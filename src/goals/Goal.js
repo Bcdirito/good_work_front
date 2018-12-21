@@ -41,7 +41,7 @@ class Goal extends Component {
             formData: {
                 [e.target.name]: e.target.value
             }
-        }, () => console.log(this.state.formData))
+        })
     }
 
     submitHandler = (e) => {

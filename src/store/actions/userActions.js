@@ -18,6 +18,7 @@ export const signUpUser = (user) => {
         })
         .then(res => res.json())
         .then((res) => {
+            debugger
             if (res.error){
                 res.error.forEach(error => {
                     alert(error)
@@ -36,7 +37,7 @@ export const createSession = user => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Accept": "application/json",
             },
             body: JSON.stringify({
                 user: user
@@ -44,10 +45,8 @@ export const createSession = user => {
         })
         .then(res => res.json())
         .then(res => {
-            if (res.error){
-                res.error.forEach(error => {
-                    alert(error)
-                })
+            if (res.message){
+                alert(res.message)
             } else {
                 dispatch(loginUser(res))
             }

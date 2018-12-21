@@ -25,6 +25,10 @@ class NavBar extends Component {
             <NavLink to="/goals" className="nav-item">Goals</NavLink>
           </Menu.Item>
 
+          {this.props.user.id ? <Menu.Item>
+            <NavLink to="/partner" className="nav-item">Partner</NavLink>
+          </Menu.Item> : null}
+
           <Menu.Menu position="right">
             <Menu.Item>
                 {this.props.user.id === undefined ? <NavLink to="/login">Login</NavLink> : <NavLink to="/" onClick={this.handleLogout}>Logout</NavLink>}

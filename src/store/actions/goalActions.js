@@ -62,7 +62,7 @@ export const destroyGoal = (goal, user) => {
             },
         })
         .then(res => res.json())
-        .then((res) => {
+        .then(res => {
             if (res.error){
                 alert(res.error)
             } else {

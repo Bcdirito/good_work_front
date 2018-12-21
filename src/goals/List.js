@@ -44,7 +44,7 @@ class List extends Component {
     }
 
     deleteHandler = () => {
-        this.props.deleteList(this.props)
+        this.props.deleteList(this.props, this.props.user)
         this.props.resetContainer()
     }
 
@@ -117,7 +117,7 @@ class List extends Component {
         }
         
         if (tasks !== undefined) {
-            taskComps = tasks.map(task => {
+           taskComps = tasks.map(task => {
                 if(Number(task.relationships.list.data.id) === Number(this.props.list.id)) {
                     return (
                         <Table.Row key={task.id} id={task.id}>

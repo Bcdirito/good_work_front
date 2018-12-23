@@ -40,19 +40,19 @@ body {
 }
 
 a:link {
-  color: rgb(70, 129, 238) 
+  color: black 
 }
 
 a:hover {
-  color: rgb(70, 129, 238) 
+  color: black 
 }
 
 a:active {
-  color: rgb(70, 129, 238)
+  color: black
 }
 
 a:visited {
-  color: rgb(70, 129, 238)
+  color: black
 }
 
 h1 {
@@ -61,7 +61,7 @@ h1 {
   align-items: center;
   background-color: #cacafc;
   color: #010203;
-  width: 50%;
+  width: 35%;
   border-radius: 10px;
   text-align: center
 }

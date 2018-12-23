@@ -1,20 +1,26 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 import { getPartner, createPartner, updatePartner, destroyPartner} from "../store/actions/partnerActions"
-import {Form, Input, Button} from "semantic-ui-react"
+import {Form, Input, Button, Card, Image} from "semantic-ui-react"
 
 class Partner extends Component {
 
     state = {
-        clicked: false,
+        addForm: false,
         editForm: false,
-        name: this.props.partner.name,
-        email: this.props.partner.email
+        name: "",
+        email: ""
     }
 
     componentDidMount(){
         if (this.props.partner.id === undefined){
             this.props.getPartner(this.props.user)
+        } else {
+            this.setState({
+                ...this.state,
+                name: this.props.partner.name,
+                email: this.props.partner.email
+            })
         }
     }
 
@@ -55,6 +61,22 @@ class Partner extends Component {
         this.props.destroyPartner(this.props.partner, this.props.user)
     }
 
+    renderCards = () => {
+        return (<Card>
+            <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' />
+            <Card.Content>
+              <Card.Header textAlign="center">{this.props.partner.name}</Card.Header>
+              <Card.Meta textAlign="center">
+                <span>email: <a>{this.props.partner.email}</a></span>
+              </Card.Meta>
+              <Card.Content textAlign="center">
+                <Button>Message</Button><Button onClick={this.clickEditHandler}>Edit Partner</Button>
+              </Card.Content>
+            </Card.Content>
+         
+          </Card>)
+    }
+
     renderForm = () => {
         return (
         <div>
@@ -71,9 +93,9 @@ class Partner extends Component {
         console.log(this.props.partner)
         return (
         <div>
-            <div className="header">{this.props.partner.id ?<h1> Your Accountability Partner </h1>: <h1> Add a Friend </h1>}</div>
-            {this.state.clicked === false && this.props.partner.id === undefined ? <Button onClick={this.clickHandler}>Add a Partner</Button> : this.renderForm()}
-            {this.state.editForm === false && this.props.partner.id ? <Button onClick={this.clickEditHandler}>Edit Partner</Button> : null }
+            <h1> Partners </h1>
+            {this.state.addForm === false && this.props.partner.id === undefined? <Button onClick={this.clickHandler}>Add a Partner</Button> : this.renderCards()}
+            {this.state.addForm === true ? this.renderForm() : null}
             {this.state.editForm === true ? <div><Button onClick={this.clickHandler}>Edit Partner</Button><Button onClick={this.deleteHandler}>Delete Partner</Button></div> : null }
         </div>
         )

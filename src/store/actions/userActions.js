@@ -12,17 +12,20 @@ export const signUpUser = (user) => {
             },
             body: JSON.stringify({
                 username: user.username,
-                password_digest: user.password,
+                password: user.password,
                 email: user.email
             })
         })
         .then(res => res.json())
         .then((res) => {
-            debugger
             if (res.error){
-                res.error.forEach(error => {
-                    alert(error)
-                })
+                if (res.error.length === 1){
+                    alert(res.error)
+                } else {
+                    res.error.forEach(error => {
+                        alert(error)
+                    })
+                }
             } else {
                 dispatch(createUser(res))
             }

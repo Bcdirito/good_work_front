@@ -1,3 +1,5 @@
+export const logoutUser = user => ({type: "LOGOUT_USER", user})
+
 export const createUser = user => ({type: "CREATE_USER", user})
 
 export const loginUser = user => ({type: "LOGIN_USER", user})
@@ -50,6 +52,7 @@ export const createSession = user => {
         .then(res => {
             if (res.message){
                 alert(res.message)
+                dispatch(logoutUser(user))
             } else {
                 dispatch(loginUser(res))
             }

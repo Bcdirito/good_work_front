@@ -59,17 +59,18 @@ export const createList = (list, goal, user) => {
 
 export const destroyList = (list, user) => {
     const id = list.list.id
-    debugger
     return (dispatch) => {
         return fetch(`http://localhost:3000/api/v1/lists/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Accept": "application/json",
+                "Authorization": `${user.token}`
             }
         })
         .then(res => res.json())
         .then(res => {
+            debugger
             if (res.error){
                 alert(res.error)
             } else {

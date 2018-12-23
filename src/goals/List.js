@@ -145,7 +145,7 @@ class List extends Component {
             
             <div>{this.state.clicked === true ? this.renderForm() : null}</div>
                 <br></br>
-                {this.state.clicked === false ?<Button onClick={this.buttonHandler}>Add A Task</Button> : <Button onClick={this.buttonHandler}>Go Back</Button>}
+                {this.state.clicked === false ?<Button onClick={this.buttonHandler}>Add A Task</Button> : <Button onClick={this.buttonHandler}>Go Back to Goal</Button>}
                 {taskComps[0] === undefined ? <Button onClick={this.deleteHandler}>Delete List</Button> : null}
                 {this.state.featuredTask.id ? this.renderTaskCard() : null}
         </div>

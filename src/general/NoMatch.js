@@ -1,14 +1,14 @@
-import React from 'react'
 import wrongMap from "../media/noMatchMap.jpeg"
+import React, { Component } from 'react'
 
-const NoMatch = props => {
+export default class NoMatch extends Component {
+  render() {
     return (
-        <div id="noMatch">
-            <div className="header"><h1>My Friend, You Seem To Have Gotten Lost</h1></div>
-            <br></br>
-            <div id="wrongPlace"></div><img src={wrongMap} alt="no match"></img>
-        </div>  
+      <div>
+        <div className="header"><h1>My Friend, You Seem To Have Gotten Lost</h1></div>
+        <br></br>
+        <div id="wrongPlace"></div><img src={wrongMap} alt="no match"></img>
+    </div>  
     )
+  }
 }
-
-export default NoMatch

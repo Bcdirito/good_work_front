@@ -37,15 +37,15 @@ class Partner extends Component {
         } else {
             this.props.createPartner(this.state, this.props.user)
         }
-
+        this.clearState()
     }
 
     clickHandler = () => {
         console.log("Clicked!")
         this.setState({
             ...this.state,
-            clicked: !this.state.clicked
-        })
+            addForm: !this.state.addForm
+        }, () => console.log(this.state))
     }
 
     clickEditHandler = () => {
@@ -59,6 +59,16 @@ class Partner extends Component {
 
     deleteHandler = () => {
         this.props.destroyPartner(this.props.partner, this.props.user)
+        this.clearState()
+    }
+
+    clearState = () => {
+        this.setState({
+            addForm: false,
+            editForm: false,
+            name: "",
+            email: ""
+        })
     }
 
     renderCards = () => {
@@ -90,13 +100,16 @@ class Partner extends Component {
     }
 
     render() {
-        console.log(this.props.partner)
         return (
         <div>
             <h1> Partners </h1>
-            {this.state.addForm === false && this.props.partner.id === undefined? <Button onClick={this.clickHandler}>Add a Partner</Button> : this.renderCards()}
-            {this.state.addForm === true ? this.renderForm() : null}
-            {this.state.editForm === true ? <div><Button onClick={this.clickHandler}>Edit Partner</Button><Button onClick={this.deleteHandler}>Delete Partner</Button></div> : null }
+            {this.state.addForm === false && this.props.partner.id === undefined? <Button onClick={this.clickHandler}>Add a Partner</Button> : null}
+            {this.props.partner.id ? this.renderCards() : null}
+            {this.state.addForm === true || this.state.editForm === true ? this.renderForm() : null}
+            {this.state.addForm === true ? <Button onClick={this.clearState}>Go Back</Button> : null}
+            <br></br>
+            {this.state.editForm === true ? <Button onClick={this.deleteHandler}>Delete Partner</Button> : null}
+            
         </div>
         )
     }

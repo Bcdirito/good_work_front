@@ -47,7 +47,7 @@ export const createPartner = (data, user) => {
         })
         .then(res => res.json())
         .then(res => {
-            if (res.message){
+            if (res.error){
                 alert(res.message)
             } else {
                 dispatch(addPartner(res.data))

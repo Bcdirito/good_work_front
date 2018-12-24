@@ -27,7 +27,8 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 goals: state.goals.filter(goal => {
                     return Number(goal.id) !== action.goal
-                })
+                }),
+                featuredGoal: {}
             }
         
         case "FEATURE_GOAL":

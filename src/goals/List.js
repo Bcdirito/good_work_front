@@ -43,9 +43,16 @@ class List extends Component {
         })
     }
 
-    deleteHandler = () => {
-        this.props.deleteList(this.props, this.props.user)
-        this.props.resetContainer()
+
+    finishList = () => {
+        let result = window.confirm("Did You Accomplish Everything to Do on This List?")
+        if (result === true){
+            alert("Another One Down, Another Win for You!")
+            this.props.deleteList(this.props, this.props.user)
+            this.props.resetContainer()
+        } else {
+            alert("No Worries! We'll be Here When You Finish!")
+        }
     }
 
     finishTask = (e) => {
@@ -68,7 +75,7 @@ class List extends Component {
 
     resetComponent = () => {
         this.setState({
-            clicked: !this.state.clicked,
+            clicked: false,
             formData: {
                 title: "",
                 content: ""
@@ -146,7 +153,7 @@ class List extends Component {
             <div>{this.state.clicked === true ? this.renderForm() : null}</div>
                 <br></br>
                 {this.state.clicked === false ?<Button onClick={this.buttonHandler}>Add A Task</Button> : <Button onClick={this.buttonHandler}>Go Back to Goal</Button>}
-                {taskComps[0] === undefined ? <Button onClick={this.deleteHandler}>Delete List</Button> : null}
+                {taskComps[0] === undefined ? <Button className="finished" onClick={this.finishList}>Finished!</Button> : null}
                 {this.state.featuredTask.id ? this.renderTaskCard() : null}
         </div>
         )

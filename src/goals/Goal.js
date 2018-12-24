@@ -64,6 +64,16 @@ class Goal extends Component {
         this.setState({ featuredList: list})
     }
 
+    finishGoal = () => {
+        let result = window.confirm("Are You Proving Your Greatness Again by Completing This Goal?")
+        if (result === true){
+            alert("You Did It! You Deserve All of the High Fives!")
+            this.deleteHandler()
+        } else {
+            alert("Sounds Good! We'll be Here Cheering You On!")
+        }
+    }
+
     renderForm = () => {
         return <Form onSubmit={e => this.submitHandler(e)}>
                     <Form.Field>
@@ -108,7 +118,7 @@ class Goal extends Component {
                 <div>{this.state.clicked === true ? this.renderForm() : null}</div>
                 <br></br>
                 {this.state.clicked === false && this.state.featuredList.id === undefined ? <Button onClick={this.buttonHandler}>Add List</Button>: <Button onClick={this.resetContainer}>Back to Goal</Button>}
-                {this.state.clicked === false && this.state.featuredList.id === undefined ? <Button onClick={this.deleteHandler}>Delete Me!</Button> : null}
+                {this.state.clicked === false && this.state.featuredList.id === undefined ? <Button className="finished" onClick={this.deleteHandler}>Finished!</Button> : null}
             </div>
         )
   }

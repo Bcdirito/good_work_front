@@ -51,8 +51,9 @@ class TaskCard extends Component {
                     <input type="text" name="content" value={this.state.editData.content}
                         onChange={e => this.changeHandler(e)}/>
                 </Form.Field>
-                <Button type="submit" >Update Task</Button>
+                <Button type="submit">Update Task</Button>
             </Form>
+                <Button onClick={this.resetComponent}>Never Mind</Button>
         </div>
         )
     }

@@ -2,35 +2,35 @@ import React, { Component } from 'react'
 import GoalContainer from "../goals/GoalContainer"
 import { connect } from "react-redux"
 import { Button } from 'semantic-ui-react';
-import { createSession } from "../store/actions/userActions"
 
 class Home extends Component {
   clickHandler = e => {
+    console.log("clicked")
     this.props.history.push(`/${e.target.name}`)
   }
 
-  componentDidMount(){
-    const userToken = localStorage.getItem("token")
-    if(userToken) {
-      fetch(`http://localhost:3000/api/v1/profile`, {
-        headers: {
-          "Content-Type": "application/json",
-          "Accepts": "application/json",
-          "Authorization": `${userToken}`
-        }
-      })
-      .then(res => res.json())
-      .then(res => {
-        if (res.message){
-          alert(res.message)
-        }
-        this.props.login(res.user)
-      })
-      .catch(console.error)
-    } else {
-      localStorage.clear()
-    }
-  }
+  // componentDidMount(){
+  //   const userToken = localStorage.getItem("token")
+  //   if(userToken) {
+  //     fetch(`http://localhost:3000/api/v1/profile`, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         "Accepts": "application/json",
+  //         "Authorization": `${userToken}`
+  //       }
+  //     })
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       if (res.message){
+  //         alert(res.message)
+  //       }
+  //       this.props.login(res.user)
+  //     })
+  //     .catch(console.error)
+  //   } else {
+  //     localStorage.clear()
+  //   }
+  // }
 
   homeRender = () => {
     if (this.props.user.id) {
@@ -61,11 +61,5 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    login: user => dispatch(createSession(user))
-  }
-}
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(mapStateToProps)(Home)

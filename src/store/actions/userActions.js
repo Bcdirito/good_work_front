@@ -54,6 +54,9 @@ export const createSession = user => {
             if (res.message){
                 alert(res.message)
                 dispatch(logoutUser(user))
+            } else if (res.error) {
+                alert(res.error)
+                dispatch(logoutUser(user))     
             } else {
                 dispatch(loginUser(res))
             }

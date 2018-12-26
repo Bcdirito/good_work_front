@@ -105,11 +105,13 @@ const reducer = (state = initialState, action) => {
 
         case "LOGIN_USER":
             localStorage.setItem("token", action.user.jwt)
+            debugger
             return {
                 ...state,
                 user: {
                     id: action.user.user.id,
                     user: action.user.user.username,
+                    name: action.user.user.name,
                     token: action.user.jwt
                 },
             }

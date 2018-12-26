@@ -21,9 +21,9 @@ class NavBar extends Component {
             <NavLink to="/doctors" className="nav-item">Doctors</NavLink>
           </Menu.Item>
 
-          <Menu.Item>
+          {this.props.user.id ?<Menu.Item>
             <NavLink to="/goals" className="nav-item">Goals</NavLink>
-          </Menu.Item>
+          </Menu.Item> : null}
 
           {this.props.user.id ? <Menu.Item>
             <NavLink to="/partner" className="nav-item">Partner</NavLink>

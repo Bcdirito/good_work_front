@@ -9,6 +9,7 @@ import './App.css';
 import LoginPage from './general/LoginPage';
 import { connect } from "react-redux"
 import { createSession } from "./store/actions/userActions"
+import GoalContainer from './goals/GoalContainer';
 
 class App extends Component {
 
@@ -48,10 +49,13 @@ class App extends Component {
             <Route exact path="/login" render={(props) => (
               <LoginPage {...props} />
             )} />
+            <Route exact path="/goals" render={(props) => (
+              <GoalContainer {...props} />
+            )} />
             <Route exact path="/goals/:id" render={(props) => (
               <Goal {...props} />
             )} />
-            <Route exact path="/partner" render={(props) => (
+            <Route exact path="/partners" render={(props) => (
               <Partner {...props} />
           )} />
             <Route component={NoMatch}/>

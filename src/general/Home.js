@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import GoalContainer from "../goals/GoalContainer"
+import Profile from "./Profile"
 import { connect } from "react-redux"
 import { Button } from 'semantic-ui-react';
 
@@ -34,7 +35,7 @@ class Home extends Component {
 
   homeRender = () => {
     if (this.props.user.id) {
-      return <GoalContainer history={this.props.history}/>
+      return <Profile history={this.props.history}/>
     } else {
       return (<div>
         <div id="welcome">
@@ -48,7 +49,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <h1>Welcome to Good Work</h1>
+        <h1>{this.props.user.name ? `Hello ${this.props.user.name}`: "Welcome to Good Work"}</h1>
         {this.homeRender()}
       </div>
     )

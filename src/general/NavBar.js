@@ -26,7 +26,7 @@ class NavBar extends Component {
           </Menu.Item> : null}
 
           {this.props.user.id ? <Menu.Item>
-            <NavLink to="/partner" className="nav-item">Partner</NavLink>
+            <NavLink to="/partners" className="nav-item">Partners</NavLink>
           </Menu.Item> : null}
 
           <Menu.Menu position="right">

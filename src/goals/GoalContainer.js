@@ -78,7 +78,7 @@ class GoalContainer extends Component {
     }
 
     return (
-      <div>
+      <div className="goals">
           <h2>My Goals</h2>
             <div className="goalContainer">
                 <Grid>

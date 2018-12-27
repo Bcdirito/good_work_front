@@ -10,35 +10,12 @@ class Home extends Component {
     this.props.history.push(`/${e.target.name}`)
   }
 
-  // componentDidMount(){
-  //   const userToken = localStorage.getItem("token")
-  //   if(userToken) {
-  //     fetch(`http://localhost:3000/api/v1/profile`, {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         "Accepts": "application/json",
-  //         "Authorization": `${userToken}`
-  //       }
-  //     })
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       if (res.message){
-  //         alert(res.message)
-  //       }
-  //       this.props.login(res.user)
-  //     })
-  //     .catch(console.error)
-  //   } else {
-  //     localStorage.clear()
-  //   }
-  // }
-
   homeRender = () => {
     if (this.props.user.id) {
       return <Profile history={this.props.history}/>
     } else {
       return (<div>
-        <div id="welcome">
+        <div>
               <Button name="login" onClick={e => this.clickHandler(e)} color="blue">Login/Sign Up</Button>
               <Button name="doctors" onClick={e => this.clickHandler(e)} color="blue">Find A Doctor</Button>
         </div>
@@ -48,8 +25,8 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
-        <h1>{this.props.user.name ? `Hello ${this.props.user.name}`: "Welcome to Good Work"}</h1>
+      <div className="welcome">
+        <h1 id="greeting">{this.props.user.name ? `Hello, ${this.props.user.name}`: "Welcome to Good Work"}</h1>
         {this.homeRender()}
       </div>
     )

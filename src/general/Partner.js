@@ -101,7 +101,7 @@ class Partner extends Component {
 
     render() {
         return (
-        <div>
+        <div className="partners">
             <h1> Partners </h1>
             {this.state.addForm === false && this.props.partner.id === undefined? <Button onClick={this.clickHandler}>Add a Partner</Button> : null}
             {this.props.partner.id ? this.renderCards() : null}

@@ -31,10 +31,6 @@
   }
 }
 
-body {
-  background-image: url('./media/good_work_background.jpeg') !important
-}
-
 #navbar {
   background-color: #fcfcca
 }
@@ -70,7 +66,7 @@ h1 {
   display: flex;
   justify-content: center;
   position: relative;
-  align-items: center;
+  align-items: center;  
 }
 
 .button {
@@ -122,4 +118,38 @@ ul {
 .header {
   display: flex;
   justify-content: center;
+}
+
+.greeting {
+    display: flex;
+    justify-content: center;
+    width: 15%
+}
+
+.welcome {
+  background-image: url('./media/good_work_background.jpeg') !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 45em;
+}
+
+.noMatch {
+  background-image: url('./media/noMatchMap.jpg') !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 45em;
+}
+
+.partners {
+  background-image: url('./media/better_friend_avatar.jpeg') !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 45em;
+}
+
+.goals {
+  background-image: url('./media/goals.jpg') !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 45em;
 }

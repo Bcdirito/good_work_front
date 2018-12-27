@@ -11,6 +11,7 @@ import { connect } from "react-redux"
 import { createSession } from "./store/actions/userActions"
 import GoalContainer from './goals/GoalContainer';
 
+
 class App extends Component {
 
   componentDidMount() {
@@ -37,8 +38,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props.user)
-    console.log(localStorage)
     return (
       <div className="App">
       <NavBar />

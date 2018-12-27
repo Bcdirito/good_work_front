@@ -52,7 +52,7 @@ class LoginPage extends Component {
 
     render() {
         return (
-        <div>
+        <div className="welcome">
             <div>
                 {this.state.clicked === true ? this.renderForm(): null}
             </div> 

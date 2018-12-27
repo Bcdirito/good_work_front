@@ -15,9 +15,14 @@ class Goal extends Component {
         featuredList: {}
     }
 
-    componentWillMount = () => {
+    componentDidMount = () => {
         const id = Number(this.props.match.params.id)
-
+        // if (this.props.featuredGoal.id === undefined){
+        //     let pathArr = window.location.pathname.split("/")
+        //     let paramsId = Number(pathArr[pathArr.length -1])
+        //     console.log(this.props.user)
+        //     console.log(paramsId)
+        // }
         if (this.props.lists.length > 0){
             this.props.clearLists()
         } else if (this.props.lists.length === 0 && this.props.user.id) {
@@ -106,7 +111,7 @@ class Goal extends Component {
                 }        
         })
         return (
-            <div>
+            <div className="goalPage">
                 <h2>{goal.attributes ?  goal.attributes.name : null}</h2>
                     {this.state.featuredList.id ? <List list={this.state.featuredList} resetContainer={this.resetContainer}/>: <div className="listContainer">
                         <Grid>

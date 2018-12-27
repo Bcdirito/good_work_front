@@ -32,7 +32,7 @@
 }
 
 #navbar {
-  background-color: #fcfcca
+  background-color: #fcfcca;
 }
 
 a:link {
@@ -130,26 +130,33 @@ ul {
   background-image: url('./media/good_work_background.jpeg') !important;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 45em;
+  height: 51em;
 }
 
 .noMatch {
   background-image: url('./media/noMatchMap.jpg') !important;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 45em;
+  height: 51em;
 }
 
 .partners {
   background-image: url('./media/better_friend_avatar.jpeg') !important;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 45em;
+  height: 51em;
 }
 
 .goals {
   background-image: url('./media/goals.jpg') !important;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 45em;
+  height: 51em;
+}
+
+.goalPage {
+  background-image: url('./media/beach-calm-dawn-267967.jpg') !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 51em;
 }

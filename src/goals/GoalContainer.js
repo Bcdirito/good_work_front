@@ -89,7 +89,7 @@ class GoalContainer extends Component {
             </div>
             <div>{this.state.clicked === true ? this.renderForm() : null}</div>
             <br></br>
-            {this.state.clicked === false ? <Button onClick={this.buttonHandler}>Add Goal</Button>: <Button onClick={this.buttonHandler}>Go Back</Button> }
+            {this.state.clicked === false ? <Button className="goalButton" onClick={this.buttonHandler}>Add Goal</Button>: <Button onClick={this.buttonHandler}>Go Back</Button> }
       </div>
     )
   }

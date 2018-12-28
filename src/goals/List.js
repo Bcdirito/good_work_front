@@ -140,11 +140,11 @@ class List extends Component {
         <div>
             <h3>{list.attributes.name}</h3>
             <Table celled>
-                <Table.Header className="tableHeader">
-                    <Table.Row>
-                        <Table.HeaderCell>Task</Table.HeaderCell>
-                        <Table.HeaderCell>Content</Table.HeaderCell>
-                        <Table.HeaderCell>Status</Table.HeaderCell>
+                <Table.Header>
+                    <Table.Row className="tableHeader">
+                        <Table.HeaderCell className="tableHeader">Task</Table.HeaderCell>
+                        <Table.HeaderCell className="tableHeader">Content</Table.HeaderCell>
+                        <Table.HeaderCell className="tableHeader">Status</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
                 {taskComps}

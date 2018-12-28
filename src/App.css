@@ -160,3 +160,7 @@ ul {
   background-repeat: no-repeat;
   height: 51em;
 }
+
+.lost {
+  background-color: rgb(99, 142, 146);
+}

@@ -10,6 +10,7 @@ import LoginPage from './general/LoginPage';
 import { connect } from "react-redux"
 import { createSession } from "./store/actions/userActions"
 import GoalContainer from './goals/GoalContainer';
+import NavContainer from "./navigation/NavContainer"
 
 
 class App extends Component {
@@ -40,7 +41,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <NavBar />
           <Switch>
             <Route exact path="/" render={(props) => (
               <Home {...props}/>

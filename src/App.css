@@ -57,9 +57,9 @@ h1 {
   align-items: center;
   background-color: #cacafc;
   color: #010203;
-  width: 35%;
+  /* width: 35%; */
   border-radius: 10px;
-  text-align: center
+  text-align: center;
 }
 
 #welcome {
@@ -70,7 +70,6 @@ h1 {
 }
 
 .button {
-  background-color: #d1d1ff !important;
   color: #010203 !important
 }
 
@@ -106,7 +105,7 @@ ul {
 }
 
 .finished {
-  background-color: rgb(24, 236, 24) !important
+  background-color: rgb(164, 193, 206) !important
 }
 
 #wrongPlace {
@@ -120,47 +119,67 @@ ul {
   justify-content: center;
 }
 
-.greeting {
-    display: flex;
-    justify-content: center;
-    width: 15%
+#greeting {
+    margin: 0;
+    position: absolute;
+    top: 23%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
 }
 
 .welcome {
   background-image: url('./media/good_work_background.jpeg') !important;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 51em;
+  height: 100vh;
 }
 
 .noMatch {
   background-image: url('./media/noMatchMap.jpg') !important;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 51em;
+  height: 100vh;
 }
 
 .partners {
   background-image: url('./media/better_friend_avatar.jpeg') !important;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 51em;
+  height: 100vh;
 }
 
 .goals {
   background-image: url('./media/goals.jpg') !important;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 51em;
+  height: 100vh;
 }
 
 .goalPage {
   background-image: url('./media/beach-calm-dawn-267967.jpg') !important;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 51em;
+  height: 100vh;
 }
 
 .lost {
   background-color: rgb(99, 142, 146);
+}
+
+.navContainer {
+  background-color: transparent;
+}
+
+.profileButtons {
+  background-color: rgb(224, 232, 199) !important;
+  margin-left: 10px;
+}
+
+.greetingHeader {
+  background-color: rgb(224, 232, 199) !important;
+}
+
+.goalButton {
+  background-color: rgb(132, 179, 66) !important; 
 }

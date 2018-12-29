@@ -3,6 +3,8 @@ import GoalContainer from "../goals/GoalContainer"
 import Profile from "./Profile"
 import { connect } from "react-redux"
 import { Button } from 'semantic-ui-react';
+import NavContainer from "../navigation/NavContainer"
+
 
 class Home extends Component {
   clickHandler = e => {
@@ -26,8 +28,11 @@ class Home extends Component {
   render() {
     return (
       <div className="welcome">
-        <h1 id="greeting">{this.props.user.name ? `Hello, ${this.props.user.name}`: "Welcome to Good Work"}</h1>
+        <NavContainer />
+        <div id="greeting">
+        <h1 className="greetingHeader">{this.props.user.name ? `Hello, ${this.props.user.name}`: "Welcome to Good Work"}</h1>
         {this.homeRender()}
+        </div>
       </div>
     )
   }

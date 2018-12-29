@@ -1,4 +1,3 @@
-import wrongMap from "../media/noMatchMap.jpeg"
 import React, { Component } from 'react'
 
 export default class NoMatch extends Component {

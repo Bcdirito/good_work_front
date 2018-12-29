@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Route, Switch, withRouter} from 'react-router-dom'
-import NavBar from "./general/NavBar"
 import NoMatch from "./general/NoMatch"
 import Home from "./general/Home"
 import Goal from "./goals/Goal"
@@ -11,7 +10,6 @@ import LoginPage from './general/LoginPage';
 import { connect } from "react-redux"
 import { createSession } from "./store/actions/userActions"
 import GoalContainer from './goals/GoalContainer';
-import NavContainer from "./navigation/NavContainer"
 
 class App extends Component {
 

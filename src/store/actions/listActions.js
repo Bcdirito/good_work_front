@@ -75,7 +75,6 @@ export const destroyList = (list, user) => {
         })
         .then(res => res.json())
         .then(res => {
-            debugger
             if (res.error){
                 alert(res.error)
             } else {

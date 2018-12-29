@@ -129,11 +129,13 @@ class List extends Component {
            taskComps = tasks.map(task => {
                 if(Number(task.relationships.list.data.id) === Number(this.props.list.id)) {
                     return (
-                        <Table.Row key={task.id} id={task.id}>
-                            <Table.Cell>{task.attributes.title}</Table.Cell>
-                            <Table.Cell>{task.attributes.content}</Table.Cell>
-                            <Table.Cell><Button onClick={e => this.featureTaskCard(e)}>Edit Task</Button><Button color="green" className="finished" onClick={e => this.finishTask(e)}> Finished! </Button></Table.Cell>
-                        </Table.Row>)
+                        <Table.Body>
+                            <Table.Row key={task.id} id={task.id}>
+                                <Table.Cell>{task.attributes.title}</Table.Cell>
+                                <Table.Cell>{task.attributes.content}</Table.Cell>
+                                <Table.Cell><Button onClick={e => this.featureTaskCard(e)}>Edit Task</Button><Button color="green" className="finished" onClick={e => this.finishTask(e)}> Finished! </Button></Table.Cell>
+                            </Table.Row>
+                        </Table.Body>)
                 }
             })
         }

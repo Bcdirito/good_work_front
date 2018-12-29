@@ -32,17 +32,15 @@ const reducer = (state = initialState, action) => {
             }
         
         case "FEATURE_GOAL":
-            console.log("Made It To FEATURE_GOAL")
             return {
                 ...state,
                 featuredGoal: action.goal.data
             }
 
-        case "LOAD_LIST":
-            // debugger
+        case "LOAD_LISTS":
             return {
                 ...state,
-                lists: [...state.lists, action.list]
+                lists: action.lists
             }
         
         case "ADD_LIST":

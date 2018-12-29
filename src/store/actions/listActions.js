@@ -2,7 +2,7 @@ export const addList = list => ({type: "ADD_LIST", list})
 
 export const deleteList = list => ({type: "DELETE_LIST", list})
 
-export const loadList = list=> ({type: "LOAD_LIST", list})
+export const loadLists = lists => ({type: "LOAD_LISTS", lists})
 
 export const getLists = (goalId, user) => {
     return (dispatch) => {
@@ -18,12 +18,17 @@ export const getLists = (goalId, user) => {
             if (res.errors){
                 console.log(res.errors)
             } else {
-                res.data.forEach(list => {
-                    if (list.relationships.goal.data !== null && Number(list.relationships.goal.data.id)
-                    === goalId){
-                        dispatch(loadList(list))
-                    }
+                const filterArr = res.data.filter(list => {
+                    return list.relationships.goal.data !== null && Number(list.relationships.goal.data.id)
+                    === goalId
                 })
+                dispatch(loadLists(filterArr))
+                // res.data.forEach(list => {
+                //     if (list.relationships.goal.data !== null && Number(list.relationships.goal.data.id)
+                //     === goalId){
+                //         dispatch(loadList(list))
+                //     }
+                // })
             }}
         )
         .catch(console.error)

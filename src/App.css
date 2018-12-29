@@ -105,7 +105,7 @@ ul {
 }
 
 .finished {
-  background-color: rgb(164, 193, 206) !important
+  background-color: rgb(52, 159, 77) !important
 }
 
 #wrongPlace {
@@ -172,14 +172,14 @@ ul {
 }
 
 .profileButtons {
-  background-color: rgb(224, 232, 199) !important;
+  background-color: rgb(255, 247, 172) !important;
   margin-left: 10px;
 }
 
 .greetingHeader {
-  background-color: rgb(224, 232, 199) !important;
+  background-color: rgb(255, 247, 172) !important
 }
 
-.goalButton {
-  background-color: rgb(132, 179, 66) !important; 
-}
+/* .addGoal {
+  background-color: rgb(244, 234, 147) !important
+} */

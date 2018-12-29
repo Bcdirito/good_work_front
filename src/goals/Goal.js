@@ -17,15 +17,19 @@ class Goal extends Component {
 
     componentDidMount = () => {
         const id = Number(this.props.match.params.id)
-        // if (this.props.featuredGoal.id === undefined){
-        //     let pathArr = window.location.pathname.split("/")
-        //     let paramsId = Number(pathArr[pathArr.length -1])
-        //     console.log(this.props.user)
-        //     console.log(paramsId)
-        // }
+
         if (this.props.lists.length > 0){
             this.props.clearLists()
         } else if (this.props.lists.length === 0 && this.props.user.id) {
+            this.props.selectGoal(id, this.props.user)
+            this.props.getLists(id, this.props.user)
+        }
+    }
+
+    componentDidUpdate(prevProps){
+        if (this.props !== prevProps && this.props.lists.length === 0){
+            console.log("Made it to CDU")
+            const id = Number(this.props.match.params.id)
             this.props.selectGoal(id, this.props.user)
             this.props.getLists(id, this.props.user)
         }
@@ -98,7 +102,7 @@ class Goal extends Component {
 
         const listComps = lists.map(list => {
             if(Number(list.relationships.goal.data.id) === Number(this.props.featuredGoal.id)) {
-                return (<div classname="listTiles">
+                return (<div className="listTiles">
                             <Grid.Column>
                                 <ListTile
                                 key={list.id}
@@ -110,9 +114,10 @@ class Goal extends Component {
                         </div>)
                 }        
         })
+
         return (
             <div className="goalPage">
-                <h2>{goal.attributes ?  goal.attributes.name : null}</h2>
+                <h2>{goal.attributes !== undefined && goal !== undefined ?  goal.attributes.name : null}</h2>
                     {this.state.featuredList.id ? <List list={this.state.featuredList} resetContainer={this.resetContainer}/>: <div className="listContainer">
                         <Grid>
                             <Grid.Row>
@@ -122,7 +127,7 @@ class Goal extends Component {
                     </div>}
                 <div>{this.state.clicked === true ? this.renderForm() : null}</div>
                 <br></br>
-                {this.state.clicked === false && this.state.featuredList.id === undefined ? <Button onClick={this.buttonHandler}>Add List</Button>: <Button onClick={this.resetContainer}>Back to Goal</Button>}
+                {this.state.clicked === false && this.state.featuredList.id === undefined ? <Button className="addList" onClick={this.buttonHandler}>Add List</Button>: <Button onClick={this.resetContainer}>Back to Goal</Button>}
                 {this.state.clicked === false && this.state.featuredList.id === undefined ? <Button className="finished" onClick={this.deleteHandler}>Finished!</Button> : null}
             </div>
         )

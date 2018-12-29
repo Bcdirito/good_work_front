@@ -13,16 +13,17 @@ class GoalContainer extends Component {
     }
 
     componentDidMount(){
-        if (this.props.goals.length === 0 && this.props.user){
+        if (this.props.goals.length === 0 && this.props.user.id){
             this.props.getGoals(this.props.user)
         }
     }
 
-    componentDidUpdate(){
-        console.log(this.props.goals)
+    componentDidUpdate(prevProps) {
+        if(prevProps !== this.props && this.props.goals.length === 0){
+            this.props.getGoals(this.props.user)
+        }
     }
 
-    
     buttonHandler = () => {
         this.setState({ clicked: !this.state.clicked})
     }
@@ -61,6 +62,7 @@ class GoalContainer extends Component {
     let goalComps
 
     goals = this.props.goals
+    console.log(this.props)
 
     if (goals !== undefined || goals.length > 0) {
         goalComps = goals.map(goal => {
@@ -89,7 +91,7 @@ class GoalContainer extends Component {
             </div>
             <div>{this.state.clicked === true ? this.renderForm() : null}</div>
             <br></br>
-            {this.state.clicked === false ? <Button className="goalButton" onClick={this.buttonHandler}>Add Goal</Button>: <Button className="goalButton" onClick={this.buttonHandler}>Go Back</Button> }
+            {this.state.clicked === false ? <Button className="addGoal" onClick={this.buttonHandler}>Add Goal</Button>: <Button className="goBack" onClick={this.buttonHandler}>Go Back</Button> }
       </div>
     )
   }

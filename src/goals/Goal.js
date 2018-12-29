@@ -5,6 +5,7 @@ import {connect} from "react-redux"
 import {Button, Form, Grid} from "semantic-ui-react"
 import { destroyGoal, selectGoal } from '../store/actions/goalActions'
 import {createList, getLists} from "../store/actions/listActions"
+import NavContainer from "../navigation/NavContainer"
 
 class Goal extends Component {
     state = {
@@ -117,6 +118,8 @@ class Goal extends Component {
 
         return (
             <div className="goalPage">
+                <NavContainer />
+
                 <h2>{goal.attributes !== undefined && goal !== undefined ?  goal.attributes.name : null}</h2>
                     {this.state.featuredList.id ? <List list={this.state.featuredList} resetContainer={this.resetContainer}/>: <div className="listContainer">
                         <Grid>

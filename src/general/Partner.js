@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from "react-redux"
 import { getPartner, createPartner, updatePartner, destroyPartner} from "../store/actions/partnerActions"
 import {Form, Input, Button, Card, Image} from "semantic-ui-react"
-
+import NavContainer from "../navigation/NavContainer"
 class Partner extends Component {
 
     state = {
@@ -102,14 +102,14 @@ class Partner extends Component {
     render() {
         return (
         <div className="partners">
-            <h1> Partners </h1>
-            {this.state.addForm === false && this.props.partner.id === undefined? <Button onClick={this.clickHandler}>Add a Partner</Button> : null}
-            {this.props.partner.id ? this.renderCards() : null}
-            {this.state.addForm === true || this.state.editForm === true ? this.renderForm() : null}
-            {this.state.addForm === true ? <Button onClick={this.clearState}>Go Back</Button> : null}
-            <br></br>
-            {this.state.editForm === true ? <Button onClick={this.deleteHandler}>Delete Partner</Button> : null}
-            
+            <NavContainer />
+                <h2> Partners </h2>
+                {this.state.addForm === false && this.props.partner.id === undefined? <Button onClick={this.clickHandler}>Add a Partner</Button> : null}
+                {this.props.partner.id ? this.renderCards() : null}
+                {this.state.addForm === true || this.state.editForm === true ? this.renderForm() : null}
+                {this.state.addForm === true ? <Button onClick={this.clearState}>Go Back</Button> : null}
+                <br></br>
+                {this.state.editForm === true ? <Button onClick={this.deleteHandler}>Delete Partner</Button> : null}
         </div>
         )
     }

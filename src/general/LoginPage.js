@@ -3,12 +3,18 @@ import { Button } from "semantic-ui-react"
 import LoginForm from './LoginForm';
 import SignUp from './SignUp'
 import { connect } from "react-redux"
-import {signUpUser, createSession} from "../store/actions/userActions"
+import {signUpUser, createSession, logoutUser} from "../store/actions/userActions"
+import NavContainer from "../navigation/NavContainer"
 
 class LoginPage extends Component {
     state = {
         clicked: false,
         form: "",
+    }
+
+
+    componentDidMount(){
+        this.props.logout()
     }
 
     buttonHandler = e => {
@@ -53,6 +59,7 @@ class LoginPage extends Component {
     render() {
         return (
         <div className="welcome">
+            <NavContainer />
             <div>
                 {this.state.clicked === true ? this.renderForm(): null}
             </div> 
@@ -70,7 +77,8 @@ class LoginPage extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         login: user => dispatch(createSession(user)),
-        signUp: user => dispatch(signUpUser(user))
+        signUp: user => dispatch(signUpUser(user)),
+        logout: () => dispatch(logoutUser())
     }
 }
 

@@ -3,6 +3,7 @@ import {connect} from "react-redux"
 import {Button, Form, Grid} from "semantic-ui-react"
 import {createGoal, getGoals} from "../store/actions/goalActions"
 import GoalTile from './GoalTile';
+import NavContainer from "../navigation/NavContainer"
 
 class GoalContainer extends Component {
     state = {
@@ -81,6 +82,7 @@ class GoalContainer extends Component {
 
     return (
       <div className="goals">
+        <NavContainer />
           <h2>My Goals</h2>
             <div className="goalContainer">
                 <Grid>

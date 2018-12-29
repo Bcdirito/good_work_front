@@ -29,10 +29,10 @@ class Home extends Component {
     return (
       <div className="welcome">
         <NavContainer />
-        <div id="greeting">
-        <h1 className="greetingHeader">{this.props.user.name ? `Hello, ${this.props.user.name}`: "Welcome to Good Work"}</h1>
-        {this.homeRender()}
-        </div>
+          <div id="greeting">
+          <h1 className="greetingHeader">{this.props.user.name ? `Hello, ${this.props.user.name}`: "Welcome to Good Work"}</h1>
+          {this.homeRender()}
+          </div>
       </div>
     )
   }

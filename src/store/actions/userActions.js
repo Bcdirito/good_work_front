@@ -1,4 +1,4 @@
-export const logoutUser = user => ({type: "LOGOUT_USER", user})
+export const logoutUser = () => ({type: "LOGOUT_USER"})
 
 export const createUser = user => ({type: "CREATE_USER", user})
 

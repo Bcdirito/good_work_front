@@ -6,12 +6,12 @@ import Home from "./general/Home"
 import Goal from "./goals/Goal"
 import Partner from "./general/Partner"
 import './App.css';
+import "./css/menu.css"
 import LoginPage from './general/LoginPage';
 import { connect } from "react-redux"
 import { createSession } from "./store/actions/userActions"
 import GoalContainer from './goals/GoalContainer';
 import NavContainer from "./navigation/NavContainer"
-
 
 class App extends Component {
 

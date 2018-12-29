@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from "semantic-ui-react"
 
+
 export default class Profile extends Component {
     clickHandler = (e) => {
         this.props.history.push(`/${e.target.name}`)

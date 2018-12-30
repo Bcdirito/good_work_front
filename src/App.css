@@ -55,7 +55,6 @@ h1 {
   display: block;
   justify-content: center;
   align-items: center;
-  background-color: #cacafc;
   color: #010203;
   /* width: 35%; */
   border-radius: 10px;
@@ -73,9 +72,6 @@ h1 {
   color: #010203 !important
 }
 
-h3 {
-  background-color: azure
-}
 
 ul {
   background-color: antiquewhite !important
@@ -180,6 +176,35 @@ ul {
   background-color: rgb(255, 247, 172) !important
 }
 
-/* .addGoal {
-  background-color: rgb(244, 234, 147) !important
-} */
+.doctor {
+  background-image: url("./media/temp_doctor_background.jpg") !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh
+}
+
+.comingSoon {
+  background-color: #69dde4;
+  margin: 0;
+  position: absolute;
+  top: 11%;
+  left: 67%;
+  margin-right: -33%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  width: 40%;
+}
+
+h1, h2 {
+  font-family: 'Raleway' !important;
+  color: #ffffff;
+  font-style: italic;
+}
+
+h1 {
+  font-size: 37px !important
+}
+
+h2 {
+  font-size: 32px !important
+}

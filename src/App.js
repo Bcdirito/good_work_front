@@ -4,6 +4,7 @@ import NoMatch from "./general/NoMatch"
 import Home from "./general/Home"
 import Goal from "./goals/Goal"
 import Partner from "./general/Partner"
+import ComingSoon from "./general/ComingSoon"
 import './App.css';
 import "./css/menu.css"
 import LoginPage from './general/LoginPage';
@@ -55,6 +56,9 @@ class App extends Component {
             <Route exact path="/partners" render={(props) => (
               <Partner {...props} />
           )} />
+            <Route exact path="/doctors" render={(props) => (
+                <ComingSoon {...props} />
+            )} />
             <Route component={NoMatch}/>
           </Switch>
       </div>

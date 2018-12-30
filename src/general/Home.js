@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import GoalContainer from "../goals/GoalContainer"
 import Profile from "./Profile"
 import { connect } from "react-redux"
 import { Button } from 'semantic-ui-react';

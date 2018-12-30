@@ -63,8 +63,8 @@ class LoginPage extends Component {
             <div>
                 {this.state.clicked === true ? this.renderForm(): null}
             </div> 
-                {this.state.clicked === false ?<Button name="login" onClick={e => this.buttonHandler(e)} className="button" color="blue">Login</Button> : null}
-                {this.state.clicked === false ?<Button name="sign up" onClick={e => this.buttonHandler(e)} className="button" color="blue">Sign Up</Button> : null}
+                {this.state.clicked === false ?<Button name="login" onClick={e => this.buttonHandler(e)} className="loginButton" >Login</Button> : null}
+                {this.state.clicked === false ?<Button name="sign up" onClick={e => this.buttonHandler(e)} className="loginButton" >Sign Up</Button> : null}
             <div>
                 <br></br>
                 {this.state.clicked === true ? <Button name="clear" onClick={this.resetContainer} className="button"  >Go Back</Button> : null}

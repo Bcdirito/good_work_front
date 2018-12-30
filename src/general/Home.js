@@ -17,8 +17,8 @@ class Home extends Component {
     } else {
       return (<div>
         <div>
-              <Button name="login" onClick={e => this.clickHandler(e)} color="blue">Login/Sign Up</Button>
-              <Button name="doctors" onClick={e => this.clickHandler(e)} color="blue">Find A Doctor</Button>
+              <Button name="login" onClick={e => this.clickHandler(e)} className="homeButton">Login/Sign Up</Button>
+              <Button name="doctors" className="homeButton" onClick={e => this.clickHandler(e)} >Find A Doctor</Button>
         </div>
       </div>)
     }

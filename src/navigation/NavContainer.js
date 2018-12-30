@@ -3,12 +3,12 @@ import { connect } from "react-redux"
 
 class NavContainer extends Component {
   render() {
-    console.log(this.props.user)
+    console.log(this.props.parent)
     return (
       <nav role="navigation">
         <div id="menuToggle">
           
-          <input type="checkbox" />
+          <input type= "checkbox" />
           
           <span></span>
           <span></span>

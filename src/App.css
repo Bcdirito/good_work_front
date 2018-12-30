@@ -2,12 +2,12 @@
   text-align: center;
 }
 
-.App-logo {
+/* .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
-}
+}  */
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -16,7 +16,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
 .App-link {
   color: #61dafb;
@@ -68,11 +68,6 @@ h1 {
   align-items: center;  
 }
 
-.button {
-  color: #010203 !important
-}
-
-
 ul {
   background-color: antiquewhite !important
 }
@@ -118,7 +113,7 @@ ul {
 #greeting {
     margin: 0;
     position: absolute;
-    top: 23%;
+    top: 14%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
@@ -167,13 +162,15 @@ ul {
   background-color: transparent;
 }
 
-.profileButtons {
+.homeButton {
   background-color: rgb(255, 247, 172) !important;
+  color: #b9dce4 !important ;
   margin-left: 10px;
 }
 
 .greetingHeader {
-  background-color: rgb(255, 247, 172) !important
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .doctor {
@@ -187,24 +184,28 @@ ul {
   background-color: #69dde4;
   margin: 0;
   position: absolute;
-  top: 11%;
+  top: 9%;
   left: 67%;
   margin-right: -33%;
   transform: translate(-50%, -50%);
   border-radius: 10px;
-  width: 40%;
-}
-
-h1, h2 {
-  font-family: 'Raleway' !important;
-  color: #ffffff;
-  font-style: italic;
+  width: 47.5%;
+  color: #ffffff !important;
 }
 
 h1 {
-  font-size: 37px !important
+  font-family: 'Raleway' !important;
+  font-style: italic;
+  font-size: 30px !important;
 }
 
 h2 {
-  font-size: 32px !important
+  font-family: 'Raleway' !important;
+  font-style: italic;
+  font-size: 26.5px !important
+}
+
+Button {
+  font-family: 'Raleway' !important;
+  font-style: italic !important;
 }

@@ -59,6 +59,13 @@ h1 {
   /* width: 35%; */
   border-radius: 10px;
   text-align: center;
+  font-family: 'Lobster Two', cursive !important;
+  font-size: 30px !important;
+}
+
+h2 {
+  font-family: 'Lobster Two', cursive !important;
+  font-size: 26.5px !important
 }
 
 #welcome {
@@ -110,7 +117,7 @@ ul {
   justify-content: center;
 }
 
-#greeting {
+#greeting, #login {
     margin: 0;
     position: absolute;
     top: 14%;
@@ -134,7 +141,7 @@ ul {
 }
 
 .partners {
-  background-image: url('./media/better_friend_avatar.jpeg') !important;
+  background-image: url('./media/new_partner_test.jpg') !important;
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
@@ -162,9 +169,8 @@ ul {
   background-color: transparent;
 }
 
-.homeButton {
+.homeButton, .loginButton {
   background-color: rgb(255, 247, 172) !important;
-  color: #b9dce4 !important ;
   margin-left: 10px;
 }
 
@@ -193,19 +199,64 @@ ul {
   color: #ffffff !important;
 }
 
-h1 {
-  font-family: 'Raleway' !important;
-  font-style: italic;
-  font-size: 30px !important;
-}
-
-h2 {
-  font-family: 'Raleway' !important;
-  font-style: italic;
-  font-size: 26.5px !important
+.comingSoon h1{
+  color: #ffffff !important;
 }
 
 Button {
-  font-family: 'Raleway' !important;
-  font-style: italic !important;
+  font-family: 'Lobster Two', cursive !important;
+  color: #010203 !important;
+  width: 100px;
+}
+
+.form {
+  margin: 0;  
+  position: absolute;
+  top: 33%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  width: 30%;
+  font-family: 'Lobster Two', cursive !important;
+  font-size: 15px;
+}
+
+.formButton {
+  background-color: #9be994 !important
+}
+
+.goBack {
+  margin: 0;  
+  position: absolute;
+  top: 58%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  width: 47.5%;
+}
+
+.loginForm {
+  margin: 0;  
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  width: 30%;
+  font-family: 'Lobster Two', cursive !important;
+}
+
+.signUpForm {
+  margin: 0;  
+  position: absolute;
+  top: 27%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  width: 30%;
+  font-family: 'Lobster Two', cursive !important;
 }

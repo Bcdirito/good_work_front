@@ -15,13 +15,12 @@ export default class LoginForm extends Component {
 
     render() {
         return (
-        <div>
-            <Form onSubmit={e => this.props.submitHandler(e, this.state)}>
+            <Form onSubmit={e => this.props.submitHandler(e, this.state)}className="loginForm">
                 <Form.Input className="center aligned column" control={Input} name="username" label="Username:" placeholder="username" value={this.state.username} onChange={e => this.handleChange(e)} />
                 <Form.Input className="center aligned column" type="password" control={Input} name="password" label="Password:" placeholder="password" value={this.state.password} onChange={e => this.handleChange(e)} />
-                <Button type="submit" className="button" color="blue">Log In</Button>
+                <Button type="submit" className="formButton" >Log In</Button>
+                <Button onClick={this.props.resetContainer} className="loginButton">Go Back</Button>
             </Form>
-        </div>
         )
     }
 }

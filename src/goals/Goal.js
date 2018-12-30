@@ -42,8 +42,14 @@ class Goal extends Component {
     }
 
     deleteHandler = () => {
-        this.props.deleteGoal(this.props.featuredGoal, this.props.user)
-        this.props.history.replace("/")
+        const result = window.confirm("What is That? Did You Just Complete A Goal?")
+        if (result === true){
+            alert("This Is Why You Fill Me With Such Wonder!")
+            this.props.deleteGoal(this.props.featuredGoal, this.props.user)
+            this.props.history.replace("/")
+        } else {
+            alert("Keep At It! Nothing Can Stop You!")
+        }
     }
 
     changeHandler = e => {

@@ -26,9 +26,9 @@ class LoginPage extends Component {
 
     renderForm = () => {
         if (this.state.form === "login"){
-            return (<LoginForm submitHandler={this.submitHandler}/>)
+            return (<LoginForm submitHandler={this.submitHandler} resetContainer={this.resetContainer}/>)
         } else if (this.state.form === "sign up"){
-            return (<SignUp submitHandler={this.submitHandler}/>)
+            return (<SignUp submitHandler={this.submitHandler} resetContainer={this.resetContainer}/>)
         }
     }
 
@@ -60,15 +60,10 @@ class LoginPage extends Component {
         return (
         <div className="welcome">
             <NavContainer />
-            <div>
-                {this.state.clicked === true ? this.renderForm(): null}
-            </div> 
-                {this.state.clicked === false ?<Button name="login" onClick={e => this.buttonHandler(e)} className="loginButton" >Login</Button> : null}
-                {this.state.clicked === false ?<Button name="sign up" onClick={e => this.buttonHandler(e)} className="loginButton" >Sign Up</Button> : null}
-            <div>
-                <br></br>
-                {this.state.clicked === true ? <Button name="clear" onClick={this.resetContainer} className="button"  >Go Back</Button> : null}
-            </div>
+                {this.state.form === "" || this.state.form === "login" ? <h1>Login</h1> : <h1>Sign Up</h1>}
+                    {this.state.clicked === true ? this.renderForm(): null}
+                    {this.state.clicked === false ?<Button name="login" onClick={e => this.buttonHandler(e)} className="loginButton" >Login</Button> : null}
+                    {this.state.clicked === false ?<Button name="sign up" onClick={e => this.buttonHandler(e)} className="loginButton" >Sign Up</Button> : null}
         </div>
         )
     }

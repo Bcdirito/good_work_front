@@ -6,7 +6,7 @@ body
   /* make it look decent enough */
   background: #232323;
   color: #232323;
-  font-family: "Avenir Next", "Avenir", cursive;
+  font-family: 'Lobster Two', cursive;
 }
 
 a
@@ -45,6 +45,7 @@ a:hover
   left: -5px;
   color: #232323 !important;
   cursor: pointer;
+  font-family: 'Lobster Two', cursive !important; 
   
   opacity: 0; /* hide this */
   z-index: 2; /* and place it over the hamburger */
@@ -62,8 +63,8 @@ a:hover
   height: 4px;
   margin-bottom: 5px;
   position: relative;
-  
-  background: #ffffff ;
+  font-family: 'Lobster Two', cursive !important;
+  background: #232323 ;
 
   border-radius: 3px;
   
@@ -95,6 +96,7 @@ a:hover
   opacity: 1;
   transform: rotate(45deg) translate(-2px, -1px);
   background: #232323;
+  font-family: 'Lobster Two', cursive !important;
 }
 
 /*
@@ -125,7 +127,8 @@ a:hover
   margin: -100px 0 0 -50px;
   padding: 15px;
   padding-top: 110px;
-  
+  font-family: 'Lobster Two', cursive !important;
+  background-color: antiquewhite !important;
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
   /* to stop flickering of text in safari */

@@ -17,7 +17,7 @@ class Home extends Component {
     } else {
       return (<div>
         <div>
-              <Button name="login" onClick={e => this.clickHandler(e)} className="homeButton">Login/Sign Up</Button>
+              <Button name="login" onClick={e => this.clickHandler(e)} className="homeButton">{"Login/Sign Up"}</Button>
               <Button name="doctors" className="homeButton" onClick={e => this.clickHandler(e)} >Find A Doctor</Button>
         </div>
       </div>)
@@ -29,8 +29,8 @@ class Home extends Component {
       <div className="welcome">
         <NavContainer />
           <div id="greeting">
-          <h1 className="greetingHeader">{this.props.user.name ? `Hello, ${this.props.user.name}`: "Welcome to Good Work"}</h1>
-          {this.homeRender()}
+            <h1 className="greetingHeader">{this.props.user.name ? `Hello, ${this.props.user.name}`: "Welcome to Good Work"}</h1>
+            {this.homeRender()}
           </div>
       </div>
     )

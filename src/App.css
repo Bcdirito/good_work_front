@@ -270,3 +270,64 @@ Button {
   transform: translate(-50%, -50%);
   width: 17em !important;
 }
+
+.partner {
+  background-color: #11b4bd;
+  margin: 0;
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  margin-right: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  width: 45%;
+  padding-top: 3px;
+  padding-bottom: 6px;
+}
+
+#partnerName {
+  font-family: 'Lobster Two', cursive !important;
+  color: #010203 !important;
+  padding-bottom: .5em
+}
+
+.partnerButton {
+  background-color: rgb(60, 133, 191) !important;
+  color: #ffffff !important;
+}
+
+.content {
+  font-family: 'Lobster Two', cursive !important;
+  color: #010203 !important;
+  font-weight: 700;
+}
+
+.partnerForm {
+  margin: 0;  
+  position: absolute;
+  top: 8em;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  font-family: 'Lobster Two', cursive !important;
+}
+
+
+.formSubmit {
+  background-color: rgb(58, 179, 86) !important;
+  width: 23%;
+  height: 50px;
+}
+
+.partnerGoBack{
+  background-color: rgb(60, 133, 191) !important;
+  width: 23%;
+  height: 50px;
+}
+
+.partnerDelete{
+  background-color: rgb(255, 247, 172) !important;
+  width: 23%;
+  height: 50px;
+}

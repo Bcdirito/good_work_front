@@ -79,14 +79,12 @@ const reducer = (state = initialState, action) => {
             }
         
         case "EDIT_TASK":
-            console.log("Triggered Edit Task", action.task)
             const editedTasks = state.tasks.map(task => {
                 if (action.task.id === task.id) {
                     return {...task, ...action.task}
                 }
                 return task
             })
-            console.log(editedTasks)
             return {
                 ...state,
                 tasks: editedTasks
@@ -139,13 +137,14 @@ const reducer = (state = initialState, action) => {
             }
 
         case "ADD_PARTNER":
+            const partner = action.partner[0]
             return {
                 ...state,
                 partner: {
-                    id: action.partner.id,
-                    name: action.partner.attributes.name
+                    id: partner.id,
+                    name: partner.attributes.name
                     ,
-                    email: action.partner.attributes.email}
+                    email: partner.attributes.email}
             }
 
         case "EDIT_PARTNER":

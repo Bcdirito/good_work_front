@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 import { getPartner, createPartner, updatePartner, destroyPartner} from "../store/actions/partnerActions"
-import {Form, Input, Button, Card, Image} from "semantic-ui-react"
+import {Form, Input, Button, Card} from "semantic-ui-react"
 import NavContainer from "../navigation/NavContainer"
 class Partner extends Component {
 
@@ -13,8 +13,10 @@ class Partner extends Component {
     }
 
     componentDidMount(){
-        if (this.props.partner.id === undefined){
-            this.props.getPartner(this.props.user)
+        if (this.props.user.id){
+            if(this.props.partner === undefined || this.props.partner.id === undefined){
+                this.props.getPartner(this.props.user)
+            }
         } else {
             this.setState({
                 ...this.state,
@@ -77,16 +79,16 @@ class Partner extends Component {
         })
     }
 
-    renderCards = () => {
-        return (<Card>
-            <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' />
+    renderCard = () => {
+        return (<Card className="partner">
             <Card.Content>
-              <Card.Header textAlign="center">{this.props.partner.name}</Card.Header>
+              <Card.Header id="partnerName" textAlign="center">{this.props.partner.name}</Card.Header>
               <Card.Meta textAlign="center">
                 <span>email: <a>{this.props.partner.email}</a></span>
               </Card.Meta>
               <Card.Content textAlign="center">
-                <Button>Message</Button><Button onClick={this.clickEditHandler}>Edit Partner</Button>
+                <br></br>
+                <Button className="partnerButton">Message</Button><Button className="partnerButton" onClick={this.clickEditHandler}>Edit</Button>
               </Card.Content>
             </Card.Content>
          
@@ -96,28 +98,27 @@ class Partner extends Component {
     renderForm = () => {
         return (
         <div>
-            <Form onSubmit={e => this.submitHandler(e)}>
-            <Form.Input className="center aligned column" control={Input} label="name" name="name" value={this.state.name} onChange={e => this.handleChange(e)} />
-            <Form.Input className="center aligned column" control={Input} label="email" name="email" value={this.state.email} onChange={e => this.handleChange(e)} />
-            <Button type="submit" className="button">Submit Partner</Button>
+            <Form className="partnerForm" onSubmit={e => this.submitHandler(e)}>
+                <Form.Input className="center aligned column" control={Input} label="name" name="name" value={this.state.name} onChange={e => this.handleChange(e)} />
+                <Form.Input className="center aligned column" control={Input} label="email" name="email" value={this.state.email} onChange={e => this.handleChange(e)} />
+                <Button type="submit" className="formSubmit">Submit Partner</Button>
+                <Button className="partnerGoBack" onClick={this.clearState}>Go Back</Button>
+                <Button className="partnerDelete" onClick={this.deleteHandler}>Delete Partner</Button>
             </Form>
+
         </div>
         )
     }
 
     render() {
-        // console.log(this.props)
-        debugger
+        console.log(this.props)
         return (
         <div className="partners">
             <NavContainer />
                 <h2> Partners </h2>
-                {this.state.addForm === false && this.props.partner.id === undefined ? <Button onClick={this.clickHandler}>Add a Partner</Button> : null}
-                {this.props.partner.id ? this.renderCards() : null}
+                {this.state.addForm === false && this.props.partner === undefined ? <Button onClick={this.clickHandler}>Add a Partner</Button> : null}
+                {this.props.partner !== undefined && this.state.addForm === false && this.state.editForm === false ? this.renderCard() : null}
                 {this.state.addForm === true || this.state.editForm === true ? this.renderForm() : null}
-                {this.state.addForm === true ? <Button onClick={this.clearState}>Go Back</Button> : null}
-                <br></br>
-                {this.state.editForm === true ? <Button onClick={this.deleteHandler}>Delete Partner</Button> : null}
         </div>
         )
     }

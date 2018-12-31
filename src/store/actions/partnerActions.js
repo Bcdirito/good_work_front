@@ -19,6 +19,8 @@ export const getPartner = user => {
             if (res.message){
                 alert(res.message)
             } else {
+                // console.log(userId)
+                // debugger
                 res.data.forEach(partner => {
                   if (Number(partner.relationships.user.data.id
                     ) === userId){

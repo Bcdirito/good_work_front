@@ -120,7 +120,7 @@ ul {
 #greeting, #login {
     margin: 0;
     position: absolute;
-    top: 14%;
+    top: 17.5%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
@@ -169,7 +169,7 @@ ul {
   background-color: transparent;
 }
 
-.homeButton, .loginButton {
+.homeButton, .loginButton, .profileButtons {
   background-color: rgb(255, 247, 172) !important;
   margin-left: 10px;
 }
@@ -187,15 +187,17 @@ ul {
 }
 
 .comingSoon {
-  background-color: #69dde4;
+  background-color: #11b4bd;
   margin: 0;
   position: absolute;
-  top: 9%;
+  top: 10%;
   left: 67%;
   margin-right: -33%;
   transform: translate(-50%, -50%);
   border-radius: 10px;
-  width: 47.5%;
+  width: 45%;
+  padding-top: 3px;
+  padding-bottom: 6px;
   color: #ffffff !important;
 }
 
@@ -240,23 +242,31 @@ Button {
 .loginForm {
   margin: 0;  
   position: absolute;
-  top: 20%;
+  top: 17.5em;
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
   border-radius: 10px;
-  width: 30%;
+  width: 80vw;
   font-family: 'Lobster Two', cursive !important;
 }
 
 .signUpForm {
   margin: 0;  
   position: absolute;
-  top: 27%;
-  left: 50%;
+  top: 24.5vh;
+  left: 51.33%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
   border-radius: 10px;
-  width: 30%;
+  width: 22.5em;
   font-family: 'Lobster Two', cursive !important;
+}
+
+#signUpHeader {
+  margin-top: 4%;
+  margin-left: 51.15%;
+  margin-right: -40%;
+  transform: translate(-50%, -50%);
+  width: 17em !important;
 }

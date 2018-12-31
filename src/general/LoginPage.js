@@ -18,10 +18,14 @@ class LoginPage extends Component {
     }
 
     buttonHandler = e => {
-        this.setState({
-            clicked: !this.state.clicked,
-            form: e.target.name
-        })
+        if (e.target.name === "login" || e.target.name === "sign up"){
+            this.setState({
+                clicked: !this.state.clicked,
+                form: e.target.name
+            })
+        } else {
+            this.props.history.push("/")
+        }
     }
 
     renderForm = () => {
@@ -60,10 +64,14 @@ class LoginPage extends Component {
         return (
         <div className="welcome">
             <NavContainer />
-                {this.state.form === "" || this.state.form === "login" ? <h1>Login</h1> : <h1>Sign Up</h1>}
-                    {this.state.clicked === true ? this.renderForm(): null}
+            <div id="greeting">
+                {this.state.form === "" || this.state.form === "login" ? <h1>Login</h1> : <h1 id="signUpHeader">Sign Up</h1>}
+                    {this.state.form === "login" ? <div className="loginForm">{this.renderForm()}</div>: null}
+                    {this.state.form === "sign up" ? <div className="signUpForm">{this.renderForm()}</div>: null}
                     {this.state.clicked === false ?<Button name="login" onClick={e => this.buttonHandler(e)} className="loginButton" >Login</Button> : null}
                     {this.state.clicked === false ?<Button name="sign up" onClick={e => this.buttonHandler(e)} className="loginButton" >Sign Up</Button> : null}
+                    {this.state.clicked === false ? <Button name="go back" onClick={e => this.buttonHandler(e)} className="loginButton">Go Back</Button> : null}
+                </div>
         </div>
         )
     }

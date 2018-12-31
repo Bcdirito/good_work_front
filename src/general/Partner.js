@@ -24,6 +24,12 @@ class Partner extends Component {
         }
     }
 
+    componentDidUpdate(prevProps){
+        if(this.props !== prevProps && this.props.partner.id === undefined){
+            this.props.getPartner(this.props.user)
+        }
+    }
+
     handleChange = e => {
         this.setState({
             [e.target.name]: e.target.value
@@ -100,11 +106,13 @@ class Partner extends Component {
     }
 
     render() {
+        // console.log(this.props)
+        debugger
         return (
         <div className="partners">
             <NavContainer />
                 <h2> Partners </h2>
-                {this.state.addForm === false && this.props.partner.id === undefined? <Button onClick={this.clickHandler}>Add a Partner</Button> : null}
+                {this.state.addForm === false && this.props.partner.id === undefined ? <Button onClick={this.clickHandler}>Add a Partner</Button> : null}
                 {this.props.partner.id ? this.renderCards() : null}
                 {this.state.addForm === true || this.state.editForm === true ? this.renderForm() : null}
                 {this.state.addForm === true ? <Button onClick={this.clearState}>Go Back</Button> : null}

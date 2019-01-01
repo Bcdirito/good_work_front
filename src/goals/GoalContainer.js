@@ -25,8 +25,12 @@ class GoalContainer extends Component {
         }
     }
 
-    buttonHandler = () => {
-        this.setState({ clicked: !this.state.clicked})
+    buttonHandler = (e) => {
+        if (e.target.name === "add goal"){
+            this.setState({ clicked: !this.state.clicked})
+        } else if (e.target.name === "go back"){
+            this.setState({ clicked: false, formData: { title: "" } })
+        }
     }
 
     changeHandler = e => {
@@ -45,12 +49,14 @@ class GoalContainer extends Component {
     }
 
     renderForm = () => {
-        return <Form onSubmit={e => this.submitHandler(e)}>
+        return <Form id="goalForm" onSubmit={e => this.submitHandler(e)}>
                     <Form.Field>
                         <label>Title</label>
                         <input type="text" name="title" value={this.state.formData.title} placeholder="Goal Title" onChange={e => this.changeHandler(e)}/>
                     </Form.Field>
-                    <Button type="submit">Create New Goal</Button>
+                    <Button className="formButton" type="submit">Create New Goal</Button>
+                    <Button className="goalGoBack" name="go back" onClick={e => this.buttonHandler(e)}>Go Back</Button>
+
                 </Form>
     }
 
@@ -63,7 +69,6 @@ class GoalContainer extends Component {
     let goalComps
 
     goals = this.props.goals
-    console.log(this.props)
 
     if (goals !== undefined || goals.length > 0) {
         goalComps = goals.map(goal => {
@@ -85,15 +90,15 @@ class GoalContainer extends Component {
         <NavContainer />
           <h2>My Goals</h2>
             <div className="goalContainer">
-                <Grid>
+                {this.state.clicked === false ?<Grid>
                     <Grid.Row>
                         {goalComps}
                     </Grid.Row>
-                </Grid>
+                </Grid> : null}
             </div>
             <div>{this.state.clicked === true ? this.renderForm() : null}</div>
             <br></br>
-            {this.state.clicked === false ? <Button className="addGoal" onClick={this.buttonHandler}>Add Goal</Button>: <Button className="goBack" onClick={this.buttonHandler}>Go Back</Button> }
+            {this.state.clicked === false ? <Button name="add goal" className="addGoal" onClick={e => this.buttonHandler(e)}>Add Goal</Button>: null}
       </div>
     )
   }

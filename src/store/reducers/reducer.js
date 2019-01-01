@@ -125,7 +125,6 @@ const reducer = (state = initialState, action) => {
             }
 
         case "CREATE_USER":
-            // console.log(action.user)
             localStorage.setItem("token", action.user.jwt)
             return {
                 ...state,
@@ -137,7 +136,7 @@ const reducer = (state = initialState, action) => {
             }
 
         case "ADD_PARTNER":
-            const partner = action.partner[0]
+            const partner = action.partner
             return {
                 ...state,
                 partner: {

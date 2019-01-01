@@ -23,7 +23,10 @@ export const getPartner = user => {
                   return Number(partner.relationships.user.data.id
                     ) === userId
                 })
-                dispatch(addPartner(partner))
+                if (partner.length > 0){
+                    const userPartner = partner[0]
+                    dispatch(addPartner(userPartner))
+                }
             }
         })
     }

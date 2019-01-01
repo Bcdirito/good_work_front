@@ -3,7 +3,6 @@ import { connect } from "react-redux"
 
 class NavContainer extends Component {
   render() {
-    console.log(this.props.parent)
     return (
       <nav role="navigation">
         <div id="menuToggle">

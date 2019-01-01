@@ -163,15 +163,23 @@ ul {
 
 .lost {
   background-color: rgb(99, 142, 146);
+  width: 50%;
+  margin: 0;
+  position: absolute;
+  left: 25%;
+  top: 10%;
+  color: #ffffff !important;
 }
 
 .navContainer {
   background-color: transparent;
 }
 
-.homeButton, .loginButton, .profileButtons {
+.homeButton, .loginButton, .profileButtons, .addGoal {
   background-color: rgb(255, 247, 172) !important;
   margin-left: 10px;
+  padding-right: 2.5px !important;
+  padding-left: 2.5px !important;
 }
 
 .greetingHeader {
@@ -316,12 +324,14 @@ Button {
 
 .formSubmit {
   background-color: rgb(58, 179, 86) !important;
+  color: #ffffff !important;
   width: 23%;
   height: 50px;
 }
 
 .partnerGoBack{
   background-color: rgb(60, 133, 191) !important;
+  color: #ffffff !important;
   width: 23%;
   height: 50px;
 }
@@ -330,4 +340,26 @@ Button {
   background-color: rgb(255, 247, 172) !important;
   width: 23%;
   height: 50px;
+}
+
+.goalGoBack{
+  background-color: rgb(255, 247, 172) !important;
+  width: 23%;
+  height: 50px;
+}
+
+#goalForm {
+  margin: 0;  
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  font-family: 'Lobster Two', cursive !important;
+}
+
+#goalTile {
+  color: #ffffff !important;
+  background-color: rgb(58, 179, 86) !important;
 }

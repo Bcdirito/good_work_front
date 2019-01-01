@@ -49,7 +49,6 @@ class Partner extends Component {
     }
 
     clickHandler = () => {
-        console.log("Clicked!")
         this.setState({
             ...this.state,
             addForm: !this.state.addForm
@@ -80,19 +79,20 @@ class Partner extends Component {
     }
 
     renderCard = () => {
-        return (<Card className="partner">
-            <Card.Content>
-              <Card.Header id="partnerName" textAlign="center">{this.props.partner.name}</Card.Header>
-              <Card.Meta textAlign="center">
-                <span>email: <a>{this.props.partner.email}</a></span>
-              </Card.Meta>
-              <Card.Content textAlign="center">
-                <br></br>
-                <Button className="partnerButton">Message</Button><Button className="partnerButton" onClick={this.clickEditHandler}>Edit</Button>
-              </Card.Content>
-            </Card.Content>
-         
-          </Card>)
+        if (this.props.partner.id !== undefined){
+            return (<Card className="partner">
+                <Card.Content>
+                <Card.Header id="partnerName" textAlign="center">{this.props.partner.name}</Card.Header>
+                <Card.Meta textAlign="center">
+                    <span>email: <a>{this.props.partner.email}</a></span>
+                </Card.Meta>
+                <Card.Content textAlign="center">
+                    <br></br>
+                    <Button className="partnerButton">Message</Button><Button className="partnerButton" onClick={this.clickEditHandler}>Edit</Button>
+                </Card.Content>
+                </Card.Content>
+            </Card>)
+          }
     }
 
     renderForm = () => {
@@ -102,8 +102,8 @@ class Partner extends Component {
                 <Form.Input className="center aligned column" control={Input} label="name" name="name" value={this.state.name} onChange={e => this.handleChange(e)} />
                 <Form.Input className="center aligned column" control={Input} label="email" name="email" value={this.state.email} onChange={e => this.handleChange(e)} />
                 <Button type="submit" className="formSubmit">Submit Partner</Button>
-                <Button className="partnerGoBack" onClick={this.clearState}>Go Back</Button>
-                <Button className="partnerDelete" onClick={this.deleteHandler}>Delete Partner</Button>
+                <Button className="goalGoBack" onClick={this.clearState}>Go Back</Button>
+                {this.state.editForm === true ? <Button className="partnerDelete" onClick={this.deleteHandler}>Delete Partner</Button> : null}
             </Form>
 
         </div>
@@ -111,12 +111,11 @@ class Partner extends Component {
     }
 
     render() {
-        console.log(this.props)
         return (
         <div className="partners">
             <NavContainer />
-                <h2> Partners </h2>
-                {this.state.addForm === false && this.props.partner === undefined ? <Button onClick={this.clickHandler}>Add a Partner</Button> : null}
+                <h2 id="partnerHeading"> Partners </h2>
+                {this.state.addForm === false && this.props.partner === undefined ||this.state.addForm === false && this.props.partner.id === undefined ? <Button className="partnerButton" onClick={this.clickHandler}>Add a Partner</Button> : null}
                 {this.props.partner !== undefined && this.state.addForm === false && this.state.editForm === false ? this.renderCard() : null}
                 {this.state.addForm === true || this.state.editForm === true ? this.renderForm() : null}
         </div>

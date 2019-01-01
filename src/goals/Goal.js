@@ -116,6 +116,7 @@ class Goal extends Component {
                                 listId={list.id}
                                 list={list}
                                 featureList={this.featureList}
+                                resetContainer={this.resetContainer}
                                 />
                             </Grid.Column>
                         </div>)
@@ -126,7 +127,7 @@ class Goal extends Component {
             <div className="goalPage">
                 <NavContainer />
 
-                <h2>{goal.attributes !== undefined && goal !== undefined ?  goal.attributes.name : null}</h2>
+                <h2 id="goalHeader">{goal.attributes !== undefined && goal !== undefined ?  goal.attributes.name : null}</h2>
                     {this.state.featuredList.id ? <List list={this.state.featuredList} resetContainer={this.resetContainer}/>: <div className="listContainer">
                         <Grid>
                             <Grid.Row>
@@ -136,7 +137,7 @@ class Goal extends Component {
                     </div>}
                 <div>{this.state.clicked === true ? this.renderForm() : null}</div>
                 <br></br>
-                {this.state.clicked === false && this.state.featuredList.id === undefined ? <Button className="addList" onClick={this.buttonHandler}>Add List</Button>: <Button onClick={this.resetContainer}>Back to Goal</Button>}
+                {this.state.clicked === false && this.state.featuredList.id === undefined ? <Button className="addList" onClick={this.buttonHandler}>Add List</Button>: null}
                 {this.state.clicked === false && this.state.featuredList.id === undefined ? <Button className="finished" onClick={this.deleteHandler}>Finished!</Button> : null}
             </div>
         )

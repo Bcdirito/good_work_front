@@ -133,7 +133,7 @@ class List extends Component {
                             <Table.Row key={task.id} id={task.id}>
                                 <Table.Cell>{task.attributes.title}</Table.Cell>
                                 <Table.Cell>{task.attributes.content}</Table.Cell>
-                                <Table.Cell><Button onClick={e => this.featureTaskCard(e)}>Edit Task</Button><Button color="green" className="finished" onClick={e => this.finishTask(e)}> Finished! </Button></Table.Cell>
+                                <Table.Cell><Button className="finishedTask" onClick={e => this.finishTask(e)}>Finished!</Button><Button className="editTask" onClick={e => this.featureTaskCard(e)}>Edit Task</Button></Table.Cell>
                             </Table.Row>
                         </Table.Body>)
                 }
@@ -141,23 +141,24 @@ class List extends Component {
         }
         
         return (
-        <div>
-            <h3>{list.attributes.name}</h3>
-            <Table celled>
-                <Table.Header>
-                    <Table.Row className="tableHeader">
-                        <Table.HeaderCell className="tableHeader">Task</Table.HeaderCell>
-                        <Table.HeaderCell className="tableHeader">Content</Table.HeaderCell>
-                        <Table.HeaderCell className="tableHeader">Status</Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
-                {taskComps}
-            </Table>
+        <div className="taskTable">
+            <h3 id="listHeader">{list.attributes.name}</h3>
+                {this.state.clicked === false && this.state.featuredClick === false ? <div><div id="table">
+                    <Table celled>
+                        <Table.Header id="tHeader">
+                            <Table.Row>
+                                <Table.HeaderCell id="taskTitle">Task</Table.HeaderCell>
+                                <Table.HeaderCell id="taskContent">Content</Table.HeaderCell>
+                                <Table.HeaderCell id="taskStatus">Status</Table.HeaderCell>
+                            </Table.Row>
+                        </Table.Header>
+                        {taskComps}
+                    </Table>
+                 {this.state.clicked === false ?<Button className="addTask" onClick={this.buttonHandler}>Add A Task</Button> : null}
+                 {taskComps[0] === undefined ? <Button className="finishedList" onClick={this.finishList}>Finished!</Button>: null}
+                 </div> <Button className="backToGoal" onClick={this.props.resetContainer}>Back to Goal</Button></div> : null}
             
-            <div>{this.state.clicked === true ? this.renderForm() : null}</div>
-                <br></br>
-                {this.state.clicked === false ?<Button onClick={this.buttonHandler}>Add A Task</Button> : <Button onClick={this.buttonHandler}>Go Back to Goal</Button>}
-                {taskComps[0] === undefined ? <Button className="finished" onClick={this.finishList}>Finished!</Button> : null}
+                {this.state.clicked === true ? this.renderForm() : null}
                 {this.state.featuredTask.id ? this.renderTaskCard() : null}
         </div>
         )

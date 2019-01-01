@@ -18,6 +18,22 @@
   color: white;
 } */
 
+a:link {
+  color: #010203
+}
+
+a:visited {
+  color: #010203
+}
+
+a:hover {
+  color: #010203
+}
+
+a:active {
+  color: #010203
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -31,25 +47,6 @@
   }
 }
 
-#navbar {
-  background-color: #fcfcca;
-}
-
-a:link {
-  color: black 
-}
-
-a:hover {
-  color: black 
-}
-
-a:active {
-  color: black
-}
-
-a:visited {
-  color: black
-}
 
 h1 {
   display: block;
@@ -65,7 +62,12 @@ h1 {
 
 h2 {
   font-family: 'Lobster Two', cursive !important;
-  font-size: 26.5px !important
+  font-size: 26.5px !important;
+}
+
+h3 {
+  font-family: 'Lobster Two', cursive !important;
+  font-size: 22px !important;
 }
 
 #welcome {
@@ -103,7 +105,9 @@ ul {
 }
 
 .finished {
-  background-color: rgb(58, 179, 86) !important
+  background-color: rgb(58, 179, 86) !important;
+  padding-right: 2.5px !important;
+  padding-left: 2.5px !important;
 }
 
 #wrongPlace {
@@ -175,7 +179,7 @@ ul {
   background-color: transparent;
 }
 
-.homeButton, .loginButton, .profileButtons, .addGoal {
+.homeButton, .loginButton, .profileButtons, .addGoal, .addList, .addTask {
   background-color: rgb(255, 247, 172) !important;
   margin-left: 10px;
   padding-right: 2.5px !important;
@@ -342,7 +346,7 @@ Button {
   height: 50px;
 }
 
-.goalGoBack{
+.goalGoBack {
   background-color: rgb(255, 247, 172) !important;
   width: 23%;
   height: 50px;
@@ -362,4 +366,76 @@ Button {
 #goalTile {
   color: #ffffff !important;
   background-color: rgb(58, 179, 86) !important;
+}
+
+#goalHeader, #goalContainerHeader, #listHeader {
+  color: #ffffff;
+}
+
+#listTile {
+  color: #ffffff !important;
+  background-color: rgb(84, 129, 187) !important;
+}
+
+#table {
+  display: block;
+  width: 75%;
+  margin-top: 0;  
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+  height: 500px !important;
+}
+
+#tHeader {
+  table-layout: fixed !important;
+}
+
+.addTask {
+  background-color: rgb(84, 129, 187) !important;
+  color: #ffffff !important;
+  height: 40px;
+  width: 12.5%
+}
+
+.finishedList{
+  background-color: rgb(58, 179, 86) !important;
+  color: #ffffff !important;
+  height: 40px;
+  width: 12.5%
+}
+
+.backToGoal{
+  background-color: rgb(255, 247, 172) !important;
+  color: #010203 !important;
+  height: 40px;
+  width: 12.5%;
+}
+
+#taskTitle {
+  width: 15%;
+}
+
+#taskContent {
+  width: 45%;
+}
+
+#taskStatus {
+  width: 25%;
+}
+
+.finishedTask {
+  width: 100px;
+  height: 50px;
+  background-color: rgb(58, 179, 86) !important;
+}
+
+.editTask {
+  width: 100px;
+  height: 50px;
+  color: #ffffff !important;
+  background-color: rgb(84, 129, 187) !important;
 }

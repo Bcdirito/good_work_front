@@ -88,7 +88,7 @@ class GoalContainer extends Component {
     return (
       <div className="goals">
         <NavContainer />
-          <h2>My Goals</h2>
+          <h2 id="goalContainerHeader">My Goals</h2>
             <div className="goalContainer">
                 {this.state.clicked === false ?<Grid>
                     <Grid.Row>

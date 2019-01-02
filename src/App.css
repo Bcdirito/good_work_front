@@ -179,7 +179,7 @@ ul {
   background-color: transparent;
 }
 
-.homeButton, .loginButton, .profileButtons, .addGoal, .addList, .addTask {
+.homeButton, .loginButton, .profileButtons, .addGoal, .addList {
   background-color: rgb(255, 247, 172) !important;
   margin-left: 10px;
   padding-right: 2.5px !important;
@@ -218,7 +218,7 @@ ul {
 }
 
 Button {
-  font-family: 'Lobster Two', cursive !important;
+  font-family: 'Dosis', sans-serif !important;
   color: #010203 !important;
   width: 100px;
 }
@@ -237,7 +237,9 @@ Button {
 }
 
 .formButton {
-  background-color: #9be994 !important
+  background-color: #9be994 !important;
+  position: fixed;
+  left: 25%
 }
 
 .goBack {
@@ -298,7 +300,7 @@ Button {
 }
 
 #partnerName {
-  font-family: 'Lobster Two', cursive !important;
+  font-family: 'Dosis', sans-serif !important;
   color: #010203 !important;
   padding-bottom: .5em
 }
@@ -309,7 +311,7 @@ Button {
 }
 
 .content {
-  font-family: 'Lobster Two', cursive !important;
+  font-family: 'Dosis', sans-serif;
   color: #010203 !important;
   font-weight: 700;
 }
@@ -336,7 +338,7 @@ Button {
 .partnerGoBack{
   background-color: rgb(60, 133, 191) !important;
   color: #ffffff !important;
-  width: 23%;
+  width: 7.5%;
   height: 50px;
 }
 
@@ -348,8 +350,9 @@ Button {
 
 .goalGoBack {
   background-color: rgb(255, 247, 172) !important;
-  width: 23%;
+  /* width: 23%; */
   height: 50px;
+  position: fixed;
 }
 
 #goalForm {
@@ -382,12 +385,12 @@ Button {
   width: 70%;
   margin-top: 0;  
   position: fixed;
-  top: 50%;
+  top: 48%;
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
   overflow: auto;
-  height: 400px !important;
+  height: 300px !important;
 }
 
 #tHeader {
@@ -436,6 +439,7 @@ Button {
 
 #finishedTask {
   background-color: rgb(58, 179, 86) !important;
+  color: #ffffff !important;
 }
 
 #editTask {
@@ -468,9 +472,12 @@ Button {
   background-color: rgb(255, 247, 172) !important;
 }
 
-#underTaskButtons {
+.underTaskButton {
   background-color: #ffffff !important;
   top: 15em;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 .taskCard {
@@ -489,6 +496,43 @@ Button {
   color: #ffffff !important;
 }
 
+#newTask{
+  display: block;
+  width: 50%;
+  margin-top: 0;  
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+.createTask {
+  width: 22.5%;
+  margin-left: 5px;
+}
+
+.createTask {
+  background-color: rgb(58, 179, 86) !important;
+  color: #ffffff !important;
+}
+
 .goBackTask {
+  background-color: rgb(84, 129, 187) !important;
+  color: #ffffff !important;
+}
+
+#addTask {
   background-color: rgb(255, 247, 172) !important;
+  position: fixed;
+  bottom: 9em;
+  left: 42%;
+}
+
+#backToGoal {
+  background-color: rgb(84, 129, 187) !important;
+  color: #ffffff !important;
+  position: fixed;
+  bottom: 9em;
+  right: 42%
 }

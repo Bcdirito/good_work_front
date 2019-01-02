@@ -128,7 +128,7 @@ a:hover
   padding: 15px;
   padding-top: 110px;
   font-family: 'Lobster Two', cursive !important;
-  background-color: rgb(235, 235, 235) !important;
+  background-color: rgba(235, 235, 235, 0.904) !important;
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
   /* to stop flickering of text in safari */

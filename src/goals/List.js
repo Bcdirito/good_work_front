@@ -88,7 +88,7 @@ class List extends Component {
     }
 
     renderForm = () => {
-        return <Form onSubmit={e => this.submitHandler(e)}>
+        return <Form id="newTask" onSubmit={e => this.submitHandler(e)}>
                     <Form.Field>
                         <label>Task Title</label>
                             <input type="text" name="title" value={this.state.formData.title} placeholder="Task Title" onChange={e => this.changeHandler(e)}/>
@@ -97,7 +97,8 @@ class List extends Component {
                         <label>Task Content</label>
                             <input type="text" name="content" value={this.state.formData.content} placeholder="Task Content" onChange={e => this.changeHandler(e)}/>
                     </Form.Field>
-                    <Button type="submit">Create New Task</Button>
+                    <Button type="submit" className="createTask">Create New Task</Button>
+                    <Button onClick={this.resetComponent} className="goBackTask">Never Mind</Button>
                 </Form>
     }
 
@@ -133,7 +134,7 @@ class List extends Component {
                             <Table.Row key={task.id} id={task.id}>
                                 <Table.Cell>{task.attributes.title}</Table.Cell>
                                 <Table.Cell>{task.attributes.content}</Table.Cell>
-                                <Table.Cell><Button className="taskButton" id="finishedTask" onClick={e => this.finishTask(e)}>Finished !</Button><Button className="taskButton" id="editTask" onClick={e => this.featureTaskCard(e)}>Edit Task</Button></Table.Cell>
+                                <Table.Cell><Button className="taskButton" id="finishedTask" onClick={e => this.finishTask(e)}>Finished!</Button><Button className="taskButton" id="editTask" onClick={e => this.featureTaskCard(e)}>Edit Task</Button></Table.Cell>
                             </Table.Row>
                         </Table.Body>)
                 }
@@ -155,11 +156,12 @@ class List extends Component {
                         {taskComps}
                     </Table>
                  </div>
-
-                {this.state.clicked === false ?<Button id="addTask" onClick={this.buttonHandler}>Add A Task</Button> : null}
-                {taskComps[0] === undefined ? <Button id="finishedList" onClick={this.finishList}>Finished !</Button>: null}
-                <Button id="backToGoal" onClick={this.props.resetContainer}>Back to Goal</Button></div> : null}
-            
+                 </div> : null}
+                <div className="underTaskButton">
+                    {this.state.clicked === false ?<Button id="addTask"  onClick={this.buttonHandler}>Add A Task</Button> : null}
+                    {taskComps[0] === undefined ? <Button id="finishedList"  onClick={this.finishList}>Finished!</Button>: null}
+                    {this.state.clicked === false ? <Button id="backToGoal"  onClick={this.props.resetContainer}>Back to Goal</Button> : null}
+                </div>
                 {this.state.clicked === true ? this.renderForm() : null}
                 {this.state.featuredTask.id ? this.renderTaskCard() : null}
         </div>

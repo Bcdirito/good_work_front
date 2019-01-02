@@ -377,9 +377,9 @@ Button {
   background-color: rgb(84, 129, 187) !important;
 }
 
-#table {
+.table {
   display: block;
-  width: 75%;
+  width: 70%;
   margin-top: 0;  
   position: fixed;
   top: 50%;
@@ -387,7 +387,7 @@ Button {
   margin-right: -50%;
   transform: translate(-50%, -50%);
   overflow: auto;
-  height: 500px !important;
+  height: 400px !important;
 }
 
 #tHeader {
@@ -427,15 +427,68 @@ Button {
   width: 25%;
 }
 
-.finishedTask {
-  width: 100px;
-  height: 50px;
+.taskButton {
+  width: 43%;
+  height: 50px !important;
+  text-align: center !important;
+  padding: 5px
+}
+
+#finishedTask {
   background-color: rgb(58, 179, 86) !important;
 }
 
-.editTask {
-  width: 100px;
-  height: 50px;
+#editTask {
   color: #ffffff !important;
   background-color: rgb(84, 129, 187) !important;
+}
+
+.newListForm {
+  width: 350px;
+  top: 67%;
+  color: #ffffff !important;
+  justify-content: center;
+  position: absolute;
+  margin: 0;
+}
+
+.newListButton {
+  width: 30%;
+  height: 50px !important;
+  text-align: center !important;
+  padding: 5px
+}
+
+#newList {
+  background-color: rgb(58, 179, 86) !important;
+  padding: 5px
+}
+
+#listGoBack {
+  background-color: rgb(255, 247, 172) !important;
+}
+
+#underTaskButtons {
+  background-color: #ffffff !important;
+  top: 15em;
+}
+
+.taskCard {
+  display: block;
+  width: 70%;
+  margin-top: 0;  
+  position: fixed;
+  top: 53%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+.updateTask {
+  background-color: rgb(58, 179, 86) !important;
+  color: #ffffff !important;
+}
+
+.goBackTask {
+  background-color: rgb(255, 247, 172) !important;
 }

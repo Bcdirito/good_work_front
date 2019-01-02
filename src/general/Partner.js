@@ -102,7 +102,7 @@ class Partner extends Component {
                 <Form.Input className="center aligned column" control={Input} label="name" name="name" value={this.state.name} onChange={e => this.handleChange(e)} />
                 <Form.Input className="center aligned column" control={Input} label="email" name="email" value={this.state.email} onChange={e => this.handleChange(e)} />
                 <Button type="submit" className="formSubmit">Submit Partner</Button>
-                <Button className="goalGoBack" onClick={this.clearState}>Go Back</Button>
+                <Button className="partnerGoBack" onClick={this.clearState}>Go Back</Button>
                 {this.state.editForm === true ? <Button className="partnerDelete" onClick={this.deleteHandler}>Delete Partner</Button> : null}
             </Form>
 

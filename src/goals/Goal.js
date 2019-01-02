@@ -91,13 +91,16 @@ class Goal extends Component {
     }
 
     renderForm = () => {
-        return <Form onSubmit={e => this.submitHandler(e)}>
-                    <Form.Field>
-                        <label>List Title</label>
-                        <input type="text" name="title" value={this.state.formData.title} placeholder="Enter Title Here" onChange={e => this.changeHandler(e)}/>
-                    </Form.Field>
-                    <Button type="submit">Create New List</Button>
-                </Form>
+        return (<div>
+                    <Form className="newListForm" onSubmit={e => this.submitHandler(e)}>
+                        <Form.Field>
+                            <label>List Title</label>
+                            <input type="text" name="title" value={this.state.formData.title} placeholder="Enter Title Here" onChange={e => this.changeHandler(e)}/>
+                        </Form.Field>
+                        <Button type="submit" className="newListButton" id="newList">Create New List</Button>
+                        <Button name="go back" className="newListButton" id="listGoBack" onClick={this.resetContainer}>Go Back</Button>
+                    </Form>
+                </div>)
 
     }
 
@@ -128,14 +131,14 @@ class Goal extends Component {
                 <NavContainer />
 
                 <h2 id="goalHeader">{goal.attributes !== undefined && goal !== undefined ?  goal.attributes.name : null}</h2>
-                    {this.state.featuredList.id ? <List list={this.state.featuredList} resetContainer={this.resetContainer}/>: <div className="listContainer">
+                    {this.state.featuredList.id ? <List list={this.state.featuredList} resetContainer={this.resetContainer}/> : <div className="listContainer">
                         <Grid>
                             <Grid.Row>
-                                {listComps}
+                                {this.state.clicked === false ? listComps : this.renderForm()}
                             </Grid.Row>
                         </Grid>
                     </div>}
-                <div>{this.state.clicked === true ? this.renderForm() : null}</div>
+                {/* <div>{this.state.clicked === true ? this.renderForm() : null}</div> */}
                 <br></br>
                 {this.state.clicked === false && this.state.featuredList.id === undefined ? <Button className="addList" onClick={this.buttonHandler}>Add List</Button>: null}
                 {this.state.clicked === false && this.state.featuredList.id === undefined ? <Button className="finished" onClick={this.deleteHandler}>Finished!</Button> : null}

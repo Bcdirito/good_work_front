@@ -133,7 +133,7 @@ class List extends Component {
                             <Table.Row key={task.id} id={task.id}>
                                 <Table.Cell>{task.attributes.title}</Table.Cell>
                                 <Table.Cell>{task.attributes.content}</Table.Cell>
-                                <Table.Cell><Button className="finishedTask" onClick={e => this.finishTask(e)}>Finished!</Button><Button className="editTask" onClick={e => this.featureTaskCard(e)}>Edit Task</Button></Table.Cell>
+                                <Table.Cell><Button className="taskButton" id="finishedTask" onClick={e => this.finishTask(e)}>Finished !</Button><Button className="taskButton" id="editTask" onClick={e => this.featureTaskCard(e)}>Edit Task</Button></Table.Cell>
                             </Table.Row>
                         </Table.Body>)
                 }
@@ -143,7 +143,7 @@ class List extends Component {
         return (
         <div className="taskTable">
             <h3 id="listHeader">{list.attributes.name}</h3>
-                {this.state.clicked === false && this.state.featuredClick === false ? <div><div id="table">
+                {this.state.clicked === false && this.state.featuredClick === false ? <div><div className="table">
                     <Table celled>
                         <Table.Header id="tHeader">
                             <Table.Row>
@@ -154,9 +154,11 @@ class List extends Component {
                         </Table.Header>
                         {taskComps}
                     </Table>
-                 {this.state.clicked === false ?<Button className="addTask" onClick={this.buttonHandler}>Add A Task</Button> : null}
-                 {taskComps[0] === undefined ? <Button className="finishedList" onClick={this.finishList}>Finished!</Button>: null}
-                 </div> <Button className="backToGoal" onClick={this.props.resetContainer}>Back to Goal</Button></div> : null}
+                 </div>
+
+                {this.state.clicked === false ?<Button id="addTask" onClick={this.buttonHandler}>Add A Task</Button> : null}
+                {taskComps[0] === undefined ? <Button id="finishedList" onClick={this.finishList}>Finished !</Button>: null}
+                <Button id="backToGoal" onClick={this.props.resetContainer}>Back to Goal</Button></div> : null}
             
                 {this.state.clicked === true ? this.renderForm() : null}
                 {this.state.featuredTask.id ? this.renderTaskCard() : null}

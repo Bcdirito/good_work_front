@@ -38,22 +38,22 @@ class TaskCard extends Component {
     }
     
     render() {
-        // console.log(this.props)
         return (
-            <div>
+            <div className="taskCard">
                 <Form onSubmit={e => this.submitHandler(e)}>
-                <Form.Field></Form.Field>
+                <Form.Field>
                     <label>Task Title</label>
                         <input type="text" name="title" value={this.state.editData.title}
                         onChange={e => this.changeHandler(e)}/>
+                </Form.Field>
                 <Form.Field>
                     <label>Task Content</label>
                     <input type="text" name="content" value={this.state.editData.content}
                         onChange={e => this.changeHandler(e)}/>
                 </Form.Field>
-                <Button type="submit">Update Task</Button>
+                <Button type="submit" className="updateTask">Update Task</Button>
+                <Button onClick={this.resetComponent} className="goBackTask">Never Mind</Button>
             </Form>
-                <Button onClick={this.resetComponent}>Never Mind</Button>
         </div>
         )
     }

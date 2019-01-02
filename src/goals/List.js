@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux"
 import TaskCard from "./TaskCard"
-import {Form, Button, Table} from "semantic-ui-react"
+import {Form, Button, Table, Loader} from "semantic-ui-react"
 import {createTask, getTasks, destroyTask} from "../store/actions/taskActions"
 import {destroyList} from "../store/actions/listActions"
 
@@ -14,7 +14,8 @@ class List extends Component {
             content: ""
         },
         tasks: [],
-        featuredTask: {}
+        featuredTask: {},
+        loading: false
     }
 
     componentDidMount = () => {
@@ -29,6 +30,12 @@ class List extends Component {
                 return this.props.list.id === Number(task.relationships.list.data.id)
             })
         })
+    }
+
+    componentDidUpdate = (prevProps) => {
+        if(prevProps.tasks.length !== this.props.tasks.length){
+            this.setState({...this.state, loading: false})
+        }
     }
 
 
@@ -58,12 +65,12 @@ class List extends Component {
     }
 
     finishTask = (e) => {
-        console.log(e.target)
         const id = Number(e.target.parentElement.parentElement.id)
         let result = window.confirm("Did You Finish This Task, You Rock Star?")
         if (result === true) {
             alert("I'm So Proud of You! You Amaze Me!")
             this.props.deleteTask(id, this.props.user)
+            this.setState({...this.state, loading: true})
         } else {
             alert("Keep Going! I Know You Can Do It!")
         }
@@ -77,6 +84,7 @@ class List extends Component {
 
     resetComponent = () => {
         this.setState({
+            ...this.state,
             clicked: false,
             formData: {
                 title: "",
@@ -144,7 +152,7 @@ class List extends Component {
         return (
         <div className="taskTable">
             <h3 id="listHeader">{list.attributes.name}</h3>
-                {this.state.clicked === false && this.state.featuredClick === false ? <div><div className="table">
+                {this.state.clicked === false && this.state.featuredClick === false && this.state.loading === false ? <div><div className="table">
                     <Table celled>
                         <Table.Header id="tHeader">
                             <Table.Row>
@@ -158,12 +166,13 @@ class List extends Component {
                  </div>
                  </div> : null}
                 <div className="underTaskButton">
-                    {this.state.clicked === false ?<Button id="addTask"  onClick={this.buttonHandler}>Add A Task</Button> : null}
-                    {taskComps[0] === undefined ? <Button id="finishedList"  onClick={this.finishList}>Finished!</Button>: null}
-                    {this.state.clicked === false ? <Button id="backToGoal"  onClick={this.props.resetContainer}>Back to Goal</Button> : null}
+                    {this.state.clicked === false && this.state.loading === false ?<Button id="addTask"  onClick={this.buttonHandler}>Add A Task</Button> : null}
+                    {taskComps[0] === undefined && this.state.clicked === false && this.state.loading === false ? <Button id="finishedList"  onClick={this.finishList}>Finished!</Button>: null}
+                    {this.state.clicked === false && this.state.loading === false ? <Button id="backToGoal"  onClick={this.props.resetContainer}>Back to Goal</Button> : null}
                 </div>
                 {this.state.clicked === true ? this.renderForm() : null}
                 {this.state.featuredTask.id ? this.renderTaskCard() : null}
+                {this.state.loading === true ? <Loader active inline='centered' size="large" /> : null}
         </div>
         )
     }

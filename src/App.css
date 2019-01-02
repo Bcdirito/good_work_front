@@ -239,7 +239,8 @@ Button {
 .formButton {
   background-color: #9be994 !important;
   position: fixed;
-  left: 25%
+  left: 15%;
+  width: 33%;
 }
 
 .goBack {
@@ -350,8 +351,10 @@ Button {
 
 .goalGoBack {
   background-color: rgb(255, 247, 172) !important;
-  /* width: 23%; */
+  width: 33%;
   height: 50px;
+  right: 15%;
+  /* height: 64px; */
   position: fixed;
 }
 
@@ -460,16 +463,19 @@ Button {
   width: 30%;
   height: 50px !important;
   text-align: center !important;
-  padding: 5px
+  padding: 5px;
+  position: fixed
 }
 
 #newList {
   background-color: rgb(58, 179, 86) !important;
-  padding: 5px
+  padding: 5px;
+  left: 17%
 }
 
 #listGoBack {
   background-color: rgb(255, 247, 172) !important;
+  right: 17%;
 }
 
 .underTaskButton {
@@ -520,6 +526,7 @@ Button {
 .goBackTask {
   background-color: rgb(84, 129, 187) !important;
   color: #ffffff !important;
+  width: 153.67px;
 }
 
 #addTask {

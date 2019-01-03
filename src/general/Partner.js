@@ -69,6 +69,10 @@ class Partner extends Component {
         this.clearState()
     }
 
+    notQuiteHandler = () => {
+        alert("We're working on this, but we're not quite there yet. So many apologies.")
+    }
+
     clearState = () => {
         this.setState({
             addForm: false,
@@ -88,7 +92,7 @@ class Partner extends Component {
                 </Card.Meta>
                 <Card.Content textAlign="center">
                     <br></br>
-                    <Button className="partnerButton">Message</Button><Button className="partnerButton" onClick={this.clickEditHandler}>Edit</Button>
+                    <Button className="partnerButton" onClick={this.notQuiteHandler}>Message</Button><Button className="partnerButton" onClick={this.clickEditHandler}>Edit</Button>
                 </Card.Content>
                 </Card.Content>
             </Card>)

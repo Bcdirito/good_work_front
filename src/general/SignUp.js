@@ -27,7 +27,7 @@ export default class SignUpForm extends Component {
 
                 <Form.Input className="center aligned column" control={Input} name="email" label="Email:" placeholder="email" value={this.state.email} onChange={e => this.handleChange(e)} />
                 
-                <Button type="submit" className="formButton">Sign Up</Button>
+                <Button type="submit" className="loginButton" id="signUpButton">Sign Up</Button>
                 <Button onClick={this.props.resetContainer} className="loginButton">Go Back</Button>
             </Form>
         )

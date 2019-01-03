@@ -543,3 +543,9 @@ Button {
   bottom: 9em;
   right: 42%
 }
+
+#logInFormButton, #signUpButton {
+  background-color: rgb(58, 179, 86) !important;
+  color: #ffffff !important
+}
+

@@ -19,11 +19,11 @@ Good Work is a stress and anxiety reducing app that utilizes goal tracking and p
   
   2. Navigate to the back end repository.
   
-  3. Type in "rails s".
+  3. Type "rails s" and hit enter.
   
   4. Once your server is running, navigate back to this repository.
   
-  5. Type "npm start"
+  5. Type "npm start" and hit enter. 
   
   6. You will be prompted and asked if you would like to run the front end on another port. Press "y". Then the server will start.
   

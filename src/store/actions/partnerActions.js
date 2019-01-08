@@ -16,8 +16,8 @@ export const getPartner = user => {
         })
         .then(res => res.json())
         .then(res => {
-            if (res.message){
-                alert(res.message)
+            if (res.error){
+                alert(res.error)
             } else {
                 const partner = res.data.filter(partner => {
                   return Number(partner.relationships.user.data.id
@@ -93,12 +93,37 @@ export const destroyPartner = (partner, user) => {
                 "Authorization": `${user.token}`
             }
         })
-        .then(res => res.json)
+        .then(res => res.json())
         .then(res => {
             if (res.error){
                 alert(res.error)
             } else {
                 dispatch(deletePartner(partner))
+            }
+        })
+    }
+}
+
+export const messagePartner = (subject, message, partner, user) => {
+    return (dispatch) => {
+        return fetch(`http://localhost:3000/api/v1/partners/${partner.id}/message`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `${user.token}`
+            },
+            body: JSON.stringify({
+                subject: subject,
+                message: message
+            })
+        })
+        .then(res => res.json())
+        .then(res => {
+            if (res.error){
+                alert(res.error)
+            } else {
+                alert(res.message)
             }
         })
     }

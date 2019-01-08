@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
-import { getPartner, createPartner, updatePartner, destroyPartner} from "../store/actions/partnerActions"
-import {Form, Input, Button, Card} from "semantic-ui-react"
+import { getPartner, createPartner, updatePartner, destroyPartner, messagePartner} from "../store/actions/partnerActions"
+import {Form, Input, Button, Card, TextArea} from "semantic-ui-react"
 import NavContainer from "../navigation/NavContainer"
 class Partner extends Component {
 
     state = {
         addForm: false,
         editForm: false,
+        messageForm: false,
         name: "",
-        email: ""
+        email: "",
+        subject: "",
+        message: ""
     }
 
     componentDidMount(){
@@ -48,20 +51,25 @@ class Partner extends Component {
         this.clearState()
     }
 
-    clickHandler = () => {
-        this.setState({
-            ...this.state,
-            addForm: !this.state.addForm
-        }, () => console.log(this.state))
+    clickHandler = e => {
+        if (e.target.name === "add partner"){
+            this.setState({ ...this.state, addForm: !this.state.addForm })
+        } else if (e.target.name === "edit partner") {
+            this.setState({
+                ...this.state,
+                editForm: !this.state.editForm,
+                name: this.props.partner.name,
+                email: this.props.partner.email
+            })
+        } else if (e.target.name === "message partner") {
+            this.setState({ ...this.state, messageForm: !this.state.messageForm})
+        }  
     }
 
-    clickEditHandler = () => {
-        this.setState({
-            ...this.state,
-            editForm: !this.state.editForm,
-            name: this.props.partner.name,
-            email: this.props.partner.email
-        })
+    messageHandler = e => {
+        e.preventDefault()
+        this.props.messagePartner(this.state.subject, this.state.message, this.props.partner, this.props.user)
+        this.clearState()
     }
 
     deleteHandler = () => {
@@ -69,16 +77,15 @@ class Partner extends Component {
         this.clearState()
     }
 
-    notQuiteHandler = () => {
-        alert("We're working on this, but we're not quite there yet. So many apologies.")
-    }
-
     clearState = () => {
         this.setState({
             addForm: false,
             editForm: false,
+            messageForm: false,
             name: "",
-            email: ""
+            email: "",
+            subject: "",
+            message: ""
         })
     }
 
@@ -92,7 +99,7 @@ class Partner extends Component {
                 </Card.Meta>
                 <Card.Content textAlign="center">
                     <br></br>
-                    <Button className="partnerButton" onClick={this.notQuiteHandler}>Message</Button><Button className="partnerButton" onClick={this.clickEditHandler}>Edit</Button>
+                    <Button name="message partner" className="partnerButton" onClick={this.clickHandler}>Message</Button><Button name="edit partner" className="partnerButton" onClick={this.clickHandler}>Edit</Button>
                 </Card.Content>
                 </Card.Content>
             </Card>)
@@ -114,14 +121,25 @@ class Partner extends Component {
         )
     }
 
+    renderMessageForm = () => {
+        return (
+            <Form onSubmit={e => this.messageHandler(e)}>
+                <Form.Input className="center aligned column" control={Input} label="subject" name="subject" value={this.state.subject} onChange={e => this.handleChange(e)} />
+                <Form.Field control={TextArea} label='message' name="message" placeholder='Talk to your partner...' value={this.state.message} onChange={e => this.handleChange(e)} />
+                <Button type="submit" className="formSubmit">Send Message</Button>
+            </Form>
+        )
+    }
+
     render() {
         return (
         <div className="partners">
             <NavContainer />
                 <h2 id="partnerHeading"> Partners </h2>
-                {this.state.addForm === false && this.props.partner === undefined ||this.state.addForm === false && this.props.partner.id === undefined ? <Button className="partnerButton" onClick={this.clickHandler}>Add a Partner</Button> : null}
-                {this.props.partner !== undefined && this.state.addForm === false && this.state.editForm === false ? this.renderCard() : null}
+                {this.state.addForm === false && this.props.partner === undefined ||this.state.addForm === false && this.props.partner.id === undefined ? <Button name="add partner" className="partnerButton" onClick={e => this.clickHandler(e)}>Add a Partner</Button> : null}
+                {this.props.partner !== undefined && this.state.addForm === false && this.state.editForm === false && this.state.messageForm === false ? this.renderCard() : null}
                 {this.state.addForm === true || this.state.editForm === true ? this.renderForm() : null}
+                {this.state.messageForm === true ? this.renderMessageForm() : null}
         </div>
         )
     }
@@ -139,7 +157,8 @@ const mapDispatchToProps = dispatch => {
         getPartner: user => dispatch(getPartner(user)),
         createPartner: (data, user) => dispatch(createPartner(data, user)),
         updatePartner: (data, partner, user) => dispatch(updatePartner(data, partner, user)),
-        destroyPartner: (partner, user) => dispatch(destroyPartner(partner, user))
+        destroyPartner: (partner, user) => dispatch(destroyPartner(partner, user)),
+        messagePartner: (subject, message, partner, user) => dispatch(messagePartner(subject, message, partner, user))
     }
 }
 

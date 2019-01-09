@@ -4,7 +4,9 @@ const initialState = {
     goals: [],
     featuredGoal: {},
     lists: [],
-    tasks: []
+    tasks: [],
+    doctors: [],
+    featuredDoctor: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -161,6 +163,13 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 partner: {}
+            }
+
+        case "ADD_DOCTORS":
+            debugger
+            return {
+                ...state,
+                doctors: action.doctors
             }
 
         default:

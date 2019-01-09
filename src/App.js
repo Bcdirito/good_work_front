@@ -11,6 +11,7 @@ import LoginPage from './general/LoginPage';
 import { connect } from "react-redux"
 import { createSession } from "./store/actions/userActions"
 import GoalContainer from './goals/GoalContainer';
+import DoctorPage from './doctors/DoctorPage';
 
 class App extends Component {
 
@@ -57,7 +58,7 @@ class App extends Component {
               <Partner {...props} />
           )} />
             <Route exact path="/doctors" render={(props) => (
-                <ComingSoon {...props} />
+                <DoctorPage {...props} />
             )} />
             <Route component={NoMatch}/>
           </Switch>

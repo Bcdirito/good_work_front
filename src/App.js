@@ -4,7 +4,6 @@ import NoMatch from "./general/NoMatch"
 import Home from "./general/Home"
 import Goal from "./goals/Goal"
 import Partner from "./general/Partner"
-import ComingSoon from "./general/ComingSoon"
 import './App.css';
 import "./css/menu.css"
 import LoginPage from './general/LoginPage';

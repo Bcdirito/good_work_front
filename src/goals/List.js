@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux"
 import TaskCard from "./TaskCard"
-import {Form, Button, Table, Loader} from "semantic-ui-react"
+import {Form, Button, Table, Loader, Input, TextArea} from "semantic-ui-react"
 import {createTask, getTasks, destroyTask} from "../store/actions/taskActions"
-import {destroyList} from "../store/actions/listActions"
 
 class List extends Component {
     state = {
@@ -52,18 +51,6 @@ class List extends Component {
         })
     }
 
-
-    finishList = () => {
-        let result = window.confirm("Did You Accomplish Everything to Do on This List?")
-        if (result === true){
-            alert("Another One Down, Another Win for You!")
-            this.props.deleteList(this.props, this.props.user)
-            this.props.resetContainer()
-        } else {
-            alert("No Worries! We'll be Here When You Finish!")
-        }
-    }
-
     finishTask = (e) => {
         const id = Number(e.target.parentElement.parentElement.id)
         let result = window.confirm("Did You Finish This Task, You Rock Star?")
@@ -97,14 +84,8 @@ class List extends Component {
 
     renderForm = () => {
         return <Form id="newTask" onSubmit={e => this.submitHandler(e)}>
-                    <Form.Field>
-                        <label>Task Title</label>
-                            <input type="text" name="title" value={this.state.formData.title} placeholder="Task Title" onChange={e => this.changeHandler(e)}/>
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Task Content</label>
-                            <input type="text" name="content" value={this.state.formData.content} placeholder="Task Content" onChange={e => this.changeHandler(e)}/>
-                    </Form.Field>
+                    <Form.Input label="task title" name="title" control={Input}value={this.state.formData.title} placeholder="Task Title" onChange={e => this.changeHandler(e)} />
+                    <Form.Field label="task content" name="content" control={TextArea} value={this.state.formData.content} placeholder="Task Content" onChange={e => this.changeHandler(e)} />
                     <Button type="submit" className="createTask">Create New Task</Button>
                     <Button onClick={this.resetComponent} className="goBackTask">Never Mind</Button>
                 </Form>
@@ -152,7 +133,7 @@ class List extends Component {
         return (
         <div className="taskTable">
             <h3 id="listHeader">{list.attributes.name}</h3>
-                {this.state.clicked === false && this.state.featuredClick === false && this.state.loading === false ? <div><div className="table">
+                {this.state.clicked === false && this.state.featuredClick === false && this.state.loading === false && taskComps.length > 0 ? <div><div className="table">
                     <Table celled>
                         <Table.Header id="tHeader">
                             <Table.Row>
@@ -166,9 +147,9 @@ class List extends Component {
                  </div>
                  </div> : null}
                 <div className="underTaskButton">
-                    {this.state.clicked === false && this.state.loading === false ?<Button id="addTask"  onClick={this.buttonHandler}>Add A Task</Button> : null}
-                    {taskComps[0] === undefined && this.state.clicked === false && this.state.loading === false ? <Button id="finishedList"  onClick={this.finishList}>Finished!</Button>: null}
-                    {this.state.clicked === false && this.state.loading === false ? <Button id="backToGoal"  onClick={this.props.resetContainer}>Back to Goal</Button> : null}
+                    {this.state.clicked === false && this.state.featuredClick === false && this.state.loading === false ?<Button id="addTask"  onClick={this.buttonHandler}>Add A Task</Button> : null}
+                    {this.state.clicked === false && this.state.featuredClick === false && this.state.loading === false ? <Button id="backToGoal"  onClick={this.props.resetContainer}>Back to Goal</Button> : null}
+                    {taskComps[0] === undefined && this.state.clicked === false && this.state.loading === false ? <Button id="finishedList"  onClick={this.props.finishList}>Finished!</Button>: null}
                 </div>
                 {this.state.clicked === true ? this.renderForm() : null}
                 {this.state.featuredTask.id ? this.renderTaskCard() : null}
@@ -188,7 +169,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         addTask: (task, list, user) => dispatch(createTask(task, list, user)),
-        deleteList: (list, user) => dispatch(destroyList(list, user)),
         getTasks: (list, user) => dispatch(getTasks(list, user)),
         deleteTask: (task, user) => dispatch(destroyTask(task, user))
 

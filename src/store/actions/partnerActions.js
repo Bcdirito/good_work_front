@@ -120,6 +120,7 @@ export const messagePartner = (subject, message, partner, user) => {
         })
         .then(res => res.json())
         .then(res => {
+            alert("Message Sending")
             if (res.error){
                 alert(res.error)
             } else {

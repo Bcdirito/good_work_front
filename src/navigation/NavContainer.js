@@ -18,7 +18,7 @@ class NavContainer extends Component {
             <a href="/"><li>Home</li></a>
             <a href="/goals"><li>Goals</li></a>
             <a href="/partners"><li>Partners</li></a>
-            <a href="/doctors"><li>Doctors</li></a>
+            {/* <a href="/doctors"><li>Doctors</li></a> */}
             <a href="/login"><li>{this.props.user.id ? "Logout" : "Login"}</li></a>
           </ul>
         </div>

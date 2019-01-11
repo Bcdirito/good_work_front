@@ -223,6 +223,7 @@ Button {
   width: 100px;
 }
 
+
 .form {
   margin: 0;  
   position: absolute;
@@ -407,7 +408,7 @@ Button {
   width: 12.5%
 }
 
-.finishedList{
+#finishedList{
   background-color: rgb(58, 179, 86) !important;
   color: #ffffff !important;
   height: 40px;
@@ -434,10 +435,11 @@ Button {
 }
 
 .taskButton {
+  display: block;
+  float: left;
   width: 43%;
   height: 50px !important;
   text-align: center !important;
-  padding: 5px
 }
 
 #finishedTask {
@@ -479,7 +481,6 @@ Button {
 }
 
 .underTaskButton {
-  background-color: #ffffff !important;
   top: 15em;
   justify-content: center;
   align-items: center;
@@ -488,10 +489,10 @@ Button {
 
 .taskCard {
   display: block;
-  width: 70%;
+  width: 100%;
   margin-top: 0;  
   position: fixed;
-  top: 53%;
+  top: 50%;
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
@@ -500,11 +501,14 @@ Button {
 .updateTask {
   background-color: rgb(58, 179, 86) !important;
   color: #ffffff !important;
+  width: 115px;
+  height: 50px !important;
+  margin-right: 3em
 }
 
 #newTask{
   display: block;
-  width: 50%;
+  width: 450px;
   margin-top: 0;  
   position: fixed;
   top: 40%;
@@ -526,7 +530,15 @@ Button {
 .goBackTask {
   background-color: rgb(84, 129, 187) !important;
   color: #ffffff !important;
-  width: 153.67px;
+}
+
+.createTask, .goBackTask {
+  width: 115px;
+  height: 50px !important;
+  display: block;
+  float: left;
+  margin-left: 5em !important;
+  /* margin-right: 3em !important; */
 }
 
 #addTask {
@@ -547,5 +559,35 @@ Button {
 #logInFormButton, #signUpButton {
   background-color: rgb(58, 179, 86) !important;
   color: #ffffff !important
+}
+
+#partnerMessage {
+  width: 450px;
+  top: 35%;
+  color: #ffffff !important;
+  justify-content: center;
+  position: absolute;
+  margin: 0;
+}
+
+#messageSubmit {
+  background-color: rgb(58, 179, 86) !important;
+  color: #ffffff !important
+}
+
+#messageSubmit, .messageGoBack {
+  height: 50px !important;
+  display: block;
+  float: left;
+  margin-left: 9em;
+  /* justify-content: center;
+  justify-items: center;
+  align-items: center;
+  align-content: center; */
+}
+
+.messageGoBack {
+  background-color: rgb(84, 129, 187) !important;
+  color: #ffffff !important;
 }
 

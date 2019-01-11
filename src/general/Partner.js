@@ -123,10 +123,11 @@ class Partner extends Component {
 
     renderMessageForm = () => {
         return (
-            <Form onSubmit={e => this.messageHandler(e)}>
+            <Form id="partnerMessage"onSubmit={e => this.messageHandler(e)}>
                 <Form.Input className="center aligned column" control={Input} label="subject" name="subject" value={this.state.subject} onChange={e => this.handleChange(e)} />
                 <Form.Field control={TextArea} label='message' name="message" placeholder='Talk to your partner...' value={this.state.message} onChange={e => this.handleChange(e)} />
-                <Button type="submit" className="formSubmit">Send Message</Button>
+                <Button type="submit" id="messageSubmit">Send Message</Button>
+                <Button className="messageGoBack" onClick={this.clearState}>Go Back</Button>
             </Form>
         )
     }

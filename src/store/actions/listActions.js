@@ -63,7 +63,7 @@ export const createList = (list, goal, user) => {
 }
 
 export const destroyList = (list, user) => {
-    const id = list.list.id
+    const id = list.id
     return (dispatch) => {
         return fetch(`http://localhost:3000/api/v1/lists/${id}`, {
             method: "DELETE",

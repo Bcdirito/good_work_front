@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux"
-import {Button, Form, Grid} from "semantic-ui-react"
+import {Button, Form, Grid, Loader} from "semantic-ui-react"
 import {createGoal, getGoals} from "../store/actions/goalActions"
 import GoalTile from './GoalTile';
 import NavContainer from "../navigation/NavContainer"
@@ -10,18 +10,24 @@ class GoalContainer extends Component {
         clicked: false,
         formData: {
             title: ""
-        }
+        },
+        loading: true
     }
 
     componentDidMount(){
         if (this.props.goals.length === 0 && this.props.user.id){
             this.props.getGoals(this.props.user)
         }
+        // this.setState({...this.state, loading: false})
     }
 
     componentDidUpdate(prevProps) {
         if(prevProps !== this.props && this.props.goals.length === 0){
             this.props.getGoals(this.props.user)
+            this.setState({...this.state, loading: false})
+        }
+        if(prevProps.goals.length !== this.props.goals.length && this.props.length !== 0) {
+            this.setState({...this.state, loading: false})
         }
     }
 
@@ -90,7 +96,7 @@ class GoalContainer extends Component {
         <NavContainer />
           <h2 id="goalContainerHeader">My Goals</h2>
             <div className="goalContainer">
-                {this.state.clicked === false ?<Grid>
+                {this.state.clicked === false && this.state.loading === false ?<Grid>
                     <Grid.Row>
                         {goalComps}
                     </Grid.Row>
@@ -98,7 +104,8 @@ class GoalContainer extends Component {
             </div>
             <div>{this.state.clicked === true ? this.renderForm() : null}</div>
             <br></br>
-            {this.state.clicked === false ? <Button name="add goal" className="addGoal" onClick={e => this.buttonHandler(e)}>Add Goal</Button>: null}
+            {this.state.clicked === false && this.state.loading === false ? <Button name="add goal" className="addGoal" onClick={e => this.buttonHandler(e)}>Add Goal</Button>: null}
+            {this.state.loading === true ? <Loader active inline='centered' size="large" /> : null}
       </div>
     )
   }

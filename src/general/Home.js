@@ -18,7 +18,7 @@ class Home extends Component {
       return (<div>
         <div>
               <Button name="login" onClick={e => this.clickHandler(e)} className="homeButton">{"Login/Sign Up"}</Button>
-              <Button name="doctors" className="homeButton" onClick={e => this.clickHandler(e)} >Find A Doctor</Button>
+              {/* <Button name="doctors" className="homeButton" onClick={e => this.clickHandler(e)} >Find A Doctor</Button> */}
         </div>
       </div>)
     }

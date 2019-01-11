@@ -22,7 +22,7 @@ export const getTasks = (list, user) => {
                 console.log(res.errors)
             } else {
                 res.data.forEach(task => {
-                    if (task.relationships.list.data.id === id){
+                    if (task.relationships.list.data !== null && task.relationships.list.data.id === id){
                         dispatch(loadTask(task))
                     }
                 })

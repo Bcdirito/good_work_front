@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import List from "./List"
 import ListTile from "./ListTile"
 import {connect} from "react-redux"
-import {Button, Form, Grid} from "semantic-ui-react"
+import {Button, Form, Grid, Loader} from "semantic-ui-react"
 import { destroyGoal, selectGoal } from '../store/actions/goalActions'
-import {createList, getLists} from "../store/actions/listActions"
+import {createList, getLists, destroyList} from "../store/actions/listActions"
 import NavContainer from "../navigation/NavContainer"
+
 
 class Goal extends Component {
     state = {
@@ -13,7 +14,8 @@ class Goal extends Component {
         formData: {
             title: ""
         },
-        featuredList: {}
+        featuredList: {},
+        loading: false
     }
 
     componentDidMount = () => {
@@ -33,6 +35,9 @@ class Goal extends Component {
             this.props.selectGoal(id, this.props.user)
             this.props.getLists(id, this.props.user)
         }
+        if (prevProps.lists.length !== this.props.lists.length){
+            this.resetContainer()
+        }
     }
 
     buttonHandler = () => {
@@ -45,7 +50,7 @@ class Goal extends Component {
         if (result === true){
             alert("This Is Why You Fill Me With Such Wonder!")
             this.props.deleteGoal(this.props.featuredGoal, this.props.user)
-            this.props.history.replace("/")
+            this.props.history.replace("/goals")
         } else {
             alert("Keep At It! Nothing Can Stop You!")
         }
@@ -71,7 +76,19 @@ class Goal extends Component {
             formData: {
                 title: ""
             },
-            featuredList: {}
+            featuredList: {},
+            loading: false
+        })
+    }
+
+    loadState = () => {
+        this.setState({
+            clicked: false,
+            formData: {
+                title: ""
+            },
+            featuredList: {},
+            loading: true
         })
     }
 
@@ -86,6 +103,17 @@ class Goal extends Component {
             this.deleteHandler()
         } else {
             alert("Sounds Good! We'll be Here Cheering You On!")
+        }
+    }
+
+    finishList = () => {
+        let result = window.confirm("Did You Accomplish Everything to Do on This List?")
+        if (result === true){
+            alert("Another One Down, Another Win for You!")
+            this.loadState()
+            this.props.deleteList(this.state.featuredList, this.props.user)
+        } else {
+            alert("No Worries! We'll be Here When You Finish!")
         }
     }
 
@@ -130,7 +158,9 @@ class Goal extends Component {
                 <NavContainer />
 
                 <h2 id="goalHeader">{goal.attributes !== undefined && goal !== undefined ?  goal.attributes.name : null}</h2>
-                    {this.state.featuredList.id ? <List list={this.state.featuredList} resetContainer={this.resetContainer}/> : <div className="listContainer">
+                    {this.state.featuredList.id ? <List list={this.state.featuredList} resetContainer={this.resetContainer}
+                    finishList={this.finishList}
+                    /> : <div className="listContainer">
                         <Grid>
                             <Grid.Row>
                                 {this.state.clicked === false ? listComps : this.renderForm()}
@@ -141,6 +171,7 @@ class Goal extends Component {
                 <br></br>
                 {this.state.clicked === false && this.state.featuredList.id === undefined ? <Button className="addList" onClick={this.buttonHandler}>Add List</Button>: null}
                 {this.state.clicked === false && this.state.featuredList.id === undefined ? <Button className="finished" onClick={this.deleteHandler}>Finished!</Button> : null}
+                {this.state.loading === true ? <Loader active inline='centered' size="large" /> : null}
             </div>
         )
   }
@@ -160,7 +191,8 @@ const mapDispatchToProps = dispatch => {
         addList: (list, goal, user) => dispatch(createList(list, goal, user)),
         getLists: (id, user) => dispatch(getLists(id, user)),
         clearLists: () => dispatch({type: "CLEAR_LISTS"}),
-        selectGoal: (id, user) => dispatch(selectGoal(id, user))
+        selectGoal: (id, user) => dispatch(selectGoal(id, user)),
+        deleteList: (list, user) => dispatch(destroyList(list, user))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Goal)

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux"
-import {Form, Button} from "semantic-ui-react"
+import {Form, Input, Button, TextArea} from "semantic-ui-react"
 import {updateTask} from "../store/actions/taskActions"
 
 class TaskCard extends Component {
@@ -41,16 +41,10 @@ class TaskCard extends Component {
         return (
             <div className="taskCard">
                 <Form onSubmit={e => this.submitHandler(e)}>
-                <Form.Field>
-                    <label>Task Title</label>
-                        <input type="text" name="title" value={this.state.editData.title}
-                        onChange={e => this.changeHandler(e)}/>
-                </Form.Field>
-                <Form.Field>
-                    <label>Task Content</label>
-                    <input type="text" name="content" value={this.state.editData.content}
-                        onChange={e => this.changeHandler(e)}/>
-                </Form.Field>
+                <Form.Input label="task title" name="title" control={Input} value={this.state.editData.title}
+                onChange={e => this.changeHandler(e)} />
+                <Form.Field control={TextArea} label="task content" name="content" value={this.state.editData.content}
+                onChange={e => this.changeHandler(e)} />
                 <Button type="submit" className="updateTask">Update Task</Button>
                 <Button onClick={this.resetComponent} className="goBackTask">Never Mind</Button>
             </Form>

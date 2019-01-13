@@ -2,6 +2,8 @@
 
 created by [Brian DiRito](https://github.com/bcdirito)
 
+click [here](https://drive.google.com/file/d/1DQaE331ddGvn0OotC7OkMh2Nk9HFlo57/view?usp=sharing) for video demo
+
 Good Work uses React.js for its front end and Ruby On Rails for its back end.
 
 Good Work is a stress and anxiety reducing app that utilizes goal tracking and partner accountability.

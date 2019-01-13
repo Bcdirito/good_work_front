@@ -4,7 +4,7 @@ import NavContainer from "../navigation/NavContainer"
 export default class componentName extends Component {
   render() {
     return (
-      <div className="doctor">
+      <div className="doctors">
         <NavContainer />
         <div className="comingSoon">
             <h1>My friend, You've Arrived Here Before We Did</h1>

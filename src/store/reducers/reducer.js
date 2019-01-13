@@ -145,7 +145,8 @@ const reducer = (state = initialState, action) => {
                     id: partner.id,
                     name: partner.attributes.name
                     ,
-                    email: partner.attributes.email}
+                    email: partner.attributes.email
+                }
             }
 
         case "EDIT_PARTNER":
@@ -166,10 +167,15 @@ const reducer = (state = initialState, action) => {
             }
 
         case "ADD_DOCTORS":
-            debugger
+            const fetchedDoctors = action.doctors.map(doctor => {
+                return {
+                    practices: doctor.practices,
+                    profile: doctor.profile,
+                }
+            })
             return {
                 ...state,
-                doctors: action.doctors
+                doctors: fetchedDoctors
             }
 
         default:

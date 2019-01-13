@@ -12,7 +12,7 @@ export default class Profile extends Component {
         <div>
             <Button className="profileButtons" name="goals" onClick={e => this.clickHandler(e)}>Goals</Button>
             <Button className="profileButtons" name="partners" onClick={e => this.clickHandler(e)}>Partners</Button>
-            {/* <Button className="profileButtons" name="doctors" onClick={e => this.clickHandler(e)}>Doctors</Button> */}
+            <Button className="profileButtons" name="doctors" onClick={e => this.clickHandler(e)}>Doctors</Button>
         </div>
         )
     }

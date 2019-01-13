@@ -23,12 +23,6 @@ export const getLists = (goalId, user) => {
                     === goalId
                 })
                 dispatch(loadLists(filterArr))
-                // res.data.forEach(list => {
-                //     if (list.relationships.goal.data !== null && Number(list.relationships.goal.data.id)
-                //     === goalId){
-                //         dispatch(loadList(list))
-                //     }
-                // })
             }}
         )
         .catch(console.error)

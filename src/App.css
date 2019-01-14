@@ -2,22 +2,6 @@
   text-align: center;
 }
 
-/* .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}  */
-
-/* .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-} */
-
 a:link {
   color: #010203
 }
@@ -53,7 +37,6 @@ h1 {
   justify-content: center;
   align-items: center;
   color: #010203;
-  /* width: 35%; */
   border-radius: 10px;
   text-align: center;
   font-family: 'Lobster Two', cursive !important;
@@ -355,7 +338,6 @@ Button {
   width: 33%;
   height: 50px;
   right: 15%;
-  /* height: 64px; */
   position: fixed;
 }
 
@@ -580,10 +562,6 @@ Button {
   display: block;
   float: left;
   margin-left: 9em;
-  /* justify-content: center;
-  justify-items: center;
-  align-items: center;
-  align-content: center; */
 }
 
 .messageGoBack {

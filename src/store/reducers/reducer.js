@@ -6,7 +6,7 @@ const initialState = {
     lists: [],
     tasks: [],
     doctors: [],
-    featuredDoctor: []
+    myDoctors: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -167,12 +167,17 @@ const reducer = (state = initialState, action) => {
             }
 
         case "ADD_DOCTORS":
-            const fetchedDoctors = action.doctors.map(doctor => {
-                return {
-                    practices: doctor.practices,
-                    profile: doctor.profile,
-                }
-            })
+            let fetchedDoctors;
+            if (action.doctors.length > 0) {
+                fetchedDoctors = action.doctors.map(doctor => {
+                    return {
+                        practices: doctor.practices,
+                        profile: doctor.profile,
+                    }
+                })
+            } else {
+                fetchedDoctors = ["Sorry, no doctors found. Please try again"]
+            }
             return {
                 ...state,
                 doctors: fetchedDoctors

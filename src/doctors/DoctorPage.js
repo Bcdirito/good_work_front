@@ -9,7 +9,8 @@ class DoctorPage extends Component {
 
   state = {
     loading: false,
-    clicked: false
+    clicked: false,
+    featuredDoctor: {}
   }
 
   componentDidUpdate = (prevProps) => {
@@ -34,8 +35,16 @@ class DoctorPage extends Component {
 
   }
 
+  featureHandler = (doctor) => {
+    this.setState({...this.state, featuredDoctor: doctor})
+  }
+
   clickHandler = () => {
     this.setState({...this.state, clicked: true})
+  }
+
+  clearFeatured = () => {
+    this.setState({...this.state, featuredDoctor: {}})
   }
 
   doctorCards = () => {
@@ -43,24 +52,60 @@ class DoctorPage extends Component {
     if (typeof this.props.doctors[0] !== "string"){
       return this.props.doctors.map(doctor => {
         ++i
-        console.log(doctor)
         return (<Grid.Column key={i}>
           <Card className="doctorCard">
-            <Image src={doctor.profile.image_url} alt=""/>
             <Card.Content>
               <Card.Header id="doctorName" textAlign="center">
+              <Image src={doctor.profile.image_url} alt="" className="doctorImage" centered/>
+              <br></br>
               {doctor.profile.first_name} {doctor.profile.last_name}
               </Card.Header>
             </Card.Content>
             <Card.Content>
               <br></br>
-              <Button>See More</Button>
+              <Button onClick={() => this.featureHandler(doctor)}>See More</Button>
               <Button>Save Doctor</Button>
             </Card.Content>
           </Card>
         </Grid.Column>)
       })
     }
+  }
+
+  featureDoctor = () => {
+    console.log(this.state.featuredDoctor)
+    return (<Grid.Column key="0">
+    <Card className="featuredDoctorCard">
+      <Card.Content>
+        <Card.Header id="doctorName" textAlign="center">
+        <Image src={this.state.featuredDoctor.profile.image_url} alt="" className="doctorImage" centered/>
+        <br></br>{this.state.featuredDoctor.profile.first_name} {this.state.featuredDoctor.profile.last_name}
+        </Card.Header>
+        <Card.Content>
+          {this.state.featuredDoctor.profile.bio}
+        </Card.Content>
+      </Card.Content>
+      <Card.Content>
+          <h3>Practices</h3>
+          <ul>
+            {this.state.featuredDoctor.practices.map(practice => {
+              return <li>{practice.name}
+              <br></br>
+              {practice.visit_address.street}, {practice.visit_address.city}, 
+              {practice.visit_address.state} {practice.visit_address.zip}
+              <br></br>
+              {practice.phones[0].number}
+              </li>
+            })}
+          </ul>
+        </Card.Content>
+      <Card.Content>
+        <br></br>
+        <Button>Save Doctor</Button>
+        <Button onClick={this.clearFeatured}>Go Back</Button>
+      </Card.Content>
+    </Card>
+  </Grid.Column>)
   }
 
   render() {
@@ -70,7 +115,7 @@ class DoctorPage extends Component {
         <h1>Doctors</h1>
         {this.props.doctors.length > 0 || this.props.myDoctors.length > 0 ? <Grid className="doctorGrid">
           <GridRow columns="3">
-            {this.props.doctors.length > 0 ? this.doctorCards(): this.myDoctorCard()}
+            {this.state.featuredDoctor.profile !== undefined ? this.featureDoctor() : this.props.doctors.length > 0 ? this.doctorCards(): this.myDoctorCards()}
           </GridRow>
         </Grid> : null}
         {this.state.loading === false && this.state.clicked === false ? <Button onClick={this.clickHandler}>Find Doctors</Button> : null}

@@ -6,7 +6,7 @@ export const editDoctor = doctor => ({type: "EDIT_DOCTOR", doctor})
 
 export const deleteDoctor = doctor => ({type: "DELETE_DOCTOR", doctor})
 
-const DOCTOR_URL = "https://api.betterdoctor.com/2016-03-01/doctors?query=anxiety"
+const DOCTOR_URL = "https://api.betterdoctor.com/2016-03-01/doctors?specialty_uid=psychologist"
 
 const skipLimit = "&skip=0&limit=100"
 

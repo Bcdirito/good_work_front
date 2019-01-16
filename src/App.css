@@ -570,10 +570,18 @@ Button {
 }
 
 .doctorCard {
-  width: 200px !important;
+  width: 300px !important;
+  /* margin-top: 50px !important; */
+  margin-bottom: 50px !important;
+}
+
+.doctorImage {
+  height: 150px !important;
+  width: 150px !important;
 }
 
 .doctorGrid {
+  display: block;
   overflow: scroll !important;
   height: 65vh;
   width: 65vw;
@@ -581,5 +589,11 @@ Button {
   align-content: center;
   justify-items: center;
   justify-content: center;
-  left: 50%;
+  top: 50%;
+  left: 50% !important;
+  margin: -100px 0 0 -150px;
+}
+
+.featuredDoctorCard {
+  width: 500px !important;
 }

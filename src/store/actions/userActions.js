@@ -1,7 +1,5 @@
 export const logoutUser = () => ({type: "LOGOUT_USER"})
 
-export const createUser = user => ({type: "CREATE_USER", user})
-
 export const loginUser = user => ({type: "LOGIN_USER", user})
 
 export const signUpUser = (user) => {
@@ -30,7 +28,7 @@ export const signUpUser = (user) => {
                     })
                 }
             } else {
-                dispatch(createUser(res))
+                dispatch(createSession(res))
             }
         })
         .catch(console.error)

@@ -121,20 +121,7 @@ const reducer = (state = initialState, action) => {
                 goals: [],
                 featuredGoal: {},
                 lists: [],
-                tasks: [],
-            
-
-            }
-
-        case "CREATE_USER":
-            localStorage.setItem("token", action.user.jwt)
-            return {
-                ...state,
-                user: {
-                    id: action.user.user.id,
-                    user: action.user.user.username,
-                    token: action.user.jwt
-                }
+                tasks: [], 
             }
 
         case "ADD_PARTNER":

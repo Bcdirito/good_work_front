@@ -24,10 +24,10 @@ export default class DoctorSearchForm extends Component {
         
         return (
             <div className="doctorSearchForm">
-                <Form onSubmit={(e) => this.props.submitHandler(e, this.state)}>
+                <Form onSubmit={(e) => this.props.searchHandler(e, this.state)}>
                     <Form.Input className="center aligned column" control={Input} label="city" name="city" value={this.state.name} onChange={e => this.handleCityChange(e)} />
                     <Dropdown placeholder='State' name="state" selection options={stateAbbreviations} onChange={e => this.handleStateChange(e)}/>
-                    <Button type="submit" text="Submit">Search</Button>
+                    <Button type="submit" text="Search">Search</Button>
                 </Form>  
             </div>
         )

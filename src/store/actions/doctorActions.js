@@ -23,3 +23,31 @@ export const getDoctors = location => {
         .catch(error => alert(error))
     }
 }
+
+export const saveDoctor = (user, doctor) => {
+    return (dispatch) => {
+        return fetch("http://localhost:3000/api/v1/doctors", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `${user.token}`
+            },
+            body: JSON.stringify({
+                name: doctor.name,
+                email: doctor.email
+            })
+        })
+        .then(res => res.json())
+        .then(res => {
+            if (res.error){
+                res.error.forEach(error => {
+                    alert(error)
+                })
+            } else {
+                dispatch(addPersonalDoctor(res.data))
+            }
+        })
+        .catch(console.error)
+    }
+}

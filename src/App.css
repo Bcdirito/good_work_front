@@ -569,3 +569,17 @@ Button {
   color: #ffffff !important;
 }
 
+.doctorCard {
+  width: 200px !important;
+}
+
+.doctorGrid {
+  overflow: scroll !important;
+  height: 65vh;
+  width: 65vw;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+  justify-content: center;
+  left: 50%;
+}

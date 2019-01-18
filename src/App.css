@@ -22,6 +22,11 @@ a:active {
   color: #61dafb;
 }
 
+li {
+  margin-top: 15px;
+  margin-right: 30px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -60,9 +65,6 @@ h3 {
   align-items: center;  
 }
 
-ul {
-  background-color: antiquewhite !important
-}
 
 .goalTiles {
   margin-left: 5em;
@@ -178,7 +180,8 @@ ul {
   background-image: url("./media/temp_doctor_background.jpg") !important;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100vh
+  height: 100vh;
+  width: 100vw;
 }
 
 .comingSoon {
@@ -216,7 +219,7 @@ Button {
   transform: translate(-50%, -50%);
   border-radius: 10px;
   width: 30%;
-  font-family: 'Lobster Two', cursive !important;
+  font-family: 'Dosis', sans-serif !important;
   font-size: 15px;
 }
 
@@ -247,7 +250,6 @@ Button {
   transform: translate(-50%, -50%);
   border-radius: 10px;
   width: 80vw;
-  font-family: 'Lobster Two', cursive !important;
 }
 
 .signUpForm {
@@ -259,7 +261,6 @@ Button {
   transform: translate(-50%, -50%);
   border-radius: 10px;
   width: 22.5em;
-  font-family: 'Lobster Two', cursive !important;
 }
 
 #signUpHeader {
@@ -309,7 +310,6 @@ Button {
   margin-right: -50%;
   transform: translate(-50%, -50%);
   border-radius: 10px;
-  font-family: 'Lobster Two', cursive !important;
 }
 
 
@@ -349,7 +349,6 @@ Button {
   margin-right: -50%;
   transform: translate(-50%, -50%);
   border-radius: 10px;
-  font-family: 'Lobster Two', cursive !important;
 }
 
 #goalTile {
@@ -589,11 +588,83 @@ Button {
   align-content: center;
   justify-items: center;
   justify-content: center;
-  top: 50%;
-  left: 50% !important;
-  margin: -100px 0 0 -150px;
+  top: 60%;
+  margin-left: 18% !important;
+}
+
+.findDoctors {
+  background-color: rgb(84, 129, 187) !important;
+  color: #ffffff !important;
+}
+
+.findMoreDoctors {
+  margin-top: 5% !important;
+  background-color: rgb(84, 129, 187) !important;
+  color: #ffffff !important;
 }
 
 .featuredDoctorCard {
-  width: 500px !important;
+  width: 750px !important;
+  height: 450px !important;
+}
+
+.doctorSearchForm{
+  height: 40% !important;
+  top: 75%;
+  background-color: rgba(175, 175, 175, 0.5);
+  border-radius: 10px;
+  width: 45%;
+  margin-left: 28%;
+}
+
+.doctorSearchForm .form{
+  top: 50%;
+  width: 60%
+}
+
+.doctorSearchButton {
+  margin-left: 15%;
+  background-color: rgb(84, 129, 187) !important;
+  color: #ffffff !important;
+}
+
+.doctorSearchBack {
+  /* margin-left: 15%; */
+  margin-top: 10%;
+  background-color: rgb(255, 247, 172) !important;
+  color: #010203 !important;
+}
+
+.practices {
+  overflow: scroll;
+  height: 250px;
+}
+
+.underFeatureDoctorButtons {
+  display: block;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+  justify-content: center;
+}
+
+.underFeatureDoctorButtons button{
+  height: 50px !important;
+  margin-top: 10px !important;
+  margin-left: 10px !important;
+}
+
+.saveDoctor {
+  background-color: rgb(58, 179, 86) !important;
+  color: #ffffff !important
+}
+
+.doctorSeeMore {
+  background-color: rgb(84, 129, 187) !important;
+  color: #ffffff !important;
+}
+
+.featuredDocGoBack {
+  background-color: rgb(255, 247, 172) !important;
+  color: #010203 !important; 
 }

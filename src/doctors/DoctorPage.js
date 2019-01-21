@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux"
-import {getDoctors, saveDoctor} from "../store/actions/doctorActions"
+import {getDoctors, saveDoctor, savePractice} from "../store/actions/doctorActions"
 import {Button, Loader, Grid, GridRow, Card, Image} from "semantic-ui-react"
 import NavContainer from "../navigation/NavContainer"
 import DoctorSearchForm from "./DoctorSearchForm"
@@ -32,8 +32,16 @@ class DoctorPage extends Component {
   }
 
   saveHandler = (doctor) => {
-    console.log(doctor)
+    this.props.myDoctor(this.props.user, doctor)
+    // this.savePractices(doctor.practices)
+    this.setState({...this.state, loading: true})
   }
+
+  // savePractices = (practices) => {
+  //   practices.forEach(practice => {
+  //     this.props.storePractice(this.props.user, practice)
+  //   })
+  // }
 
   featureHandler = (doctor) => {
     this.setState({...this.state, featuredDoctor: doctor})
@@ -88,7 +96,7 @@ class DoctorPage extends Component {
           {this.state.featuredDoctor.profile.first_name} {this.state.featuredDoctor.profile.last_name}
           </Card.Header>
           <br></br>
-          <Card.Content textAlign="left">
+          <Card.Content className="doctorBio" textAlign="left">
             {this.state.featuredDoctor.profile.bio}
           </Card.Content>
         </Card.Content>
@@ -114,6 +122,7 @@ class DoctorPage extends Component {
   }
 
   render() {
+    console.log(this.props.myDoctors)
     return (
       <div className="doctors">
         <NavContainer />
@@ -142,7 +151,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchDoctors: (location) => dispatch(getDoctors(location)),
-    myDoctor: (user, doctor) => dispatch(saveDoctor(user, doctor))
+    myDoctor: (user, doctor) => dispatch(saveDoctor(user, doctor)),
+    storePractice: (user, practice) => dispatch(savePractice(user, practice))
   }
 }
 

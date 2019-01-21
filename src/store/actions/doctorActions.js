@@ -25,6 +25,9 @@ export const getDoctors = location => {
 }
 
 export const saveDoctor = (user, doctor) => {
+    const practices = doctor.practices
+    const name = `${doctor.profile.first_name} ${doctor.profile.last_name}`
+    const bio = doctor.profile.bio
     return (dispatch) => {
         return fetch("http://localhost:3000/api/v1/doctors", {
             method: "POST",
@@ -34,8 +37,44 @@ export const saveDoctor = (user, doctor) => {
                 "Authorization": `${user.token}`
             },
             body: JSON.stringify({
-                name: doctor.name,
-                email: doctor.email
+                user_id: user.id,
+                name: name,
+                bio: bio
+            })
+        })
+        .then(res => res.json())
+        .then(res => {
+            if (res.error){
+                alert(res.error)
+            } else {
+                practices.forEach(practice => {
+                    savePractice(user, practice, res.data)
+                })
+                dispatch(addPersonalDoctor(res.data))
+            }
+        })
+        .catch(console.error)
+    }
+}
+
+export const savePractice = (user, practice, doctor) => {
+    debugger
+    const name = practice.name
+    const address = `${practice.visit_address.street}, ${practice.vist_address.city}, ${practice.visit_address.state} ${practice.visit_address.zip}`
+    const phone = practice.phones[0].number
+    return (dispatch) => {
+        return fetch("http://localhost:3000/api/v1/practices", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `${user.token}`
+            },
+            body: JSON.stringify({
+                doctor_id: doctor.id,
+                name: name,
+                address: address,
+                phone: phone
             })
         })
         .then(res => res.json())

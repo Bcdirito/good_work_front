@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux"
-import {getDoctors, saveDoctor, savePractice} from "../store/actions/doctorActions"
+import {getDoctors, saveDoctor, savePractice, fetchMyDoctors} from "../store/actions/doctorActions"
 import {Button, Loader, Grid, GridRow, Card, Image} from "semantic-ui-react"
 import NavContainer from "../navigation/NavContainer"
 import DoctorSearchForm from "./DoctorSearchForm"
@@ -20,6 +20,14 @@ class DoctorPage extends Component {
       }
       this.setState({...this.state, loading: false})
     }
+
+    if (this.props.user.id && prevProps.myDoctors.length === this.props.myDoctors.length){
+      this.getDoctors()
+    }
+  }
+
+  getDoctors = () => {
+    this.props.getMyDoctors(this.props.user)
   }
 
   searchHandler = (e, data) => {
@@ -33,15 +41,8 @@ class DoctorPage extends Component {
 
   saveHandler = (doctor) => {
     this.props.myDoctor(this.props.user, doctor)
-    // this.savePractices(doctor.practices)
     this.setState({...this.state, loading: true})
   }
-
-  // savePractices = (practices) => {
-  //   practices.forEach(practice => {
-  //     this.props.storePractice(this.props.user, practice)
-  //   })
-  // }
 
   featureHandler = (doctor) => {
     this.setState({...this.state, featuredDoctor: doctor})
@@ -86,6 +87,10 @@ class DoctorPage extends Component {
     }
   }
 
+  // myDoctorCards = () => {
+  //   console.log(this.props.myDoctors)
+  // }
+
   featureDoctor = () => {
     return (<div>
       <Card className="featuredDoctorCard">
@@ -127,9 +132,10 @@ class DoctorPage extends Component {
       <div className="doctors">
         <NavContainer />
         <h1>Doctors</h1>
-        {typeof this.props.doctors[0] === "object" && this.state.clicked === false || this.props.myDoctors.length > 0 && this.state.clicked === false  ? <Grid className="doctorGrid">
+        {typeof this.props.doctors[0] === "object" && this.state.clicked === false ? 
+        <Grid className="doctorGrid">
           <GridRow columns="3">
-            {this.state.featuredDoctor.profile !== undefined ? this.featureDoctor() : this.props.doctors.length > 0 ? this.doctorCards(): this.myDoctorCards()}
+            {this.state.featuredDoctor.profile !== undefined ? this.featureDoctor() : this.props.doctors.length > 0 ? this.doctorCards(): null}
           </GridRow>
         </Grid> : null}
         {this.state.loading === false && this.state.clicked === false ? <Button className={typeof this.props.doctors[0] === "object" ? "findMoreDoctors" : "findDoctors"} onClick={this.clickHandler}>Find Doctors</Button> : null}
@@ -152,7 +158,8 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchDoctors: (location) => dispatch(getDoctors(location)),
     myDoctor: (user, doctor) => dispatch(saveDoctor(user, doctor)),
-    storePractice: (user, practice) => dispatch(savePractice(user, practice))
+    storePractice: (user, practice) => dispatch(savePractice(user, practice)),
+    getMyDoctors: (user) => dispatch(fetchMyDoctors(user))
   }
 }
 

@@ -2,7 +2,7 @@ export const addDoctors = doctors => ({type: "ADD_DOCTORS", doctors})
 
 export const addPersonalDoctor = doctor => ({type: "ADD_PERSONAL", doctor})
 
-export const editDoctor = doctor => ({type: "EDIT_DOCTOR", doctor})
+export const storePersonalDoctors = doctors => ({ type: "STORE_PERSONAL", doctors})
 
 export const deleteDoctor = doctor => ({type: "DELETE_DOCTOR", doctor})
 
@@ -58,9 +58,8 @@ export const saveDoctor = (user, doctor) => {
 }
 
 export const savePractice = (user, practice, doctor) => {
-    debugger
     const name = practice.name
-    const address = `${practice.visit_address.street}, ${practice.vist_address.city}, ${practice.visit_address.state} ${practice.visit_address.zip}`
+    const address = `${practice.visit_address.street}, ${practice.visit_address.city}, ${practice.visit_address.state} ${practice.visit_address.zip}`
     const phone = practice.phones[0].number
     return (dispatch) => {
         return fetch("http://localhost:3000/api/v1/practices", {
@@ -79,14 +78,49 @@ export const savePractice = (user, practice, doctor) => {
         })
         .then(res => res.json())
         .then(res => {
+            debugger
             if (res.error){
                 res.error.forEach(error => {
                     alert(error)
                 })
             } else {
-                dispatch(addPersonalDoctor(res.data))
+                debugger
+                let filterMyDocs
+                dispatch(storePersonalDoctors)
             }
         })
         .catch(console.error)
+    }
+}
+
+export const fetchMyDoctors = user => {
+    return (dispatch) => {
+        return fetch("http://localhost:3000/api/v1/doctors", {
+            headers: {
+                "Content-Type": "application/json",
+                "Accepts": "application/json",
+                "Authorization": `${user.token}`
+            }
+        })
+        .then(res => res.json())
+        .then(res => {
+            if (res.message){
+                alert(res.message)
+            } else if (res.error) {
+                alert (res.error)
+            } else {
+                let filterArr = res.data.map(doc => {
+                    let users = doc.relationships.users.data
+                    let userIds = users.map(ind => {
+                        return Number(ind.id)
+                    })
+                    if (userIds.includes(user.id)){
+                        return doc
+                    }
+                })
+                dispatch(storePersonalDoctors(filterArr))
+            }
+        })
+        .catch(error => alert(error))
     }
 }

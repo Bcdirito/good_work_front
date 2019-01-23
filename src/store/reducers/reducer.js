@@ -169,7 +169,16 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 doctors: fetchedDoctors
             }
-
+        
+        case "ADD_PERSONAL":
+        
+        case "STORE_PERSONAL":
+            const arr = action.doctors
+            return {
+                ...state,
+                myDoctors: action.doctors
+            }
+            
         default:
             return state
     }

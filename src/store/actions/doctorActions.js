@@ -25,9 +25,11 @@ export const getDoctors = location => {
 }
 
 export const saveDoctor = (user, doctor) => {
+    debugger
     const practices = doctor.practices
     const name = `${doctor.profile.first_name} ${doctor.profile.last_name}`
     const bio = doctor.profile.bio
+    const image_url = doctor.profile.image_url
     return (dispatch) => {
         return fetch("http://localhost:3000/api/v1/doctors", {
             method: "POST",
@@ -39,7 +41,8 @@ export const saveDoctor = (user, doctor) => {
             body: JSON.stringify({
                 user_id: user.id,
                 name: name,
-                bio: bio
+                bio: bio,
+                image_url: image_url
             })
         })
         .then(res => res.json())

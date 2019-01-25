@@ -7,7 +7,6 @@ import NavContainer from "../navigation/NavContainer"
 
 class Home extends Component {
   clickHandler = e => {
-    console.log("clicked")
     this.props.history.push(`/${e.target.name}`)
   }
 

@@ -46,8 +46,12 @@ class DoctorPage extends Component {
   }
 
   saveHandler = (doctor) => {
-    this.props.myDoctor(this.props.user, doctor)
-    this.setState({...this.state, loading: true})
+    if (this.props.user.id){
+      this.props.myDoctor(this.props.user, doctor)
+      this.setState({...this.state, loading: true}) 
+    } else {
+      this.goToLogin()
+    }
   }
 
   featureHandler = (doctor) => {
@@ -64,7 +68,18 @@ class DoctorPage extends Component {
   }
 
   myDocHandler = () => {
-    this.setState({...this.state, myDoc: true})
+    if (this.props.myDoctors.length === 0){
+      this.props.user.id ? alert("You have no doctors.") : this.goToLogin()
+    } else {
+      this.setState({...this.state, myDoc: true})
+    }
+  }
+
+  goToLogin = () => {
+    let result = window.confirm("You need to log in to see this. Would you like to?")
+    if (result === true){
+      window.location.replace("/login")
+    } 
   }
 
   resetState = () => {
@@ -161,13 +176,13 @@ class DoctorPage extends Component {
       <Card className="featuredDoctorCard">
         <Card.Content>
           <Card.Header id="doctorName" textAlign="center">
-          {this.state.featuredDoctor.profile.image_url && this.state.featuredDoctor.profile.image_url.includes("general") ? null : <Image src={this.state.featuredDoctor.profile.image_url} alt="" className="doctorImage" centered/>}
+          {this.state.featuredDoctor.attributes.image && this.state.featuredDoctor.attributes.image.includes("general") ? null : <Image src={this.state.featuredDoctor.attributes.image} alt="" className="doctorImage" centered/>}
           <br></br>
-          {this.state.featuredDoctor.profile.first_name} {this.state.featuredDoctor.profile.last_name}
+          {this.state.featuredDoctor.attributes.name}
           </Card.Header>
           <br></br>
           <Card.Content className="doctorBio" textAlign="left">
-            {this.state.featuredDoctor.profile.bio}
+            {this.state.featuredDoctor.attributes.bio}
           </Card.Content>
         </Card.Content>
         <Card.Content className="practices">

@@ -25,7 +25,6 @@ export const getDoctors = location => {
 }
 
 export const saveDoctor = (user, doctor) => {
-    debugger
     const practices = doctor.practices
     const name = `${doctor.profile.first_name} ${doctor.profile.last_name}`
     const bio = doctor.profile.bio
@@ -42,7 +41,7 @@ export const saveDoctor = (user, doctor) => {
                 user_id: user.id,
                 name: name,
                 bio: bio,
-                image_url: image_url
+                image: image_url
             })
         })
         .then(res => res.json())
@@ -81,7 +80,6 @@ export const savePractice = (user, practice, doctor) => {
         })
         .then(res => res.json())
         .then(res => {
-            debugger
             if (res.error){
                 res.error.forEach(error => {
                     alert(error)

@@ -114,7 +114,6 @@ const reducer = (state = initialState, action) => {
             }
 
         case "LOGOUT_USER":
-            console.log("Made It Here")
             localStorage.clear()
             return {
                 user: {},

@@ -519,7 +519,6 @@ Button {
   display: block;
   float: left;
   margin-left: 5em !important;
-  /* margin-right: 3em !important; */
 }
 
 #addTask {
@@ -570,7 +569,6 @@ Button {
 
 .doctorCard {
   width: 300px !important;
-  /* margin-top: 50px !important; */
   margin-bottom: 50px !important;
 }
 
@@ -629,7 +627,6 @@ Button {
 }
 
 .doctorSearchBack {
-  /* margin-left: 15%; */
   margin-top: 10%;
   background-color: rgb(255, 247, 172) !important;
   color: #010203 !important;

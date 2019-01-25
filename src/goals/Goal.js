@@ -167,7 +167,6 @@ class Goal extends Component {
                             </Grid.Row>
                         </Grid>
                     </div>}
-                {/* <div>{this.state.clicked === true ? this.renderForm() : null}</div> */}
                 <br></br>
                 {this.state.clicked === false && this.state.featuredList.id === undefined ? <Button className="addList" onClick={this.buttonHandler}>Add List</Button>: null}
                 {this.state.clicked === false && this.state.featuredList.id === undefined ? <Button className="finished" onClick={this.deleteHandler}>Finished!</Button> : null}

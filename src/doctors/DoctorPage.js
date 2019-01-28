@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux"
-import {getDoctors, saveDoctor, savePractice, fetchMyDoctors} from "../store/actions/doctorActions"
+import {getDoctors, saveDoctor, fetchMyDoctors} from "../store/actions/doctorActions"
 import {Button, Loader, Grid, GridRow, Card, Image} from "semantic-ui-react"
 import NavContainer from "../navigation/NavContainer"
 import DoctorSearchForm from "./DoctorSearchForm"
@@ -241,7 +241,6 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchDoctors: (location) => dispatch(getDoctors(location)),
     myDoctor: (user, doctor) => dispatch(saveDoctor(user, doctor)),
-    storePractice: (user, practice) => dispatch(savePractice(user, practice)),
     getMyDoctors: (user) => dispatch(fetchMyDoctors(user))
   }
 }

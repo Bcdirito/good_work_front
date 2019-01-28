@@ -41,7 +41,8 @@ export const saveDoctor = (user, doctor) => {
                 user_id: user.id,
                 name: name,
                 bio: bio,
-                image: image_url
+                image: image_url,
+                practices: practices,
             })
         })
         .then(res => res.json())
@@ -49,45 +50,7 @@ export const saveDoctor = (user, doctor) => {
             if (res.error){
                 alert(res.error)
             } else {
-                practices.forEach(practice => {
-                    savePractice(user, practice, res.data)
-                })
                 dispatch(addPersonalDoctor(res.data))
-            }
-        })
-        .catch(console.error)
-    }
-}
-
-export const savePractice = (user, practice, doctor) => {
-    const name = practice.name
-    const address = `${practice.visit_address.street}, ${practice.visit_address.city}, ${practice.visit_address.state} ${practice.visit_address.zip}`
-    const phone = practice.phones[0].number
-    return (dispatch) => {
-        return fetch("http://localhost:3000/api/v1/practices", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                "Authorization": `${user.token}`
-            },
-            body: JSON.stringify({
-                doctor_id: doctor.id,
-                name: name,
-                address: address,
-                phone: phone
-            })
-        })
-        .then(res => res.json())
-        .then(res => {
-            if (res.error){
-                res.error.forEach(error => {
-                    alert(error)
-                })
-            } else {
-                debugger
-                let filterMyDocs
-                dispatch(storePersonalDoctors)
             }
         })
         .catch(console.error)

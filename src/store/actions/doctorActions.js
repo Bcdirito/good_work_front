@@ -6,6 +6,8 @@ export const storePersonalDoctors = doctors => ({ type: "STORE_PERSONAL", doctor
 
 export const deleteDoctor = doctor => ({type: "DELETE_DOCTOR", doctor})
 
+export const storePractices = practices =>({type: "STORE_PRACTICES", practices})
+
 const DOCTOR_URL = "https://api.betterdoctor.com/2016-03-01/doctors?specialty_uid=psychologist"
 
 const skipLimit = "&skip=0&limit=100"
@@ -29,6 +31,7 @@ export const saveDoctor = (user, doctor) => {
     const name = `${doctor.profile.first_name} ${doctor.profile.last_name}`
     const bio = doctor.profile.bio
     const image_url = doctor.profile.image_url
+
     return (dispatch) => {
         return fetch("http://localhost:3000/api/v1/doctors", {
             method: "POST",
@@ -86,5 +89,32 @@ export const fetchMyDoctors = user => {
             }
         })
         .catch(error => alert(error))
+    }
+}
+
+export const getPractices = (user, doctor) => {
+    const id = doctor.id
+    return (dispatch) => {
+        return fetch("http://localhost:3000/api/v1/practices", {
+            headers: {
+                "Content-Type": "application/json",
+                "Accepts": "application/json",
+                "Authorization": `${user.token}`
+            }
+        })
+        .then(res => res.json())
+        .then(res => {
+            if (res.error){
+                alert(res.error)
+            } else {
+                const practices = res.data.filter(practice => {
+                    if (id === practice.relationships.doctor.data.id){
+                        return practice.attributes
+                    }
+                })
+                dispatch(storePractices(practices))
+            }
+        })
+        .catch(console.error)
     }
 }

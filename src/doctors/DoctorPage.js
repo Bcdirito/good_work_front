@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux"
-import {getDoctors, saveDoctor, fetchMyDoctors, getPractices} from "../store/actions/doctorActions"
+import {getDoctors, saveDoctor, fetchMyDoctors} from "../store/actions/doctorActions"
 import {Button, Loader, Grid, GridRow, Card, Image} from "semantic-ui-react"
 import NavContainer from "../navigation/NavContainer"
 import DoctorSearchForm from "./DoctorSearchForm"
@@ -55,7 +55,7 @@ class DoctorPage extends Component {
   }
 
   featureHandler = (doctor) => {
-    this.props.fetchPractices(this.props.user, doctor)
+    // this.props.fetchPractices(this.props.user, doctor)
     this.setState({...this.state, featuredDoctor: doctor})
   }
 
@@ -206,6 +206,7 @@ class DoctorPage extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div className="doctors">
         <NavContainer />
@@ -241,7 +242,6 @@ const mapDispatchToProps = dispatch => {
     fetchDoctors: (location) => dispatch(getDoctors(location)),
     myDoctor: (user, doctor) => dispatch(saveDoctor(user, doctor)),
     getMyDoctors: (user) => dispatch(fetchMyDoctors(user)),
-    fetchPractices: (user, doctor) => dispatch(getPractices(user, doctor))
   }
 }
 

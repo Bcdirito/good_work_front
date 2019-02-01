@@ -67,7 +67,7 @@ export const fetchMyDoctors = user => {
                 "Content-Type": "application/json",
                 "Accepts": "application/json",
                 "Authorization": `${user.token}`
-            }
+            },
         })
         .then(res => res.json())
         .then(res => {
@@ -76,45 +76,9 @@ export const fetchMyDoctors = user => {
             } else if (res.error) {
                 alert (res.error)
             } else {
-                let filterArr = res.data.map(doc => {
-                    let users = doc.relationships.users.data
-                    let userIds = users.map(ind => {
-                        return Number(ind.id)
-                    })
-                    if (userIds.includes(user.id)){
-                        return doc
-                    }
-                })
-                dispatch(storePersonalDoctors(filterArr))
+                dispatch(storePersonalDoctors(res))
             }
         })
         .catch(error => alert(error))
-    }
-}
-
-export const getPractices = (user, doctor) => {
-    const id = doctor.id
-    return (dispatch) => {
-        return fetch("http://localhost:3000/api/v1/practices", {
-            headers: {
-                "Content-Type": "application/json",
-                "Accepts": "application/json",
-                "Authorization": `${user.token}`
-            }
-        })
-        .then(res => res.json())
-        .then(res => {
-            if (res.error){
-                alert(res.error)
-            } else {
-                const practices = res.data.filter(practice => {
-                    if (id === practice.relationships.doctor.data.id){
-                        return practice.attributes
-                    }
-                })
-                dispatch(storePractices(practices))
-            }
-        })
-        .catch(console.error)
     }
 }

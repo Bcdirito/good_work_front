@@ -7,7 +7,6 @@ const initialState = {
     tasks: [],
     doctors: [],
     myDoctors: [],
-    practices: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -174,13 +173,7 @@ const reducer = (state = initialState, action) => {
             const arr = action.doctors
             return {
                 ...state,
-                myDoctors: action.doctors
-            }
-        
-        case "STORE_PRACTICES":
-            return {
-                ...state,
-                practices: action.practices
+                myDoctors: arr
             }
             
         default:

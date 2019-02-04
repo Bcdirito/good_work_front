@@ -11,7 +11,8 @@ class DoctorPage extends Component {
     loading: false,
     clicked: false,
     myDoc: false,
-    featuredDoctor: {}
+    featuredDoctor: {},
+    featuredMyDoctor: {}
   }
 
   componentDidMount = () => {
@@ -55,8 +56,11 @@ class DoctorPage extends Component {
   }
 
   featureHandler = (doctor) => {
-    // this.props.fetchPractices(this.props.user, doctor)
     this.setState({...this.state, featuredDoctor: doctor})
+  }
+
+  featureMyHandler = (doctor) => {
+    this.setState({...this.state, featuredMyDoctor: doctor})
   }
 
   clickHandler = () => {
@@ -122,12 +126,12 @@ class DoctorPage extends Component {
           <Card className="doctorCard">
             <Card.Content>
               <Card.Header id="doctorName" textAlign="center">
-              {doctor.attributes.name}
+              {doctor.profile.name}
               </Card.Header>
             </Card.Content>
             <Card.Content>
               <br></br>
-              <Button className="doctorSeeMore" onClick={() => this.featureHandler(doctor)}>See More</Button>
+              <Button className="doctorSeeMore" onClick={() => this.featureMyHandler(doctor)}>See More</Button>
               <Button className="saveDoctor"onClick={() => this.deleteHandler(doctor)}>Remove Doctor</Button>
             </Card.Content>
           </Card>
@@ -170,43 +174,41 @@ class DoctorPage extends Component {
     </div>)
   }
 
-  featureMyDoctor = () => {
+  featureMyDoctor = (doctor) => {
     return (<div>
       <Card className="featuredDoctorCard">
         <Card.Content>
           <Card.Header id="doctorName" textAlign="center">
-          {this.state.featuredDoctor.attributes.image && this.state.featuredDoctor.attributes.image.includes("general") ? null : <Image src={this.state.featuredDoctor.attributes.image} alt="" className="doctorImage" centered/>}
+          {doctor.profile.image ? <Image src={doctor.profile.image} alt="" className="doctorImage" centered/> : null}
           <br></br>
-          {this.state.featuredDoctor.attributes.name}
+          {doctor.profile.name}
           </Card.Header>
           <br></br>
           <Card.Content className="doctorBio" textAlign="left">
-            {this.state.featuredDoctor.attributes.bio}
+            {doctor.profile.bio}
           </Card.Content>
         </Card.Content>
         <Card.Content className="practices">
             <Card.Header>Practices</Card.Header>
             <ul>
-              {this.state.featuredDoctor.practices.map(practice => {
-                return <li>{practice.name}
+              {doctor.practices.map(practice => {
+                return <li key={practice.id}>{practice.name}
                 <br></br>
-                {practice.visit_address.street}, {practice.visit_address.city}, {practice.visit_address.state} {practice.visit_address.zip}
+                {practice.address}
                 <br></br>
-                Phone: {practice.phones[0].number}
+                Phone: {practice.phone}
                 </li>
               })}
             </ul>
           </Card.Content>
       </Card>
       <div className="underFeatureDoctorButtons">
-        <Button className="saveDoctor" onClick={() => this.saveHandler(this.state.featuredDoctor)}>Save Doctor</Button>
         <Button className="featuredDocGoBack" onClick={this.clearFeatured}>Go Back</Button>
       </div>
     </div>)
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className="doctors">
         <NavContainer />
@@ -215,7 +217,7 @@ class DoctorPage extends Component {
         <Grid className="doctorGrid">
           <GridRow columns="3">
             {this.state.featuredDoctor.profile !== undefined ? this.featureDoctor() : null}
-            {this.state.featuredDoctor.attributes !== undefined ? this.featureMyDoctor() : null}  
+            {this.state.featuredMyDoctor.profile !== undefined ? this.featureMyDoctor(this.state.featuredMyDoctor) : null}  
             {this.props.doctors.length > 0 ? this.doctorCards(this.props.doctors): null}
             {this.state.myDoc === true ? this.myDoctorCards(this.props.myDoctors) : null}
           </GridRow>

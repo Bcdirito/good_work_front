@@ -4,15 +4,15 @@ import {getDoctors, saveDoctor, fetchMyDoctors} from "../store/actions/doctorAct
 import {Button, Loader, Grid, GridRow, Card, Image} from "semantic-ui-react"
 import NavContainer from "../navigation/NavContainer"
 import DoctorSearchForm from "./DoctorSearchForm"
+import DoctorGrid from "./DoctorGrid"
+import MyDoctorsGrid from "./MyDoctorsGrid"
 
 class DoctorPage extends Component {
 
   state = {
     loading: false,
     clicked: false,
-    myDoc: false,
-    featuredDoctor: {},
-    featuredMyDoctor: {}
+    myDoc: false
   }
 
   componentDidMount = () => {
@@ -118,27 +118,6 @@ class DoctorPage extends Component {
     }
   }
 
-  myDoctorCards = (doctors) => {
-    let i = 0;
-      return doctors.map(doctor => {
-        ++i
-        return (<Grid.Column key={i}>
-          <Card className="doctorCard">
-            <Card.Content>
-              <Card.Header id="doctorName" textAlign="center">
-              {doctor.profile.name}
-              </Card.Header>
-            </Card.Content>
-            <Card.Content>
-              <br></br>
-              <Button className="doctorSeeMore" onClick={() => this.featureMyHandler(doctor)}>See More</Button>
-              <Button className="saveDoctor"onClick={() => this.deleteHandler(doctor)}>Remove Doctor</Button>
-            </Card.Content>
-          </Card>
-        </Grid.Column>)
-      })
-    }
-
   featureDoctor = () => {
     return (<div>
       <Card className="featuredDoctorCard">
@@ -174,54 +153,13 @@ class DoctorPage extends Component {
     </div>)
   }
 
-  featureMyDoctor = (doctor) => {
-    return (<div>
-      <Card className="featuredDoctorCard">
-        <Card.Content>
-          <Card.Header id="doctorName" textAlign="center">
-          {doctor.profile.image ? <Image src={doctor.profile.image} alt="" className="doctorImage" centered/> : null}
-          <br></br>
-          {doctor.profile.name}
-          </Card.Header>
-          <br></br>
-          <Card.Content className="doctorBio" textAlign="left">
-            {doctor.profile.bio}
-          </Card.Content>
-        </Card.Content>
-        <Card.Content className="practices">
-            <Card.Header>Practices</Card.Header>
-            <ul>
-              {doctor.practices.map(practice => {
-                return <li key={practice.id}>{practice.name}
-                <br></br>
-                {practice.address}
-                <br></br>
-                Phone: {practice.phone}
-                </li>
-              })}
-            </ul>
-          </Card.Content>
-      </Card>
-      <div className="underFeatureDoctorButtons">
-        <Button className="featuredDocGoBack" onClick={this.clearFeatured}>Go Back</Button>
-      </div>
-    </div>)
-  }
-
   render() {
     return (
       <div className="doctors">
         <NavContainer />
-        <h1>Doctors</h1>
-        {typeof this.props.doctors[0] === "object" && this.state.clicked === false || typeof this.props.myDoctors[0] === "object" && this.state.myDoc === true ? 
-        <Grid className="doctorGrid">
-          <GridRow columns="3">
-            {this.state.featuredDoctor.profile !== undefined ? this.featureDoctor() : null}
-            {this.state.featuredMyDoctor.profile !== undefined ? this.featureMyDoctor(this.state.featuredMyDoctor) : null}  
-            {this.props.doctors.length > 0 ? this.doctorCards(this.props.doctors): null}
-            {this.state.myDoc === true ? this.myDoctorCards(this.props.myDoctors) : null}
-          </GridRow>
-        </Grid> : null}
+        <h1>Doctors</h1> 
+          {this.props.doctors.length > 0 ? this.doctorCards(this.props.doctors): null}
+          {this.state.myDoc === true ? <MyDoctorsGrid doctors={this.props.myDoctors} />: null}
         {this.state.loading === false && this.state.clicked === false ? <Button className={typeof this.props.doctors[0] === "object" ? "findMoreDoctors" : "findDoctors"} onClick={this.clickHandler}>Find Doctors</Button> : null}
         {this.state.loading === false && this.state.clicked === false ? <Button className={typeof this.props.doctors[0] === "object" ? "findMoreDoctors" : "findDoctors"} onClick={this.myDocHandler}>My Doctors</Button> : null}
         {this.state.loading === false && this.state.clicked === true ? <DoctorSearchForm searchHandler={this.searchHandler} resetState={this.resetState}/> : null}

@@ -38,37 +38,3 @@ export default class FeaturedMyDoctor extends Component {
     )
   }
 }
-
-// featureMyDoctor = (doctor) => {
-//     return (<div>
-    //   <Card className="featuredDoctorCard">
-    //     <Card.Content>
-    //       <Card.Header id="doctorName" textAlign="center">
-    //       {doctor.profile.image ? <Image src={doctor.profile.image} alt="" className="doctorImage" centered/> : null}
-    //       <br></br>
-    //       {doctor.profile.name}
-    //       </Card.Header>
-    //       <br></br>
-    //       <Card.Content className="doctorBio" textAlign="left">
-    //         {doctor.profile.bio}
-    //       </Card.Content>
-    //     </Card.Content>
-    //     <Card.Content className="practices">
-    //         <Card.Header>Practices</Card.Header>
-    //         <ul>
-    //           {doctor.practices.map(practice => {
-    //             return <li key={practice.id}>{practice.name}
-    //             <br></br>
-    //             {practice.address}
-    //             <br></br>
-    //             Phone: {practice.phone}
-    //             </li>
-    //           })}
-    //         </ul>
-    //       </Card.Content>
-    //   </Card>
-    //   <div className="underFeatureDoctorButtons">
-    //     <Button className="featuredDocGoBack" onClick={this.clearFeatured}>Go Back</Button>
-    //   </div>
-//     </div>)
-//   }

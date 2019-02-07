@@ -2,11 +2,15 @@ import React, { Component } from 'react'
 import {Button, Loader, Grid, GridRow, Card, Image} from "semantic-ui-react"
 import FeaturedDoctor from "./FeaturedDoctor"
 
-export default class DoctorsGrid extends Component {
-    state = {
-        featured = {}
-    }
-    
+export default class DoctorGrid extends Component {
+  state = {
+      featured: {}
+  }
+  
+  clearFeatured = () => {
+    this.setState({...this.state, featured: {}})
+  }
+
   render() {
     let i = 0
     const doctors = this.props.doctors.map(doctor => {
@@ -26,6 +30,7 @@ export default class DoctorsGrid extends Component {
           </Card>
         </Grid.Column>)
     })
+    
     return (
       <div>
         <Grid className="doctorGrid">

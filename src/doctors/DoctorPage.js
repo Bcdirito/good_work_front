@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux"
 import {getDoctors, saveDoctor, fetchMyDoctors} from "../store/actions/doctorActions"
-import {Button, Loader, Grid, GridRow, Card, Image} from "semantic-ui-react"
+import {Button, Loader} from "semantic-ui-react"
 import NavContainer from "../navigation/NavContainer"
 import DoctorSearchForm from "./DoctorSearchForm"
 import DoctorGrid from "./DoctorGrid"
@@ -28,7 +28,7 @@ class DoctorPage extends Component {
         alert(this.props.doctors[0])
         this.setState({...this.state, loading: false})
       } else {
-        this.setState({loading: false, clicked: false, doctors: true, myDoc: false})
+        this.setState({...this.state, loading: false, doctors: true})
       }
     }
     if (this.props.user.id !== prevProps.user.id){
@@ -36,13 +36,9 @@ class DoctorPage extends Component {
     }
   }
 
-  getDoctors = () => {
-    this.props.getMyDoctors(this.props.user)
-  }
-
   searchHandler = (e, data) => {
     e.preventDefault()
-    this.setState({...this.state, clicked: false, loading: true})
+    this.loaderHandler()
     const state = data.state.toLocaleLowerCase()
     const city = data.city.toLocaleLowerCase().split(" ").join("-")
     const location = state.concat('-', city)
@@ -52,7 +48,6 @@ class DoctorPage extends Component {
   saveHandler = (doctor) => {
     if (this.props.user.id){
       this.props.myDoctor(this.props.user, doctor)
-      this.setState({...this.state, loading: true}) 
     } else {
       this.goToLogin()
     }
@@ -68,6 +63,15 @@ class DoctorPage extends Component {
 
   clearFeatured = () => {
     this.setState({...this.state, featuredDoctor: {}})
+  }
+
+  loaderHandler = () => {
+    this.setState({
+      loading: true,
+      clicked: false,
+      doctors: false,
+      myDoc: false
+    })
   }
 
   myDocHandler = () => {
@@ -89,8 +93,17 @@ class DoctorPage extends Component {
     this.setState({
       loading: false,
       clicked: false,
-      myDoc: false,
-      featuredDoctor: {}
+      doctors: false,
+      myDoc: false
+    })
+  }
+
+  loaderHandler = () => {
+    this.setState({
+      loading: true,
+      clicked: false,
+      doctors: false,
+      myDoc: false
     })
   }
 
@@ -99,10 +112,10 @@ class DoctorPage extends Component {
       <div className="doctors">
         <NavContainer />
         <h1>Doctors</h1> 
-          {this.state.doctors === true ? <DoctorGrid doctors={this.props.doctors} save={this.saveHandler}/>: null}
-          {this.state.myDoc === true ? <MyDoctorsGrid doctors={this.props.myDoctors} />: null}
-        {this.state.loading === false && this.state.clicked === false ? <Button className={typeof this.props.doctors[0] === "object" ? "findMoreDoctors" : "findDoctors"} onClick={this.clickHandler}>Find Doctors</Button> : null}
-        {this.state.loading === false && this.state.clicked === false ? <Button className={typeof this.props.doctors[0] === "object" ? "findMoreDoctors" : "findDoctors"} onClick={this.myDocHandler}>My Doctors</Button> : null}
+        {this.state.doctors === true ? <DoctorGrid doctors={this.props.doctors} save={this.saveHandler}/>: null}
+        {this.state.myDoc === true ? <MyDoctorsGrid doctors={this.props.myDoctors} />: null}
+        {this.state.loading === false && this.state.clicked === false ? <Button className={this.state.doctors === true || this.state.myDoc === true ? "findMoreDoctors" : "findDoctors"} onClick={this.clickHandler}>Find Doctors</Button> : null}
+        {this.state.loading === false && this.state.clicked === false ? <Button className={this.state.doctors === true || this.state.myDoc === true ? "findMoreDoctors" : "findDoctors"} onClick={this.myDocHandler}>My Doctors</Button> : null}
         {this.state.loading === false && this.state.clicked === true ? <DoctorSearchForm searchHandler={this.searchHandler} resetState={this.resetState}/> : null}
         {this.state.loading === true ? <Loader active inline='centered' size="large" /> : null}
       </div>

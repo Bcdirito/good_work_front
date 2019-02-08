@@ -53,6 +53,7 @@ export const saveDoctor = (user, doctor) => {
             if (res.error){
                 alert(res.error)
             } else {
+                alert("Doctor Saved!")
                 dispatch(addPersonalDoctor(res.data))
             }
         })

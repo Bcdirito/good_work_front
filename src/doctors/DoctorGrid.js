@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Button, Loader, Grid, GridRow, Card, Image} from "semantic-ui-react"
+import {Button, Grid, GridRow, Card} from "semantic-ui-react"
 import FeaturedDoctor from "./FeaturedDoctor"
 
 export default class DoctorGrid extends Component {

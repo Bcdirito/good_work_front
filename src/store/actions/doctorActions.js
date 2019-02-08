@@ -31,7 +31,7 @@ export const saveDoctor = (user, doctor) => {
     const name = `${doctor.profile.first_name} ${doctor.profile.last_name}`
     const bio = doctor.profile.bio
     const image_url = doctor.profile.image_url
-
+    alert("Saving Doctor...")
     return (dispatch) => {
         return fetch("http://localhost:3000/api/v1/doctors", {
             method: "POST",
@@ -54,7 +54,7 @@ export const saveDoctor = (user, doctor) => {
                 alert(res.error)
             } else {
                 alert("Doctor Saved!")
-                dispatch(addPersonalDoctor(res.data))
+                dispatch(addPersonalDoctor(res))
             }
         })
         .catch(console.error)

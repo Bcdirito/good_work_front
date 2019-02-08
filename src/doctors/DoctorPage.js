@@ -61,10 +61,6 @@ class DoctorPage extends Component {
     this.setState({clicked: true, loading: false, myDoc: false, doctors: false})
   }
 
-  clearFeatured = () => {
-    this.setState({...this.state, featuredDoctor: {}})
-  }
-
   loaderHandler = () => {
     this.setState({
       loading: true,

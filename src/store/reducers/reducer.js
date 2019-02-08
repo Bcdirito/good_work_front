@@ -93,7 +93,6 @@ const reducer = (state = initialState, action) => {
             }
 
         case "DELETE_TASK":
-            console.log("Triggered Delete Task", action.task)
             return {
                 ...state,
                 tasks: state.tasks.filter(task => {
@@ -169,6 +168,12 @@ const reducer = (state = initialState, action) => {
                 doctors: fetchedDoctors
             }
         
+        case "ADD_PERSONAL":
+            return {
+                ...state,
+                myDoctors: [...state.myDoctors, action.doctor]
+            }
+
         case "STORE_PERSONAL":
             const arr = action.doctors
             return {

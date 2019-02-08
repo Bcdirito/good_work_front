@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux"
-import {getDoctors, saveDoctor, fetchMyDoctors} from "../store/actions/doctorActions"
+import {getDoctors, saveDoctor, fetchMyDoctors, removeDoctor} from "../store/actions/doctorActions"
 import {Button, Loader} from "semantic-ui-react"
 import NavContainer from "../navigation/NavContainer"
 import DoctorSearchForm from "./DoctorSearchForm"
@@ -26,9 +26,9 @@ class DoctorPage extends Component {
     if (prevProps.doctors.length !== this.props.doctors.length){
       if (typeof this.props.doctors[0] === "string"){
         alert(this.props.doctors[0])
-        this.setState({...this.state, loading: false})
+          this.setState({...this.state, loading: false})
       } else {
-        this.setState({...this.state, loading: false, doctors: true})
+          this.setState({...this.state, loading: false, doctors: true})
       }
     }
     if (this.props.user.id !== prevProps.user.id){
@@ -53,6 +53,14 @@ class DoctorPage extends Component {
     }
   }
 
+  deleteHandler = (doctor) => {
+    let result = window.confirm("Are you sure you want to remove this doctor?")
+    if (result === true){
+      this.props.deleteDoc(this.props.user, doctor)
+      alert("Doctor Removed!")
+    }
+  }
+
   featureHandler = (doctor) => {
     this.setState({...this.state, featuredDoctor: doctor})
   }
@@ -64,6 +72,15 @@ class DoctorPage extends Component {
   loaderHandler = () => {
     this.setState({
       loading: true,
+      clicked: false,
+      doctors: false,
+      myDoc: false
+    })
+  }
+
+  resetState = () => {
+    this.setState({
+      loading: false,
       clicked: false,
       doctors: false,
       myDoc: false
@@ -85,31 +102,13 @@ class DoctorPage extends Component {
     } 
   }
 
-  resetState = () => {
-    this.setState({
-      loading: false,
-      clicked: false,
-      doctors: false,
-      myDoc: false
-    })
-  }
-
-  loaderHandler = () => {
-    this.setState({
-      loading: true,
-      clicked: false,
-      doctors: false,
-      myDoc: false
-    })
-  }
-
   render() {
     return (
       <div className="doctors">
         <NavContainer />
         <h1>Doctors</h1> 
         {this.state.doctors === true ? <DoctorGrid doctors={this.props.doctors} save={this.saveHandler}/>: null}
-        {this.state.myDoc === true ? <MyDoctorsGrid doctors={this.props.myDoctors} />: null}
+        {this.state.myDoc === true ? <MyDoctorsGrid doctors={this.props.myDoctors} delete={this.deleteHandler}/>: null}
         {this.state.loading === false && this.state.clicked === false ? <Button className={this.state.doctors === true || this.state.myDoc === true ? "findMoreDoctors" : "findDoctors"} onClick={this.clickHandler}>Find Doctors</Button> : null}
         {this.state.loading === false && this.state.clicked === false ? <Button className={this.state.doctors === true || this.state.myDoc === true ? "findMoreDoctors" : "findDoctors"} onClick={this.myDocHandler}>My Doctors</Button> : null}
         {this.state.loading === false && this.state.clicked === true ? <DoctorSearchForm searchHandler={this.searchHandler} resetState={this.resetState}/> : null}
@@ -132,6 +131,7 @@ const mapDispatchToProps = dispatch => {
     fetchDoctors: (location) => dispatch(getDoctors(location)),
     myDoctor: (user, doctor) => dispatch(saveDoctor(user, doctor)),
     getMyDoctors: (user) => dispatch(fetchMyDoctors(user)),
+    deleteDoc: (user, doctor) => dispatch(removeDoctor(user, doctor))
   }
 }
 

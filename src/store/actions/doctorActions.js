@@ -4,7 +4,7 @@ export const addPersonalDoctor = doctor => ({type: "ADD_PERSONAL", doctor})
 
 export const storePersonalDoctors = doctors => ({ type: "STORE_PERSONAL", doctors})
 
-export const deleteDoctor = doctor => ({type: "DELETE_DOCTOR", doctor})
+export const deleteDoctor = docId => ({type: "DELETE_DOCTOR", docId})
 
 export const storePractices = practices =>({type: "STORE_PRACTICES", practices})
 
@@ -68,7 +68,7 @@ export const fetchMyDoctors = user => {
                 "Content-Type": "application/json",
                 "Accepts": "application/json",
                 "Authorization": `${user.token}`
-            },
+            }
         })
         .then(res => res.json())
         .then(res => {
@@ -81,5 +81,30 @@ export const fetchMyDoctors = user => {
             }
         })
         .catch(error => alert(error))
+    }
+}
+
+export const removeDoctor = (user, doctor) => {
+    const id = doctor.profile.id
+    return (dispatch) => {
+        return fetch(`http://localhost:3000/api/v1/doctors/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Accepts": "application/json",
+                "Authorization": `${user.token}`
+            },
+            body: JSON.stringify({
+                user: user
+            })
+        })
+        .then(res => res.json())
+        .then(res => {
+            if (res.error){
+                alert(res.error)
+            } else {
+                dispatch(deleteDoctor(id))
+            }
+        })
     }
 }

@@ -180,6 +180,14 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 myDoctors: arr
             }
+
+        case "DELETE_DOCTOR":
+            return {
+                ...state,
+                myDoctors: state.myDoctors.filter(doc => {
+                    return Number(doc.profile.id) !== action.docId
+                })
+            }
             
         default:
             return state

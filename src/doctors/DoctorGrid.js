@@ -8,7 +8,11 @@ export default class DoctorGrid extends Component {
   }
   
   clearFeatured = () => {
-    this.setState({...this.state, featured: {}})
+    this.setState({featured: {}})
+  }
+
+  featureHandler = (doctor) => {
+    this.setState({featured: doctor}, () => console.log(this.state.featured))
   }
 
   render() {
@@ -25,7 +29,7 @@ export default class DoctorGrid extends Component {
             <Card.Content>
               <br></br>
               <Button className="doctorSeeMore" onClick={() => this.featureHandler(doctor)}>See More</Button>
-              <Button className="saveDoctor"onClick={() => this.saveHandler(doctor)}>Save Doctor</Button>
+              <Button className="saveDoctor"onClick={() => this.props.save(doctor)}>Save Doctor</Button>
             </Card.Content>
           </Card>
         </Grid.Column>)
@@ -35,7 +39,7 @@ export default class DoctorGrid extends Component {
       <div>
         <Grid className="doctorGrid">
           <GridRow columns="3">
-            {doctors}
+            {this.state.featured.profile ? <FeaturedDoctor doctor={this.state.featured} clear={this.clearFeatured} save={this.props.save}/>: doctors}
           </GridRow>
         </Grid> 
       </div>

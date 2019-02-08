@@ -32,7 +32,7 @@ export default class FeaturedMyDoctor extends Component {
             </Card.Content>
         </Card>
         <div className="underFeatureDoctorButtons">
-            <Button className="featuredDocGoBack" onClick={this.props.clearFeatured}>Go Back</Button>
+            <Button className="featuredDocGoBack" onClick={this.props.clear}>Go Back</Button>
         </div>
       </div>
     )

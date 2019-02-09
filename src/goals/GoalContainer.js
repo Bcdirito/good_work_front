@@ -16,7 +16,8 @@ class GoalContainer extends Component {
 
     componentDidMount(){
         if (this.props.goals.length === 0 && this.props.user.id){
-            this.props.getGoals(this.props.user)
+            console.log(this.props)
+            this.props.getGoals(this.props.user).then(this.setState({...this.state, loading: false}))
         }
     }
 
@@ -74,9 +75,8 @@ class GoalContainer extends Component {
   render() {
     let goals;
     let goalComps
-
     goals = this.props.goals
-
+    
     if (goals !== undefined || goals.length > 0) {
         goalComps = goals.map(goal => {
             return (<div className="goalTiles">

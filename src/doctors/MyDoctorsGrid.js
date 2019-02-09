@@ -29,7 +29,7 @@ export default class MyDoctorsGrid extends Component {
             <Card.Content>
               <br></br>
               <Button className="doctorSeeMore" onClick={() => this.featureHandler(doctor)}>See More</Button>
-              <Button className="saveDoctor"onClick={() => this.props.delete(doctor)}>Remove Doctor</Button>
+              <Button className="removeDoctor"onClick={() => this.props.delete(doctor)}>Remove Doctor</Button>
             </Card.Content>
           </Card>
         </Grid.Column>)

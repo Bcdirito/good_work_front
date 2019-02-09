@@ -570,6 +570,7 @@ Button {
 .doctorCard {
   width: 300px !important;
   margin-bottom: 50px !important;
+  background-color: rgb(236, 236, 236) !important;
 }
 
 .doctorImage {
@@ -638,7 +639,6 @@ Button {
 }
 
 .underFeatureDoctorButtons {
-  display: block;
   align-items: center;
   align-content: center;
   justify-items: center;
@@ -648,12 +648,19 @@ Button {
 .underFeatureDoctorButtons button{
   height: 50px !important;
   margin-top: 10px !important;
-  margin-left: 10px !important;
 }
 
 .saveDoctor {
   background-color: rgb(58, 179, 86) !important;
-  color: #ffffff !important
+  color: #ffffff !important;
+  float: left;
+  margin-left: 22.5% !important;
+}
+
+.featuredDocGoBack {
+  float: right;
+  margin-right: 23.5% !important;
+
 }
 
 .doctorSeeMore {
@@ -661,7 +668,7 @@ Button {
   color: #ffffff !important;
 }
 
-.featuredDocGoBack {
+.featuredDocGoBack, .removeDoctor {
   background-color: rgb(255, 247, 172) !important;
   color: #010203 !important; 
 }

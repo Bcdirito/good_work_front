@@ -46,10 +46,29 @@ class Goal extends Component {
     }
 
     deleteHandler = () => {
+        if (this.props.lists.length > 0){
+            this.unfinishedDelete()
+        } else {
+            this.finishedDelete()
+        }
+    }
+
+    unfinishedDelete = () => {
+        const result = window.confirm("Looks Like You Still Have Some Unfinished Lists. Are You Sure You're Finished With This Goal?")
+        if (result === true){
+            alert("You Got It! I Believe You Know Best!")
+            this.props.deleteGoal(this.props.featuredGoal, this.props.user, this.props.lists)
+            this.props.history.replace("/goals")
+        } else {
+            alert("Keep At It! Nothing Can Stop You!")
+        }
+    }
+
+    finishedDelete = () => {
         const result = window.confirm("What is That? Did You Just Complete A Goal?")
         if (result === true){
             alert("This Is Why You Fill Me With Such Wonder!")
-            this.props.deleteGoal(this.props.featuredGoal, this.props.user)
+            this.props.deleteGoal(this.props.featuredGoal, this.props.user, this.props.lists)
             this.props.history.replace("/goals")
         } else {
             alert("Keep At It! Nothing Can Stop You!")
@@ -136,7 +155,6 @@ class Goal extends Component {
     render() {
         const goal = this.props.featuredGoal
         const lists = this.props.lists
-
         const listComps = lists.map(list => {
             if(Number(list.relationships.goal.data.id) === Number(this.props.featuredGoal.id)) {
                 return (<div className="listTiles">
@@ -152,7 +170,6 @@ class Goal extends Component {
                         </div>)
                 }        
         })
-
         return (
             <div className="goalPage">
                 <NavContainer />
@@ -186,7 +203,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        deleteGoal: (goal, user) => dispatch(destroyGoal(goal, user)),
+        deleteGoal: (goal, user, lists) => dispatch(destroyGoal(goal, user, lists)),
         addList: (list, goal, user) => dispatch(createList(list, goal, user)),
         getLists: (id, user) => dispatch(getLists(id, user)),
         clearLists: () => dispatch({type: "CLEAR_LISTS"}),

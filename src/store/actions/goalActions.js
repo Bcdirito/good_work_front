@@ -50,8 +50,9 @@ export const createGoal = (goal, user) => {
     }
 }
 
-export const destroyGoal = (goal, user) => {
+export const destroyGoal = (goal, user, lists) => {
     const id = Number(goal.id)
+    const complete = lists.length === 0
     return (dispatch) => {
         return fetch(`http://localhost:3000/api/v1/goals/${id}`, {
             method: "DELETE",
@@ -60,6 +61,9 @@ export const destroyGoal = (goal, user) => {
                 "Accept": "application/json",
                 "Authorization": `${user.token}`
             },
+            body: JSON.stringify({
+                complete: complete
+            })
         })
         .then(res => res.json())
         .then(res => {

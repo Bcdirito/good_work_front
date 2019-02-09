@@ -27,12 +27,14 @@ class GoalContainer extends Component {
         }
         if(prevProps.goals.length !== this.props.goals.length && this.props.length !== 0) {
             this.setState({...this.state, loading: false})
+        } else if (this.props.userId){
+            this.setState({...this.state, loading: false})
         }
     }
 
     buttonHandler = (e) => {
         if (e.target.name === "add goal"){
-            this.setState({ clicked: !this.state.clicked})
+            this.setState({...this.state, clicked: !this.state.clicked})
         } else if (e.target.name === "go back"){
             this.setState({ clicked: false, formData: { title: "" } })
         }
@@ -50,7 +52,7 @@ class GoalContainer extends Component {
 
         this.props.createGoal(this.state.formData, this.props.user)
 
-        this.setState({ clicked: false, formData: { title: "" } })
+        this.setState({ clicked: false, formData: { title: "" }, loading: true})
     }
 
     renderForm = () => {

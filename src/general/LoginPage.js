@@ -46,9 +46,9 @@ class LoginPage extends Component {
 
     formHandler = (data) => {
         if (this.state.form === "login"){
-            this.props.login(data)
+            this.props.login(data, this.props)
         } else if (this.state.form === "sign up"){
-            this.props.signUp(data)
+            this.props.signUp(data, this.props)
         }
         this.props.history.replace("/")
     }
@@ -61,6 +61,7 @@ class LoginPage extends Component {
     }
 
     render() {
+        console.log(this.props)
         return (
         <div className="welcome">
             <NavContainer />
@@ -79,8 +80,8 @@ class LoginPage extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        login: user => dispatch(createSession(user)),
-        signUp: user => dispatch(signUpUser(user)),
+        login: (user, props) => dispatch(createSession(user, props)),
+        signUp: (user, props) => dispatch(signUpUser(user, props)),
         logout: () => dispatch(logoutUser())
     }
 }

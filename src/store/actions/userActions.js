@@ -2,7 +2,7 @@ export const logoutUser = () => ({type: "LOGOUT_USER"})
 
 export const loginUser = user => ({type: "LOGIN_USER", user})
 
-export const signUpUser = (user) => {
+export const signUpUser = (user, props) => {
     return (dispatch) => {
         return fetch("http://localhost:3000/api/v1/users", {
             method: "POST",
@@ -22,10 +22,12 @@ export const signUpUser = (user) => {
             if (res.error){
                 if (res.error.length === 1){
                     alert(res.error)
+                    props.history.replace("/login")
                 } else {
                     res.error.forEach(error => {
                         alert(error)
                     })
+                    props.history.replace("/login")
                 }
             } else {
                 dispatch(createSession(res))
@@ -53,7 +55,7 @@ export const createSession = user => {
                 alert(res.message)
                 dispatch(logoutUser(user))
             } else if (res.error) {
-                alert(res.error)
+                alert("Invalid Username or Password")
                 dispatch(logoutUser(user))     
             } else {
                 dispatch(loginUser(res))

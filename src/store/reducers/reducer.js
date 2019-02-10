@@ -52,7 +52,6 @@ const reducer = (state = initialState, action) => {
             }
 
         case "CLEAR_LISTS":
-            console.log("Made It To CLEAR_LISTS")
             return {
                 ...state,
                 lists: []

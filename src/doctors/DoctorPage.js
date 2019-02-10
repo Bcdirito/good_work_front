@@ -17,13 +17,13 @@ class DoctorPage extends Component {
   }
 
   componentDidMount = () => {
-    if (this.props.myDoctors.length === 0 && this.props.user.id){
+    if (this.props.myDoctors === undefined && this.props.user.id){
       this.props.getMyDoctors(this.props.user)
     }
   }
 
   componentDidUpdate = (prevProps) => {
-    if (prevProps.doctors.length !== this.props.doctors.length){
+    if (prevProps.doctors !== undefined && prevProps.doctors.length !== this.props.doctors.length){
       if (typeof this.props.doctors[0] === "string"){
         alert(this.props.doctors[0])
           this.setState({...this.state, loading: false})
@@ -88,10 +88,18 @@ class DoctorPage extends Component {
   }
 
   myDocHandler = () => {
-    if (this.props.myDoctors.length === 0){
-      this.props.user.id ? alert("You have no doctors.") : this.goToLogin()
-    } else {
+    if (this.props.myDoctors.data.length){
       this.setState({...this.state, myDoc: true, doctors: false})
+    } else {
+      this.props.user.id ? this.searchForDoctors() : this.goToLogin()
+
+    }
+  }
+
+  searchForDoctors = () => {
+    let result = window.confirm("You Have No Doctors. Would You Like to Look Some Up?")
+    if (result === true){
+      this.clickHandler()
     }
   }
 

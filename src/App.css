@@ -650,11 +650,14 @@ Button {
   margin-top: 10px !important;
 }
 
+.underFeatureDoctorButtons .saveDoctor {
+  float: left;
+  margin-left: 22.5% !important;
+}
+
 .saveDoctor {
   background-color: rgb(58, 179, 86) !important;
   color: #ffffff !important;
-  float: left;
-  margin-left: 22.5% !important;
 }
 
 .featuredDocGoBack {

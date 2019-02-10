@@ -88,11 +88,10 @@ class DoctorPage extends Component {
   }
 
   myDocHandler = () => {
-    if (this.props.myDoctors.data.length){
-      this.setState({...this.state, myDoc: true, doctors: false})
-    } else {
+    if (this.props.myDoctors.data){
       this.props.user.id ? this.searchForDoctors() : this.goToLogin()
-
+    } else {
+      this.setState({...this.state, myDoc: true, doctors: false})
     }
   }
 

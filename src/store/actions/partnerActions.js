@@ -21,7 +21,6 @@ export const getPartner = user => {
             if (res.error){
                 alert(res.error)
             } else {
-                debugger
                 const partner = res.data.filter(partner => {
                   return Number(partner.relationships.user.data.id
                     ) === userId

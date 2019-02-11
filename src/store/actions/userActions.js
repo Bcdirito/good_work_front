@@ -2,9 +2,12 @@ export const logoutUser = () => ({type: "LOGOUT_USER"})
 
 export const loginUser = user => ({type: "LOGIN_USER", user})
 
+const BASE_URL = "http://localhost:3000/api/v1/"
+
 export const signUpUser = (user, props) => {
+    let FETCH_URL = `${BASE_URL}/users`
     return (dispatch) => {
-        return fetch("http://localhost:3000/api/v1/users", {
+        return fetch(FETCH_URL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -38,8 +41,9 @@ export const signUpUser = (user, props) => {
 }
 
 export const createSession = user => {
+    let FETCH_URL = `${BASE_URL}/login`
     return (dispatch) => {
-        return fetch("http://localhost:3000/api/v1/login", {
+        return fetch(FETCH_URL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

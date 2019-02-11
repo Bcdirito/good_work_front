@@ -30,8 +30,10 @@ class Partner extends Component {
     }
 
     componentDidUpdate(prevProps){
-        if(this.props !== prevProps && this.props.partner.id === undefined){
-            this.props.getPartner(this.props.user)
+        if(this.props !== prevProps && this.props.partner){
+            if (this.props.partner.id === undefined){
+                this.props.getPartner(this.props.user)
+            }
         }
     }
 

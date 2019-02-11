@@ -25,11 +25,11 @@ class App extends Component {
         }
       })
       .then(res => res.json())
-      .then(res => {
-        if (res.message){
-          alert(res.message)
+      .then(data => {
+        if (data.message){
+          alert(data.message)
         }
-        this.props.login(res.user)
+        this.props.login(data.user)
       })
       .catch(console.error)
     } else {

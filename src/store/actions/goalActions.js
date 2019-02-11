@@ -6,9 +6,12 @@ export const featureGoal = goal => ({type: "FEATURE_GOAL", goal})
 
 export const loadGoal = goal => ({type: "LOAD_GOAL", goal})
 
+const GOAL_URL = "http://localhost:3000/api/v1/goals"
+
 export const selectGoal = (id, user) => {
+    let FETCH_URL = `${GOAL_URL}/${id}`
     return (dispatch) => {
-        return fetch(`http://localhost:3000/api/v1/goals/${id}`, {
+        return fetch(FETCH_URL, {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
@@ -24,7 +27,7 @@ export const selectGoal = (id, user) => {
 
 export const createGoal = (goal, user) => {
     return (dispatch) => {
-        return fetch("http://localhost:3000/api/v1/goals", {
+        return fetch(GOAL_URL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -53,8 +56,9 @@ export const createGoal = (goal, user) => {
 export const destroyGoal = (goal, user, lists) => {
     const id = Number(goal.id)
     const complete = lists.length === 0
+    let FETCH_URL = `${GOAL_URL}/${id}`
     return (dispatch) => {
-        return fetch(`http://localhost:3000/api/v1/goals/${id}`, {
+        return fetch(FETCH_URL, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -78,7 +82,7 @@ export const destroyGoal = (goal, user, lists) => {
 
 export const getGoals = user => {
     return (dispatch) => {
-        return fetch("http://localhost:3000/api/v1/goals", {
+        return fetch(GOAL_URL, {
             headers: {
                 "Content-Type": "application/json",
                 "Accepts": "application/json",

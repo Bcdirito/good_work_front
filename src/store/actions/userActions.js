@@ -5,7 +5,7 @@ export const loginUser = user => ({type: "LOGIN_USER", user})
 const BASE_URL = "https://git.heroku.com/good-work-backend.git/api/v1"
 
 export const signUpUser = (user, props) => {
-    let FETCH_URL = `${BASE_URL}/users`
+    let FETCH_URL = `${BASE_URL}users`
     return (dispatch) => {
         return fetch(FETCH_URL, {
             method: "POST",
@@ -41,7 +41,7 @@ export const signUpUser = (user, props) => {
 }
 
 export const createSession = user => {
-    let FETCH_URL = `${BASE_URL}/login`
+    let FETCH_URL = `${BASE_URL}login`
     return (dispatch) => {
         return fetch(FETCH_URL, {
             method: "POST",

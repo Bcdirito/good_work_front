@@ -4,7 +4,7 @@ export const editPartner = partner => ({type: "EDIT_PARTNER", partner})
 
 export const deletePartner = partner => ({type: "DELETE_PARTNER", partner})
 
-const PARTNER_URL = "http://localhost:3000/api/v1/partners"
+const PARTNER_URL = "https://git.heroku.com/good-work-backend.git/api/v1/partners"
 
 export const getPartner = user => {
     const userId = user.id

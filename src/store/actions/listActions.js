@@ -4,9 +4,10 @@ export const deleteList = list => ({type: "DELETE_LIST", list})
 
 export const loadLists = lists => ({type: "LOAD_LISTS", lists})
 
+const LIST_URL = "https://git.heroku.com/good-work-backend.git/api/v1/lists"
 export const getLists = (goalId, user) => {
     return (dispatch) => {
-        return fetch("http://localhost:3000/api/v1/lists", {
+        return fetch(LIST_URL, {
             headers: {
                 "Content-Type": "application/json",
                 "Accepts": "application/json",
@@ -31,7 +32,7 @@ export const getLists = (goalId, user) => {
 
 export const createList = (list, goal, user) => {
     return (dispatch) => {
-        return fetch("http://localhost:3000/api/v1/lists", {
+        return fetch(LIST_URL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -59,7 +60,7 @@ export const createList = (list, goal, user) => {
 export const destroyList = (list, user) => {
     const id = list.id
     return (dispatch) => {
-        return fetch(`http://localhost:3000/api/v1/lists/${id}`, {
+        return fetch(`${LIST_URL}/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

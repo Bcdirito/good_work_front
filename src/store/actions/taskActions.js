@@ -6,10 +6,12 @@ export const loadTask = task => ({type: "LOAD_TASK", task})
 
 export const editTask = task => ({type: "EDIT_TASK", task})
 
+const TASK_URL = "https://git.heroku.com/good-work-backend.git/api/v1/tasks"
+
 export const getTasks = (list, user) => {
     const id = list.id
     return (dispatch) => {
-        return fetch ("http://localhost:3000/api/v1/tasks", {
+        return fetch (TASK_URL, {
             headers: {
                 "Content-Type": "application/json",
                 "Accepts": "application/json",
@@ -33,7 +35,7 @@ export const getTasks = (list, user) => {
 
 export const createTask = (task, list, user) => {
     return (dispatch) => {
-        return fetch("http://localhost:3000/api/v1/tasks", {
+        return fetch(TASK_URL, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -53,7 +55,7 @@ export const createTask = (task, list, user) => {
 
 export const destroyTask = (id, user) => {
     return (dispatch) => {
-        return fetch(`http://localhost:3000/api/v1/tasks/${id}`, {
+        return fetch(`${TASK_URL}/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -74,7 +76,7 @@ export const destroyTask = (id, user) => {
 
 export const updateTask = (data, id, listId, user) => {
     return (dispatch) => {
-        return fetch(`http://localhost:3000/api/v1/tasks/${id}`, {
+        return fetch(`${TASK_URL}/${id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

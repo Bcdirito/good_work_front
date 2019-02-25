@@ -14,6 +14,8 @@ const skipLimit = "&skip=0&limit=100"
 
 const API_KEY = "&user_key=" + process.env.REACT_APP_API_KEY
 
+const FETCH_URL = "https://git.heroku.com/good-work-backend.git/api/v1/doctors"
+
 export const getDoctors = location => {
     const FETCH_URL = DOCTOR_URL + "&location=" + location + skipLimit + API_KEY
     return (dispatch) => {
@@ -33,7 +35,7 @@ export const saveDoctor = (user, doctor) => {
     const image_url = doctor.profile.image_url
     alert("Saving Doctor...")
     return (dispatch) => {
-        return fetch("http://localhost:3000/api/v1/doctors", {
+        return fetch(FETCH_URL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -63,7 +65,7 @@ export const saveDoctor = (user, doctor) => {
 
 export const fetchMyDoctors = user => {
     return (dispatch) => {
-        return fetch("http://localhost:3000/api/v1/doctors", {
+        return fetch(FETCH_URL, {
             headers: {
                 "Content-Type": "application/json",
                 "Accepts": "application/json",
@@ -87,7 +89,7 @@ export const fetchMyDoctors = user => {
 export const removeDoctor = (user, doctor) => {
     const id = doctor.profile.id
     return (dispatch) => {
-        return fetch(`http://localhost:3000/api/v1/doctors/${id}`, {
+        return fetch(`${FETCH_URL}/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

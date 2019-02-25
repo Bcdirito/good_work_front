@@ -2,7 +2,7 @@ export const logoutUser = () => ({type: "LOGOUT_USER"})
 
 export const loginUser = user => ({type: "LOGIN_USER", user})
 
-const BASE_URL = "http://localhost:3000/api/v1"
+const BASE_URL = "https://git.heroku.com/good-work-backend.git/api/v1"
 
 export const signUpUser = (user, props) => {
     let FETCH_URL = `${BASE_URL}/users`

@@ -17,7 +17,7 @@ class App extends Component {
   componentDidMount() {
     const userToken = localStorage.getItem("token")
     if(userToken) {
-      fetch(`http://localhost:3000/api/v1/profile`, {
+      fetch(`https://git.heroku.com/good-work-backend.git/api/v1/profile`, {
         headers: {
           "Content-Type": "application/json",
           "Accepts": "application/json",

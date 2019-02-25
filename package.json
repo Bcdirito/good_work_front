@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "npm": "6.x"
+    "npm": "6.4.1"
   },
   "dependencies": {
     "braces": "^2.3.2",

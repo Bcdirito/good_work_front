@@ -4,7 +4,8 @@ export const deleteList = list => ({type: "DELETE_LIST", list})
 
 export const loadLists = lists => ({type: "LOAD_LISTS", lists})
 
-const LIST_URL = "https://git.heroku.com/good-work-backend.git/api/v1/lists"
+const LIST_URL = "https://good-work-backend.herokuapp.com/api/v1/lists"
+
 export const getLists = (goalId, user) => {
     return (dispatch) => {
         return fetch(LIST_URL, {

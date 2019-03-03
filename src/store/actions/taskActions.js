@@ -2,36 +2,36 @@ export const addTask = task => ({type: "ADD_TASK", task})
 
 export const deleteTask = task => ({type: "DELETE_TASK", task})
 
-export const loadTask = task => ({type: "LOAD_TASK", task})
+export const storeTasks = tasks => ({type: "STORE_TASKS", tasks})
 
 export const editTask = task => ({type: "EDIT_TASK", task})
 
 const TASK_URL = "https://git.heroku.com/good-work-backend.git/api/v1/tasks"
 
-export const getTasks = (list, user) => {
-    const id = list.id
-    return (dispatch) => {
-        return fetch (TASK_URL, {
-            headers: {
-                "Content-Type": "application/json",
-                "Accepts": "application/json",
-                "Authorization": `${user.token}`
-            }
-        })
-        .then(res => res.json())
-        .then(res => {
-            if (res.errors){
-                console.log(res.errors)
-            } else {
-                res.data.forEach(task => {
-                    if (task.relationships.list.data !== null && task.relationships.list.data.id === id){
-                        dispatch(loadTask(task))
-                    }
-                })
-            }
-        })
-    }
-}
+// export const getTasks = (list, user) => {
+//     const id = list.id
+//     return (dispatch) => {
+//         return fetch (TASK_URL, {
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 "Accepts": "application/json",
+//                 "Authorization": `${user.token}`
+//             }
+//         })
+//         .then(res => res.json())
+//         .then(res => {
+//             if (res.errors){
+//                 console.log(res.errors)
+//             } else {
+//                 res.data.forEach(task => {
+//                     if (task.relationships.list.data !== null && task.relationships.list.data.id === id){
+//                         dispatch(loadTask(task))
+//                     }
+//                 })
+//             }
+//         })
+//     }
+// }
 
 export const createTask = (task, list, user) => {
     return (dispatch) => {

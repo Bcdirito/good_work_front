@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {connect} from "react-redux"
 import TaskCard from "./TaskCard"
 import {Form, Button, Table, Loader, Input, TextArea} from "semantic-ui-react"
-import {createTask, getTasks, destroyTask} from "../store/actions/taskActions"
+import {createTask, storeTasks, destroyTask} from "../store/actions/taskActions"
 
 class List extends Component {
     state = {
@@ -12,13 +12,12 @@ class List extends Component {
             title: "",
             content: ""
         },
-        tasks: this.props.tasks,
         featuredTask: {},
         loading: false
     }
 
     componentDidMount = () => {
-        
+        this.props.storeTasks(this.props.tasks)
     }
 
     componentDidUpdate = (prevProps) => {
@@ -103,7 +102,7 @@ class List extends Component {
             tasks = this.props.tasks
         }
         
-        if (tasks !== undefined) {
+        if (tasks !== undefined && tasks.length !== 0) {
            taskComps = tasks.map(task => {
                 if(Number(task.relationships.list.data.id) === Number(this.props.list.id)) {
                     return (
@@ -149,16 +148,16 @@ class List extends Component {
 
 const mapStateToProps = state => {
     return {
-        user: state.user
+        user: state.user,
+        tasks: state.tasks
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         addTask: (task, list, user) => dispatch(createTask(task, list, user)),
-        getTasks: (list, user) => dispatch(getTasks(list, user)),
+        storeTasks: tasks => dispatch(storeTasks(tasks)),
         deleteTask: (task, user) => dispatch(destroyTask(task, user))
-
     }
 }
 

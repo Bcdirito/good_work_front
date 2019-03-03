@@ -1,3 +1,5 @@
+import { CommentActions } from "semantic-ui-react";
+
 const initialState = {
     user: {},
     partner: {},
@@ -58,6 +60,12 @@ const reducer = (state = initialState, action) => {
                 lists: state.lists.filter(list => {
                     return list.id !== action.list
                 })
+            }
+
+        case "STORE_TASKS":
+            return {
+                ...state,
+                tasks: [...action.tasks]
             }
 
         case "ADD_TASK":

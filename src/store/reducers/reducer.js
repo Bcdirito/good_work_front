@@ -14,7 +14,7 @@ const reducer = (state = initialState, action) => {
         case "LOAD_GOALS":
             return {
                 ...state,
-                goals: [...state.goals, action.goal]
+                goals: [...state.goals, ...action.goals]
             }
 
         case "ADD_GOAL":
@@ -24,7 +24,6 @@ const reducer = (state = initialState, action) => {
             }
     
         case "DELETE_GOAL":
-            console.log(action.goal)
             return {
                 ...state,
                 goals: state.goals.filter(goal => {
@@ -36,7 +35,7 @@ const reducer = (state = initialState, action) => {
         case "FEATURE_GOAL":
             return {
                 ...state,
-                featuredGoal: action.goal.data
+                featuredGoal: action.goal
             }
 
         case "LOAD_LISTS":

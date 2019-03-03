@@ -10,7 +10,7 @@ class ListTile extends Component {
         return (
             <div className="ui card three wide column" onClick={this.handleClick}>
                 <div className="content" id="listTile">
-                    {this.props.list.attributes.name}
+                    {this.props.list.name}
                 </div>
             </div>
         )

@@ -46,7 +46,6 @@ export const createGoal = (goal, user) => {
                     alert(error)
                 })
             } else {
-                debugger
                 dispatch(addGoal(res.data))
             }
         })
@@ -97,7 +96,7 @@ export const getGoals = user => {
             } else if (res.message){
                 alert(res.message)
             } else {
-                dispatch(loadGoals(res.data))
+                dispatch(loadGoals(res))
             }
         })
     }

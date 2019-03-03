@@ -25,7 +25,6 @@ class Goal extends Component {
             this.props.clearLists()
         } else if (this.props.lists.length === 0 && this.props.user.id) {
             this.props.selectGoal(id, this.props.user)
-            this.props.getLists(id, this.props.user)
         }
     }
 
@@ -33,8 +32,8 @@ class Goal extends Component {
         if (this.props !== prevProps && prevProps.user.id === undefined && this.props.lists.length === 0){
             const id = Number(this.props.match.params.id)
             this.props.selectGoal(id, this.props.user)
-            this.props.getLists(id, this.props.user)
         }
+
         if (prevProps.lists.length !== this.props.lists.length){
             this.resetContainer()
         }
@@ -46,7 +45,7 @@ class Goal extends Component {
     }
 
     deleteHandler = () => {
-        if (this.props.lists.length > 0){
+        if (this.props.featuredGoal.lists.length > 0){
             this.unfinishedDelete()
         } else {
             this.finishedDelete()
@@ -154,9 +153,9 @@ class Goal extends Component {
 
     render() {
         const goal = this.props.featuredGoal
-        const lists = this.props.lists
-        const listComps = lists.map(list => {
-            if(Number(list.relationships.goal.data.id) === Number(this.props.featuredGoal.id)) {
+        let listComps;
+        if (goal.id){
+            listComps = goal.lists.map(list => {
                 return (<div className="listTiles">
                             <Grid.Column>
                                 <ListTile
@@ -168,13 +167,16 @@ class Goal extends Component {
                                 />
                             </Grid.Column>
                         </div>)
-                }        
-        })
+                }       
+            )
+        }
+        
+
         return (
             <div className="goalPage">
                 <NavContainer />
-
-                <h2 id="goalHeader">{goal.attributes !== undefined && goal !== undefined ?  goal.attributes.name : null}</h2>
+                
+                <h2 id="goalHeader">{goal !== undefined ?  goal.name : null}</h2>
                     {this.state.featuredList.id ? <List list={this.state.featuredList} resetContainer={this.resetContainer}
                     finishList={this.finishList}
                     /> : <div className="listContainer">
@@ -197,7 +199,6 @@ const mapStateToProps = state => {
     return {
         user: state.user,
         featuredGoal: state.featuredGoal,
-        lists: state.lists
     }
 }
 
@@ -205,7 +206,6 @@ const mapDispatchToProps = dispatch => {
     return {
         deleteGoal: (goal, user, lists) => dispatch(destroyGoal(goal, user, lists)),
         addList: (list, goal, user) => dispatch(createList(list, goal, user)),
-        getLists: (id, user) => dispatch(getLists(id, user)),
         clearLists: () => dispatch({type: "CLEAR_LISTS"}),
         selectGoal: (id, user) => dispatch(selectGoal(id, user)),
         deleteList: (list, user) => dispatch(destroyList(list, user))

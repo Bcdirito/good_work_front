@@ -76,7 +76,7 @@ class GoalContainer extends Component {
     let goalComps
     goals = this.props.goals
     
-    if (goals !== undefined || goals.length > 0) {
+    if (goals !== undefined && goals.length > 0) {
         goalComps = goals.map(goal => {
             return (<div className="goalTiles">
                         <Grid.Column>

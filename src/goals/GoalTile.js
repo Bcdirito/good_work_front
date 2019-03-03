@@ -10,7 +10,7 @@ class GoalTile extends Component {
         return (
             <div className="ui card three wide column" onClick={this.pushToGoal}>
                 <div className="content" id="goalTile">
-                    {this.props.goal.attributes.name}
+                    {this.props.goal.name}
                 </div>
             </div>
         )

@@ -4,9 +4,9 @@ export const deleteGoal = goal => ({type: "DELETE_GOAL", goal})
 
 export const featureGoal = goal => ({type: "FEATURE_GOAL", goal})
 
-export const loadGoal = goal => ({type: "LOAD_GOAL", goal})
+export const loadGoals = goals => ({type: "LOAD_GOALS", goals})
 
-const GOAL_URL = "https://good-work-backend.herokuapp.com/api/v1/goals"
+const GOAL_URL = "http://localhost:3000/api/v1/goals"
 
 export const selectGoal = (id, user) => {
     let FETCH_URL = `${GOAL_URL}/${id}`
@@ -46,6 +46,7 @@ export const createGoal = (goal, user) => {
                     alert(error)
                 })
             } else {
+                debugger
                 dispatch(addGoal(res.data))
             }
         })
@@ -96,11 +97,7 @@ export const getGoals = user => {
             } else if (res.message){
                 alert(res.message)
             } else {
-                res.data.forEach(goal => {
-                    if (Number(goal.relationships.user.data.id) === user.id){
-                        dispatch(loadGoal(goal))
-                    }
-                })
+                dispatch(loadGoals(res.data))
             }
         })
     }

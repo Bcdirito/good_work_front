@@ -11,7 +11,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch(action.type) {
-        case "LOAD_GOAL":
+        case "LOAD_GOALS":
             return {
                 ...state,
                 goals: [...state.goals, action.goal]

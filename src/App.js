@@ -17,7 +17,7 @@ class App extends Component {
   componentDidMount() {
     const userToken = localStorage.getItem("token")
     if(userToken) {
-      fetch(`https://good-work-backend.herokuapp.com/api/v1/profile`, {
+      fetch("http://localhost:3000/api/v1/profile", {
         headers: {
           "Content-Type": "application/json",
           "Accepts": "application/json",
@@ -80,3 +80,5 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+
+// https://good-work-backend.herokuapp.com/

@@ -16,7 +16,6 @@ class GoalContainer extends Component {
 
     componentDidMount(){
         if (this.props.goals.length === 0 && this.props.user.id){
-            console.log(this.props)
             this.props.getGoals(this.props.user).then(this.setState({...this.state, loading: false}))
         }
     }

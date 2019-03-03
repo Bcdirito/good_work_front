@@ -35,13 +35,8 @@ const reducer = (state = initialState, action) => {
         case "FEATURE_GOAL":
             return {
                 ...state,
-                featuredGoal: action.goal
-            }
-
-        case "LOAD_LISTS":
-            return {
-                ...state,
-                lists: action.lists
+                featuredGoal: action.goal,
+                lists: [...action.goal.lists]
             }
         
         case "ADD_LIST":
@@ -63,12 +58,6 @@ const reducer = (state = initialState, action) => {
                 lists: state.lists.filter(list => {
                     return list.id !== action.list
                 })
-            }
-        
-        case "LOAD_TASK":
-            return {
-                ...state,
-                tasks: [...state.tasks, action.task]
             }
 
         case "ADD_TASK":

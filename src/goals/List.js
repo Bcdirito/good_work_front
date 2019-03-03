@@ -12,23 +12,13 @@ class List extends Component {
             title: "",
             content: ""
         },
-        tasks: [],
+        tasks: this.props.tasks,
         featuredTask: {},
         loading: false
     }
 
     componentDidMount = () => {
-
-        if (this.props.tasks === undefined || this.props.tasks.length === 0){
-            this.props.getTasks(this.props.list, this.props.user)
-        }
-
-        this.setState({
-            ...this.state,
-            tasks: [...this.props.tasks].filter(task => {
-                return this.props.list.id === Number(task.relationships.list.data.id)
-            })
-        })
+        
     }
 
     componentDidUpdate = (prevProps) => {
@@ -36,8 +26,6 @@ class List extends Component {
             this.setState({...this.state, loading: false})
         }
     }
-
-
 
     buttonHandler = () => {
         this.setState({ clicked: !this.state.clicked})
@@ -161,7 +149,6 @@ class List extends Component {
 
 const mapStateToProps = state => {
     return {
-        tasks: state.tasks,
         user: state.user
     }
 }

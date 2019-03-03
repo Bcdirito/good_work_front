@@ -6,30 +6,30 @@ export const loadLists = lists => ({type: "LOAD_LISTS", lists})
 
 const LIST_URL = "https://good-work-backend.herokuapp.com/api/v1/lists"
 
-export const getLists = (goalId, user) => {
-    return (dispatch) => {
-        return fetch(LIST_URL, {
-            headers: {
-                "Content-Type": "application/json",
-                "Accepts": "application/json",
-                "Authorization": `${user.token}`
-            }
-        })
-        .then(res => res.json())
-        .then(res => {
-            if (res.errors){
-                console.log(res.errors)
-            } else {
-                const filterArr = res.data.filter(list => {
-                    return list.relationships.goal.data !== null && Number(list.relationships.goal.data.id)
-                    === goalId
-                })
-                dispatch(loadLists(filterArr))
-            }}
-        )
-        .catch(console.error)
-    }
-}
+// export const getLists = (goalId, user) => {
+//     return (dispatch) => {
+//         return fetch(LIST_URL, {
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 "Accepts": "application/json",
+//                 "Authorization": `${user.token}`
+//             }
+//         })
+//         .then(res => res.json())
+//         .then(res => {
+//             if (res.errors){
+//                 console.log(res.errors)
+//             } else {
+//                 const filterArr = res.data.filter(list => {
+//                     return list.relationships.goal.data !== null && Number(list.relationships.goal.data.id)
+//                     === goalId
+//                 })
+//                 dispatch(loadLists(filterArr))
+//             }}
+//         )
+//         .catch(console.error)
+//     }
+// }
 
 export const createList = (list, goal, user) => {
     return (dispatch) => {

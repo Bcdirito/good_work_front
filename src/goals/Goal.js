@@ -4,7 +4,7 @@ import ListTile from "./ListTile"
 import {connect} from "react-redux"
 import {Button, Form, Grid, Loader} from "semantic-ui-react"
 import { destroyGoal, selectGoal } from '../store/actions/goalActions'
-import {createList, getLists, destroyList} from "../store/actions/listActions"
+import {createList, destroyList} from "../store/actions/listActions"
 import NavContainer from "../navigation/NavContainer"
 
 
@@ -21,9 +21,9 @@ class Goal extends Component {
     componentDidMount = () => {
         const id = Number(this.props.match.params.id)
 
-        if (this.props.featuredGoal.lists.length > 0){
+        if (this.props.lists.length > 0){
             this.props.clearLists()
-        } else if (this.props.featuredGoal.lists.length === 0 && this.props.user.id) {
+        } else if (this.props.lists.length === 0 && this.props.user.id) {
             this.props.selectGoal(id, this.props.user)
         }
     }
@@ -45,7 +45,7 @@ class Goal extends Component {
     }
 
     deleteHandler = () => {
-        if (this.props.featuredGoal.lists.length > 0){
+        if (this.props.lists.length > 0){
             this.unfinishedDelete()
         } else {
             this.finishedDelete()
@@ -111,6 +111,7 @@ class Goal extends Component {
     }
 
     featureList = (list) => {
+        console.log(list)
         this.setState({ featuredList: list})
     }
 
@@ -171,7 +172,7 @@ class Goal extends Component {
             )
         }
         
-
+        console.log(this.props)
         return (
             <div className="goalPage">
                 <NavContainer />
@@ -179,6 +180,7 @@ class Goal extends Component {
                 <h2 id="goalHeader">{goal !== undefined ?  goal.name : null}</h2>
                     {this.state.featuredList.id ? <List list={this.state.featuredList} resetContainer={this.resetContainer}
                     finishList={this.finishList}
+                    tasks={this.state.featuredList.tasks}
                     /> : <div className="listContainer">
                         <Grid>
                             <Grid.Row>
@@ -199,6 +201,7 @@ const mapStateToProps = state => {
     return {
         user: state.user,
         featuredGoal: state.featuredGoal,
+        lists: state.lists
     }
 }
 

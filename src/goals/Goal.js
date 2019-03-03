@@ -21,9 +21,9 @@ class Goal extends Component {
     componentDidMount = () => {
         const id = Number(this.props.match.params.id)
 
-        if (this.props.lists.length > 0){
+        if (this.props.featuredGoal.lists.length > 0){
             this.props.clearLists()
-        } else if (this.props.lists.length === 0 && this.props.user.id) {
+        } else if (this.props.featuredGoal.lists.length === 0 && this.props.user.id) {
             this.props.selectGoal(id, this.props.user)
         }
     }

@@ -1,5 +1,3 @@
-import { CommentActions } from "semantic-ui-react";
-
 const initialState = {
     user: {},
     partner: {},

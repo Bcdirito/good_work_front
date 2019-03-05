@@ -108,8 +108,8 @@ class List extends Component {
                     return (
                         <Table.Body>
                             <Table.Row key={task.id} id={task.id}>
-                                <Table.Cell>{task.attributes.title}</Table.Cell>
-                                <Table.Cell>{task.attributes.content}</Table.Cell>
+                                <Table.Cell>{task.title}</Table.Cell>
+                                <Table.Cell>{task.content}</Table.Cell>
                                 <Table.Cell><Button className="taskButton" id="finishedTask" onClick={e => this.finishTask(e)}>Finished!</Button><Button className="taskButton" id="editTask" onClick={e => this.featureTaskCard(e)}>Edit Task</Button></Table.Cell>
                             </Table.Row>
                         </Table.Body>)

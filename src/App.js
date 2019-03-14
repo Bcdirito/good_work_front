@@ -8,7 +8,7 @@ import './App.css';
 import "./css/menu.css"
 import LoginPage from './general/LoginPage';
 import { connect } from "react-redux"
-import { createSession } from "./store/actions/userActions"
+import { loginUser } from "./store/actions/userActions"
 import GoalContainer from './goals/GoalContainer';
 import DoctorPage from './doctors/DoctorPage';
 
@@ -28,8 +28,9 @@ class App extends Component {
       .then(data => {
         if (data.message){
           alert(data.message)
+        } else {
+          this.props.login(data)
         }
-        this.props.login(data.user)
       })
       .catch(console.error)
     } else {
@@ -75,7 +76,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: user => dispatch(createSession(user))
+    login: user => dispatch(loginUser(user))
   }
 }
 

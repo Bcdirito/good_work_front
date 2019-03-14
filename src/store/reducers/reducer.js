@@ -101,8 +101,18 @@ const reducer = (state = initialState, action) => {
                     id: action.user.user.id,
                     user: action.user.user.username,
                     name: action.user.user.name,
-                    partner: action.user.partner
                 },
+                partner: action.user.partner
+            }
+
+        case "MAINTAIN_USER":
+            return {
+                user: {
+                    id: action.user.user.id,
+                    user: action.user.user.username,
+                    name: action.user.user.name,
+                },
+                partner: action.user.partner
             }
 
         case "LOGOUT_USER":

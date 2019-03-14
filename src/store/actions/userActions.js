@@ -2,6 +2,8 @@ export const logoutUser = () => ({type: "LOGOUT_USER"})
 
 export const loginUser = user => ({type: "LOGIN_USER", user})
 
+export const maintainUser = user => ({type: "MAINTAIN_USER", user})
+
 const BASE_URL = "http://localhost:3000/api/v1"
 
 export const signUpUser = (user, props) => {

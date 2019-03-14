@@ -8,7 +8,7 @@ import './App.css';
 import "./css/menu.css"
 import LoginPage from './general/LoginPage';
 import { connect } from "react-redux"
-import { loginUser } from "./store/actions/userActions"
+import { maintainUser } from "./store/actions/userActions"
 import GoalContainer from './goals/GoalContainer';
 import DoctorPage from './doctors/DoctorPage';
 
@@ -16,7 +16,7 @@ class App extends Component {
 
   componentDidMount() {
     const userToken = localStorage.getItem("token")
-    if(userToken) {
+    if(userToken && userToken !== "undefined") {
       fetch("http://localhost:3000/api/v1/profile", {
         headers: {
           "Content-Type": "application/json",
@@ -76,7 +76,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: user => dispatch(loginUser(user))
+    login: user => dispatch(maintainUser(user))
   }
 }
 

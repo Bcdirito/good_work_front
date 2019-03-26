@@ -19,15 +19,13 @@ class Goal extends Component {
     }
 
     componentDidMount = () => {
-        debugger
         if (this.props.lists.length > 0){
             this.props.clearLists()
-        } else if (this.props.lists.length === 0 && (localStorage.token && localStorage.token !== "undefined")) {
-            this.props.selectGoal()
         }
     }
 
     componentDidUpdate(prevProps){
+        debugger
         if (this.props !== prevProps && prevProps.user.id === undefined && this.props.lists.length === 0){
             const id = Number(this.props.match.params.id)
             this.props.selectGoal(id)
@@ -40,7 +38,6 @@ class Goal extends Component {
 
     buttonHandler = () => {
         this.setState({ clicked: !this.state.clicked})
-        
     }
 
     deleteHandler = () => {
@@ -110,7 +107,6 @@ class Goal extends Component {
     }
 
     featureList = (list) => {
-        console.log(list)
         this.setState({ featuredList: list})
     }
 
@@ -155,7 +151,7 @@ class Goal extends Component {
         const goal = this.props.featuredGoal
         let listComps;
 
-        if (goal.id){
+        if (goal !== undefined && goal.id){
             listComps = goal.lists.map(list => {
                 return (<div className="listTiles">
                             <Grid.Column>
@@ -172,7 +168,8 @@ class Goal extends Component {
             )
         }
         
-        console.log(this.props)
+        console.log(this.props.featuredGoal)
+
         return (
             <div className="goalPage">
                 <NavContainer />

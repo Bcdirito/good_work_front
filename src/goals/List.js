@@ -98,6 +98,7 @@ class List extends Component {
         let tasks; 
         let taskComps; 
 
+        
         if (this.props.tasks !== undefined){
             tasks = this.props.tasks
         }
@@ -116,11 +117,11 @@ class List extends Component {
                 }
             })
         }
-        
+
         return (
         <div className="taskTable">
-            <h3 id="listHeader">{list.attributes.name}</h3>
-                {this.state.clicked === false && this.state.featuredClick === false && this.state.loading === false && taskComps.length > 0 ? <div><div className="table">
+            <h3 id="listHeader">{list.name}</h3>
+                {this.state.clicked === false && this.state.featuredClick === false && this.state.loading === false && (taskComps !== "undefined") ? <div><div className="table">
                     <Table celled>
                         <Table.Header id="tHeader">
                             <Table.Row>
@@ -136,7 +137,7 @@ class List extends Component {
                 <div className="underTaskButton">
                     {this.state.clicked === false && this.state.featuredClick === false && this.state.loading === false ?<Button id="addTask"  onClick={this.buttonHandler}>Add A Task</Button> : null}
                     {this.state.clicked === false && this.state.featuredClick === false && this.state.loading === false ? <Button id="backToGoal"  onClick={this.props.resetContainer}>Back to Goal</Button> : null}
-                    {taskComps[0] === undefined && this.state.clicked === false && this.state.loading === false ? <Button id="finishedList"  onClick={this.props.finishList}>Finished!</Button>: null}
+                    {(taskComps !== undefined || taskComps[0] === undefined) && this.state.clicked === false && this.state.loading === false ? <Button id="finishedList"  onClick={this.props.finishList}>Finished!</Button>: null}
                 </div>
                 {this.state.clicked === true ? this.renderForm() : null}
                 {this.state.featuredTask.id ? this.renderTaskCard() : null}

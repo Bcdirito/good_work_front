@@ -19,19 +19,18 @@ class Goal extends Component {
     }
 
     componentDidMount = () => {
-        const id = Number(this.props.match.params.id)
-
+        debugger
         if (this.props.lists.length > 0){
             this.props.clearLists()
-        } else if (this.props.lists.length === 0 && this.props.user.id) {
-            this.props.selectGoal(id, this.props.user)
+        } else if (this.props.lists.length === 0 && (localStorage.token && localStorage.token !== "undefined")) {
+            this.props.selectGoal()
         }
     }
 
     componentDidUpdate(prevProps){
         if (this.props !== prevProps && prevProps.user.id === undefined && this.props.lists.length === 0){
             const id = Number(this.props.match.params.id)
-            this.props.selectGoal(id, this.props.user)
+            this.props.selectGoal(id)
         }
 
         if (prevProps.lists.length !== this.props.lists.length){
@@ -155,6 +154,7 @@ class Goal extends Component {
     render() {
         const goal = this.props.featuredGoal
         let listComps;
+
         if (goal.id){
             listComps = goal.lists.map(list => {
                 return (<div className="listTiles">
@@ -210,7 +210,7 @@ const mapDispatchToProps = dispatch => {
         deleteGoal: (goal, user, lists) => dispatch(destroyGoal(goal, user, lists)),
         addList: (list, goal, user) => dispatch(createList(list, goal, user)),
         clearLists: () => dispatch({type: "CLEAR_LISTS"}),
-        selectGoal: (id, user) => dispatch(selectGoal(id, user)),
+        selectGoal: (id) => dispatch(selectGoal(id)),
         deleteList: (list, user) => dispatch(destroyList(list, user))
     }
 }

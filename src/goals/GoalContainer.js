@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux"
 import {Button, Form, Grid, Loader} from "semantic-ui-react"
-import {createGoal, getGoals} from "../store/actions/goalActions"
+import {createGoal, getGoals, selectGoal} from "../store/actions/goalActions"
 import GoalTile from './GoalTile';
 import NavContainer from "../navigation/NavContainer"
 
@@ -89,6 +89,7 @@ class GoalContainer extends Component {
                             <GoalTile
                             key={goal.id}
                             goal={goal}
+                            select={this.props.selectGoal}
                             deleteGoal={this.props.deleteGoal}
                             history={this.props.history}
                             />
@@ -127,7 +128,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         getGoals: (user) => dispatch(getGoals(user)),
-        createGoal: (goal, user) => dispatch(createGoal(goal, user))
+        createGoal: (goal, user) => dispatch(createGoal(goal, user)),
+        selectGoal: (id) => dispatch(selectGoal(id))
     }
 }
 

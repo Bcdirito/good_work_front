@@ -51,7 +51,7 @@ class App extends Component {
             <Route exact path="/goals" render={(props) => (
               <GoalContainer {...props} />
             )} />
-            <Route exact path="/goals/:id" render={(props) => (
+            <Route exact path="/featured_goal" render={(props) => (
               <Goal {...props} />
             )} />
             <Route exact path="/partners" render={(props) => (

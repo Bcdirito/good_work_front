@@ -8,14 +8,15 @@ export const loadGoals = goals => ({type: "LOAD_GOALS", goals})
 
 const GOAL_URL = "http://localhost:3000/api/v1/goals"
 
-export const selectGoal = (id, user) => {
+export const selectGoal = (id) => {
     let FETCH_URL = `${GOAL_URL}/${id}`
+
     return (dispatch) => {
         return fetch(FETCH_URL, {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "Authorization": `${user.token}`
+                "Authorization": `${localStorage.token}`
             }
         })
         .then(res => res.json())
@@ -80,8 +81,7 @@ export const destroyGoal = (goal, user, lists) => {
     }
 }
 
-export const getGoals = user => {
-    console.log(localStorage)
+export const getGoals = () => {
     return (dispatch) => {
         return fetch(GOAL_URL, {
             headers: {

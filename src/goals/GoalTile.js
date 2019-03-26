@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 class GoalTile extends Component {
 
     pushToGoal = () => {
-        this.props.history.replace(`/goals/${this.props.goal.id}`)
+        this.props.select(this.props.goal.id)
+        .then(() => this.props.history.replace("/featured_goal"))
     }
 
     render() {

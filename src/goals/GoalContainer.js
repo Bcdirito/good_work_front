@@ -15,17 +15,23 @@ class GoalContainer extends Component {
     }
 
     componentDidMount(){
-        if (this.props.goals.length === 0 && this.props.user.id){
-            this.props.getGoals(this.props.user).then(this.setState({...this.state, loading: false}))
+        console.log(this.props)
+        if (this.props.goals === undefined){
+            if ((this.props.goals === undefined || this.props.goals.length === 0) && this.props.user.id){
+                this.props.getGoals(this.props.user).then(this.setState({...this.state, loading: false}))
+            }
         }
     }
 
     componentDidUpdate(prevProps) {
-        if(prevProps !== this.props && this.props.goals.length === 0){
+        console.log("Current Props: ", this.props)
+        console.log("Previous: ", prevProps)
+
+        if(prevProps !== this.props && this.props.goals === undefined){
             this.props.getGoals(this.props.user)
             this.setState({...this.state, loading: false})
         }
-        if(prevProps.goals.length !== this.props.goals.length && this.props.length !== 0) {
+        if((prevProps.goals !== undefined && this.props.goals !== undefined) && prevProps.goals.length !== this.props.goals.length && this.props.length !== 0) {
             this.setState({...this.state, loading: false})
         } else if (this.props.userId){
             this.setState({...this.state, loading: false})

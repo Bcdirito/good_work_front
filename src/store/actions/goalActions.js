@@ -81,12 +81,13 @@ export const destroyGoal = (goal, user, lists) => {
 }
 
 export const getGoals = user => {
+    console.log(localStorage)
     return (dispatch) => {
         return fetch(GOAL_URL, {
             headers: {
                 "Content-Type": "application/json",
                 "Accepts": "application/json",
-                "Authorization": `${user.token}`
+                "Authorization": `${localStorage.token}`
             }
         })
         .then(res => res.json())

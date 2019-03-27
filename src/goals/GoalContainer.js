@@ -15,7 +15,6 @@ class GoalContainer extends Component {
     }
 
     componentDidMount(){
-        console.log(this.props)
         if (this.props.goals === undefined){
             if ((this.props.goals === undefined || this.props.goals.length === 0) && this.props.user.id){
                 this.props.getGoals(this.props.user).then(this.setState({...this.state, loading: false}))
@@ -24,10 +23,7 @@ class GoalContainer extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log("Current Props: ", this.props)
-        console.log("Previous: ", prevProps)
-
-        if(prevProps !== this.props && this.props.goals === undefined){
+       if(prevProps !== this.props && this.props.goals === undefined){
             this.props.getGoals(this.props.user)
             this.setState({...this.state, loading: false})
         }

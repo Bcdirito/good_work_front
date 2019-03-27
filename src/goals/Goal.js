@@ -27,8 +27,9 @@ class Goal extends Component {
     componentDidUpdate(prevProps){
         debugger
         if (this.props !== prevProps && prevProps.user.id === undefined && this.props.lists.length === 0){
-            const id = Number(this.props.match.params.id)
-            this.props.selectGoal(id)
+            debugger
+            // const id = Number(this.props.match.params.id)
+            // this.props.selectGoal(id)
         }
 
         if (prevProps.lists.length !== this.props.lists.length){

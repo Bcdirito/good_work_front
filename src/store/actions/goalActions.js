@@ -54,7 +54,7 @@ export const createGoal = (goal, user) => {
     }
 }
 
-export const destroyGoal = (goal, user, lists) => {
+export const destroyGoal = (goal, lists) => {
     const id = Number(goal.id)
     const complete = lists.length === 0
     let FETCH_URL = `${GOAL_URL}/${id}`

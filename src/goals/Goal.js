@@ -30,7 +30,8 @@ class Goal extends Component {
         }
 
         if ((prevProps.lists !== undefined && this.props.lists !== undefined) && (prevProps.lists.length !== this.props.lists.length)){
-            this.resetContainer()
+            this.props.selectGoal(localStorage.getItem("goal")).then(this.setState({...this.state, loading: false}))
+            
         }
     }
 
@@ -50,7 +51,7 @@ class Goal extends Component {
         const result = window.confirm("Looks Like You Still Have Some Unfinished Lists. Are You Sure You're Finished With This Goal?")
         if (result === true){
             alert("You Got It! I Believe You Know Best!")
-            this.props.deleteGoal(this.props.featuredGoal, this.props.user, this.props.lists)
+            this.props.deleteGoal(this.props.featuredGoal, this.props.lists)
             this.props.history.replace("/goals")
         } else {
             alert("Keep At It! Nothing Can Stop You!")
@@ -61,7 +62,7 @@ class Goal extends Component {
         const result = window.confirm("What is That? Did You Just Complete A Goal?")
         if (result === true){
             alert("This Is Why You Fill Me With Such Wonder!")
-            this.props.deleteGoal(this.props.featuredGoal, this.props.user, this.props.lists)
+            this.props.deleteGoal(this.props.featuredGoal, this.props.lists)
             this.props.history.replace("/goals")
         } else {
             alert("Keep At It! Nothing Can Stop You!")
@@ -78,8 +79,8 @@ class Goal extends Component {
 
     submitHandler = (e) => {
         e.preventDefault()
-        this.props.addList(this.state.formData, this.props.featuredGoal, this.props.user)
-        this.setState({ clicked: false, formData: { title: "" } })
+        this.props.addList(this.state.formData, this.props.featuredGoal)
+        this.loadState()
     }
 
     resetContainer = () => {
@@ -123,7 +124,7 @@ class Goal extends Component {
         if (result === true){
             alert("Another One Down, Another Win for You!")
             this.loadState()
-            this.props.deleteList(this.state.featuredList, this.props.user)
+            this.props.deleteList(this.state.featuredList)
         } else {
             alert("No Worries! We'll be Here When You Finish!")
         }
@@ -200,11 +201,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        deleteGoal: (goal, user, lists) => dispatch(destroyGoal(goal, user, lists)),
+        deleteGoal: (goal, lists) => dispatch(destroyGoal(goal, lists)),
         addList: (list, goal) => dispatch(createList(list, goal)),
         clearLists: () => dispatch({type: "CLEAR_LISTS"}),
         selectGoal: (id) => dispatch(selectGoal(id)),
-        deleteList: (list, user) => dispatch(destroyList(list, user))
+        deleteList: (list) => dispatch(destroyList(list))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Goal)

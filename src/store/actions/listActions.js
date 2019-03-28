@@ -8,31 +8,6 @@ const LIST_URL = "http://localhost:3000/api/v1/lists"
 
 // https://good-work-backend.herokuapp.com/api/v1/lists
 
-// export const getLists = (goalId, user) => {
-//     return (dispatch) => {
-//         return fetch(LIST_URL, {
-//             headers: {
-//                 "Content-Type": "application/json",
-//                 "Accepts": "application/json",
-//                 "Authorization": `${user.token}`
-//             }
-//         })
-//         .then(res => res.json())
-//         .then(res => {
-//             if (res.errors){
-//                 console.log(res.errors)
-//             } else {
-//                 const filterArr = res.data.filter(list => {
-//                     return list.relationships.goal.data !== null && Number(list.relationships.goal.data.id)
-//                     === goalId
-//                 })
-//                 dispatch(loadLists(filterArr))
-//             }}
-//         )
-//         .catch(console.error)
-//     }
-// }
-
 export const createList = (list, goal) => {
     return (dispatch) => {
         return fetch(LIST_URL, {
@@ -54,13 +29,13 @@ export const createList = (list, goal) => {
                     alert(error)
                 })
             } else {
-                dispatch(addList(res.data))
+                dispatch(addList(res))
             }
         })
     }
 }
 
-export const destroyList = (list, user) => {
+export const destroyList = (list) => {
     const id = list.id
     return (dispatch) => {
         return fetch(`${LIST_URL}/${id}`, {

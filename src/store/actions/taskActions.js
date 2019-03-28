@@ -6,7 +6,10 @@ export const storeTasks = tasks => ({type: "STORE_TASKS", tasks})
 
 export const editTask = task => ({type: "EDIT_TASK", task})
 
-const TASK_URL = "https://git.heroku.com/good-work-backend.git/api/v1/tasks"
+const TASK_URL = "http://localhost:3000/api/v1/tasks"
+
+// http://localhost:3000/
+// https://git.heroku.com/good-work-backend.git/
 
 // export const getTasks = (list, user) => {
 //     const id = list.id
@@ -33,14 +36,14 @@ const TASK_URL = "https://git.heroku.com/good-work-backend.git/api/v1/tasks"
 //     }
 // }
 
-export const createTask = (task, list, user) => {
+export const createTask = (task, list) => {
     return (dispatch) => {
         return fetch(TASK_URL, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Authorization": `${user.token}`
+            "Authorization": `${localStorage.token}`
         },
         body: JSON.stringify({
             list_id: list.id,
@@ -74,14 +77,14 @@ export const destroyTask = (id, user) => {
     }
 }
 
-export const updateTask = (data, id, listId, user) => {
+export const updateTask = (data, id, listId) => {
     return (dispatch) => {
         return fetch(`${TASK_URL}/${id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "Authorization": `${user.token}`
+                "Authorization": `${localStorage.token}`
             },
             body: JSON.stringify({
                 list_id: listId,

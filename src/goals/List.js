@@ -17,11 +17,11 @@ class List extends Component {
     }
 
     componentDidMount = () => {
-        this.props.storeTasks(this.props.tasks)
+        this.props.storeTasks(this.props.list.tasks)
     }
 
     componentDidUpdate = (prevProps) => {
-        if(prevProps.tasks.length !== this.props.tasks.length){
+        if((prevProps.tasks !== undefined && this.props.tasks !== undefined) &&prevProps.tasks.length !== this.props.tasks.length){
             this.setState({...this.state, loading: false})
         }
     }
@@ -43,7 +43,7 @@ class List extends Component {
         let result = window.confirm("Did You Finish This Task, You Rock Star?")
         if (result === true) {
             alert("I'm So Proud of You! You Amaze Me!")
-            this.props.deleteTask(id, this.props.user)
+            this.props.deleteTask(id)
             this.setState({...this.state, loading: true})
         } else {
             alert("Keep Going! I Know You Can Do It!")
@@ -52,7 +52,7 @@ class List extends Component {
 
     submitHandler = e => {
         e.preventDefault()
-        this.props.addTask(this.state.formData, this.props.list, this.props.user)
+        this.props.addTask(this.state.formData, this.props.list)
         this.resetComponent()
     }
 
@@ -104,18 +104,16 @@ class List extends Component {
         }
         
         if (tasks !== undefined && tasks.length !== 0) {
+            debugger
            taskComps = tasks.map(task => {
-                if(Number(task.relationships.list.data.id) === Number(this.props.list.id)) {
-                    return (
-                        <Table.Body>
+                        return <Table.Body>
                             <Table.Row key={task.id} id={task.id}>
                                 <Table.Cell>{task.title}</Table.Cell>
                                 <Table.Cell>{task.content}</Table.Cell>
                                 <Table.Cell><Button className="taskButton" id="finishedTask" onClick={e => this.finishTask(e)}>Finished!</Button><Button className="taskButton" id="editTask" onClick={e => this.featureTaskCard(e)}>Edit Task</Button></Table.Cell>
                             </Table.Row>
-                        </Table.Body>)
-                }
-            })
+                        </Table.Body>
+                })
         } else {
             taskComps = []
         }
@@ -158,9 +156,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addTask: (task, list, user) => dispatch(createTask(task, list, user)),
+        addTask: (task, list) => dispatch(createTask(task, list)),
         storeTasks: tasks => dispatch(storeTasks(tasks)),
-        deleteTask: (task, user) => dispatch(destroyTask(task, user))
+        deleteTask: (task) => dispatch(destroyTask(task))
     }
 }
 

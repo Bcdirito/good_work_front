@@ -62,16 +62,16 @@ const reducer = (state = initialState, action) => {
             }
 
         case "STORE_TASKS":
+            debugger
             return {
                 ...state,
                 tasks: action.tasks
             }
 
         case "ADD_TASK":
-            const newTasks = state.tasks.concat(action.task)
             return {
                 ...state,
-                tasks: newTasks
+                tasks: [...state.tasks, action.task]
             }
         
         case "EDIT_TASK":

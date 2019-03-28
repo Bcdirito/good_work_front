@@ -172,7 +172,8 @@ class Goal extends Component {
                 <NavContainer />
                 
                 <h2 id="goalHeader">{goal !== undefined ?  goal.name : null}</h2>
-                    {this.state.featuredList.id ? <List list={this.state.featuredList} resetContainer={this.resetContainer}
+                    {this.state.featuredList.id ? <List list={this.state.featuredList}
+                    resetContainer={this.resetContainer}
                     finishList={this.finishList}
                     tasks={this.state.featuredList.tasks}
                     /> : <div className="listContainer">

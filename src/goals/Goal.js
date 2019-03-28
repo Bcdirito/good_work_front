@@ -25,14 +25,11 @@ class Goal extends Component {
     }
 
     componentDidUpdate(prevProps){
-        debugger
-        if (this.props !== prevProps && prevProps.user.id === undefined && this.props.lists.length === 0){
-            debugger
-            // const id = Number(this.props.match.params.id)
-            // this.props.selectGoal(id)
+        if (this.props !== prevProps && prevProps.user.id === undefined && this.props.lists === undefined){
+            this.props.selectGoal(localStorage.getItem("goal"))
         }
 
-        if (prevProps.lists.length !== this.props.lists.length){
+        if ((prevProps.lists !== undefined && this.props.lists !== undefined) && (prevProps.lists.length !== this.props.lists.length)){
             this.resetContainer()
         }
     }
@@ -169,8 +166,6 @@ class Goal extends Component {
             )
         }
         
-        console.log(this.props.featuredGoal)
-
         return (
             <div className="goalPage">
                 <NavContainer />

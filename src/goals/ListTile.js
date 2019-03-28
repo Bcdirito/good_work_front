@@ -3,8 +3,6 @@ import React, { Component } from 'react'
 class ListTile extends Component {
 
     handleClick = () => {
-        console.log(this.props.list)
-        debugger
         this.props.featureList(this.props.list)
     }
 

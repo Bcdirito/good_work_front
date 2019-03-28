@@ -33,6 +33,7 @@ const reducer = (state = initialState, action) => {
             }
         
         case "FEATURE_GOAL":
+            localStorage.setItem("goal", action.goal.id)
             return {
                 ...state,
                 featuredGoal: action.goal,
@@ -63,7 +64,7 @@ const reducer = (state = initialState, action) => {
         case "STORE_TASKS":
             return {
                 ...state,
-                tasks: [...action.tasks]
+                tasks: action.tasks
             }
 
         case "ADD_TASK":

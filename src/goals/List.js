@@ -120,7 +120,6 @@ class List extends Component {
             taskComps = []
         }
 
-        console.log(this.state, taskComps === undefined)
         return (
         <div className="taskTable">
             <h3 id="listHeader">{list.name}</h3>

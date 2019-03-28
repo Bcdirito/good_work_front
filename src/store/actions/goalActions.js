@@ -33,7 +33,7 @@ export const createGoal = (goal, user) => {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "Authorization": `${user.token}`
+                "Authorization": `${localStorage.token}`
             },
             body: JSON.stringify({
                 user_id: user.id,
@@ -47,7 +47,7 @@ export const createGoal = (goal, user) => {
                     alert(error)
                 })
             } else {
-                dispatch(addGoal(res.data))
+                dispatch(addGoal(res))
             }
         })
         .catch(console.error)
@@ -64,7 +64,7 @@ export const destroyGoal = (goal, user, lists) => {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "Authorization": `${user.token}`
+                "Authorization": `${localStorage.token}`
             },
             body: JSON.stringify({
                 complete: complete

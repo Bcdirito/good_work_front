@@ -201,7 +201,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         deleteGoal: (goal, user, lists) => dispatch(destroyGoal(goal, user, lists)),
-        addList: (list, goal, user) => dispatch(createList(list, goal, user)),
+        addList: (list, goal) => dispatch(createList(list, goal)),
         clearLists: () => dispatch({type: "CLEAR_LISTS"}),
         selectGoal: (id) => dispatch(selectGoal(id)),
         deleteList: (list, user) => dispatch(destroyList(list, user))

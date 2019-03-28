@@ -23,11 +23,12 @@ class GoalContainer extends Component {
     }
 
     componentDidUpdate(prevProps) {
-       if(prevProps !== this.props && this.props.goals === undefined){
+        if(prevProps !== this.props && this.props.goals === undefined){
             this.props.getGoals(this.props.user)
             this.setState({...this.state, loading: false})
         }
-        if((prevProps.goals !== undefined && this.props.goals !== undefined) && prevProps.goals.length !== this.props.goals.length && this.props.length !== 0) {
+
+        if((prevProps.goals !== undefined && this.props.goals !== undefined) && prevProps.goals.length !== this.props.goals.length) {
             this.setState({...this.state, loading: false})
         } else if (this.props.userId){
             this.setState({...this.state, loading: false})

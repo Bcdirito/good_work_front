@@ -13,7 +13,7 @@ export const getPartner = user => {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "Authorization": `${user.token}`
+                "Authorization": `${localStorage.token}`
             }
         })
         .then(res => res.json())
@@ -21,6 +21,7 @@ export const getPartner = user => {
             if (res.error){
                 alert(res.error)
             } else {
+                debugger
                 const partner = res.data.filter(partner => {
                   return Number(partner.relationships.user.data.id
                     ) === userId
@@ -41,7 +42,7 @@ export const createPartner = (data, user) => {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "Authorization": `${user.token}`
+                "Authorization": `${localStorage.token}`
             },
             body: JSON.stringify({
                 name: data.name,
@@ -61,7 +62,7 @@ export const createPartner = (data, user) => {
     }
 }
 
-export const updatePartner = (data, partner, user) => {
+export const updatePartner = (data, partner) => {
     let FETCH_URL = `${PARTNER_URL}/${partner.id}`
     return (dispatch) => {
         return fetch(FETCH_URL, {
@@ -69,7 +70,7 @@ export const updatePartner = (data, partner, user) => {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "Authorization": `${user.token}`
+                "Authorization": `${localStorage.token}`
             },
             body: JSON.stringify({
                 name: data.name,
@@ -87,15 +88,15 @@ export const updatePartner = (data, partner, user) => {
     }
 }
 
-export const destroyPartner = (partner, user) => {
+export const destroyPartner = (partner) => {
     let FETCH_URL = `${PARTNER_URL}/${partner.id}`
     return (dispatch) => {
-        return fetch(FETCH_URL, {
+        return fetch(`${PARTNER_URL}/${partner.id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "Authorization": `${user.token}`
+                "Authorization": `${localStorage.token}`
             }
         })
         .then(res => res.json())
@@ -109,16 +110,15 @@ export const destroyPartner = (partner, user) => {
     }
 }
 
-export const messagePartner = (subject, message, partner, user) => {
+export const messagePartner = (subject, message, partner) => {
     let MESSAGE_URL = `${PARTNER_URL}/${partner.id}/message`
-    console.log(MESSAGE_URL)
     return (dispatch) => {
         return fetch(MESSAGE_URL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "Authorization": `${user.token}`
+                "Authorization": `${localStorage.token}`
             },
             body: JSON.stringify({
                 subject: subject,

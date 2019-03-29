@@ -46,7 +46,7 @@ class Partner extends Component {
     submitHandler = e => {
         e.preventDefault()
         if (this.state.editForm === true){
-            this.props.updatePartner(this.state, this.props.partner, this.props.user)
+            this.props.updatePartner(this.state, this.props.partner)
         } else {
             this.props.createPartner(this.state, this.props.user)
         }
@@ -139,7 +139,6 @@ class Partner extends Component {
         <div className="partners">
             <NavContainer />
                 <h2 id="partnerHeading"> Partners </h2>
-                {/* {this.state.loading === true ? } */}
                 {this.state.addForm === false && this.props.partner === undefined ||this.state.addForm === false && this.props.partner.name === undefined ? <Button name="add partner" className="partnerButton" onClick={e => this.clickHandler(e)}>Add a Partner</Button> : null}
                 {this.props.partner !== undefined && this.state.addForm === false && this.state.editForm === false && this.state.messageForm === false ? this.renderCard() : null}
                 {this.state.addForm === true || this.state.editForm === true ? this.renderForm() : null}
@@ -158,11 +157,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getPartner: user => dispatch(getPartner(user)),
-        createPartner: (data, user) => dispatch(createPartner(data, user)),
-        updatePartner: (data, partner, user) => dispatch(updatePartner(data, partner, user)),
-        destroyPartner: (partner, user) => dispatch(destroyPartner(partner, user)),
-        messagePartner: (subject, message, partner, user) => dispatch(messagePartner(subject, message, partner, user))
+        getPartner: () => dispatch(getPartner()),
+        createPartner: (data) => dispatch(createPartner(data)),
+        updatePartner: (data, partner) => dispatch(updatePartner(data, partner)),
+        destroyPartner: (partner) => dispatch(destroyPartner(partner)),
+        messagePartner: (subject, message, partner) => dispatch(messagePartner(subject, message, partner))
     }
 }
 

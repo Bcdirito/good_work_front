@@ -2,40 +2,11 @@ export const addPartner = partner => ({type: "ADD_PARTNER", partner})
 
 export const editPartner = partner => ({type: "EDIT_PARTNER", partner})
 
-export const deletePartner = partner => ({type: "DELETE_PARTNER", partner})
+export const deletePartner = () => ({type: "DELETE_PARTNER"})
 
-const PARTNER_URL = "http://localhost:3001/api/v1/partners"
+const PARTNER_URL = "http://localhost:3000/api/v1/partners"
 
-export const getPartner = user => {
-    const userId = user.id
-    return (dispatch) => {
-        return fetch(PARTNER_URL, {
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                "Authorization": `${localStorage.token}`
-            }
-        })
-        .then(res => res.json())
-        .then(res => {
-            if (res.error){
-                alert(res.error)
-            } else {
-                debugger
-                const partner = res.data.filter(partner => {
-                  return Number(partner.relationships.user.data.id
-                    ) === userId
-                })
-                if (partner.length > 0){
-                    const userPartner = partner[0]
-                    dispatch(addPartner(userPartner))
-                }
-            }
-        })
-    }
-}
-
-export const createPartner = (data, user) => {
+export const createPartner = (data) => {
     return (dispatch) => {
         return fetch(PARTNER_URL, {
             method: "POST",
@@ -47,25 +18,22 @@ export const createPartner = (data, user) => {
             body: JSON.stringify({
                 name: data.name,
                 email: data.email,
-                user_id: user.id
             })
         })
         .then(res => res.json())
         .then(res => {
-            debugger
             if (res.error){
                 alert(res.message)
             } else {
-                dispatch(addPartner(res.data))
+                dispatch(addPartner(res))
             } 
         })
     }
 }
 
-export const updatePartner = (data, partner) => {
-    let FETCH_URL = `${PARTNER_URL}/${partner.id}`
+export const updatePartner = (data) => {
     return (dispatch) => {
-        return fetch(FETCH_URL, {
+        return fetch(`${PARTNER_URL}/update`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
@@ -82,16 +50,16 @@ export const updatePartner = (data, partner) => {
             if(res.error){
                 alert(res.error)
             } else {
-                dispatch(editPartner(res.data))
+                dispatch(editPartner(res))
             }
         })
     }
 }
 
 export const destroyPartner = (partner) => {
-    let FETCH_URL = `${PARTNER_URL}/${partner.id}`
+    let FETCH_URL = `${PARTNER_URL}/delete`
     return (dispatch) => {
-        return fetch(`${PARTNER_URL}/${partner.id}`, {
+        return fetch(FETCH_URL, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -104,14 +72,14 @@ export const destroyPartner = (partner) => {
             if (res.error){
                 alert(res.error)
             } else {
-                dispatch(deletePartner(partner))
+                dispatch(deletePartner())
             }
         })
     }
 }
 
-export const messagePartner = (subject, message, partner) => {
-    let MESSAGE_URL = `${PARTNER_URL}/${partner.id}/message`
+export const messagePartner = (subject, message) => {
+    let MESSAGE_URL = `${PARTNER_URL}/message`
     return (dispatch) => {
         return fetch(MESSAGE_URL, {
             method: "POST",

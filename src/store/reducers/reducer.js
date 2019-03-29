@@ -132,21 +132,18 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 partner: {
-                    id: partner.id,
-                    name: partner.attributes.name
+                    name: partner.name
                     ,
-                    email: partner.attributes.email
+                    email: partner.email
                 }
             }
 
         case "EDIT_PARTNER":
-            const partnerEdit = action.partner.attributes
             return {
                 ...state,
                 partner: {
-                    id: action.partner.id,
-                    name: partnerEdit.name,
-                    email: partnerEdit.email
+                    name: action.partner.name,
+                    email: action.partner.email
                 }
             }
 
@@ -168,6 +165,7 @@ const reducer = (state = initialState, action) => {
             } else {
                 fetchedDoctors = ["Sorry, no doctors found. Please try again"]
             }
+
             return {
                 ...state,
                 doctors: fetchedDoctors

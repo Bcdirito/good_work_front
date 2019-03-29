@@ -23,7 +23,7 @@ class DoctorPage extends Component {
   }
 
   componentDidUpdate = (prevProps) => {
-    if (prevProps.doctors !== undefined && prevProps.doctors.length !== this.props.doctors.length){
+    if (this.props.doctors !== undefined && ((this.props.doctors.length > 0 && prevProps.doctors === undefined) || (prevProps.doctors.length !== this.props.doctors.length))){
       if (typeof this.props.doctors[0] === "string"){
         alert(this.props.doctors[0])
           this.setState({...this.state, loading: false})
@@ -31,6 +31,7 @@ class DoctorPage extends Component {
           this.setState({...this.state, loading: false, doctors: true})
       }
     }
+
     if (this.props.user.id !== prevProps.user.id){
       this.props.getMyDoctors(this.props.user)
     }

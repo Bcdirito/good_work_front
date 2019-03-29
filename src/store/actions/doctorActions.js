@@ -28,7 +28,7 @@ export const getDoctors = location => {
     }
 }
 
-export const saveDoctor = (user, doctor) => {
+export const saveDoctor = (doctor) => {
     const practices = doctor.practices
     const name = `${doctor.profile.first_name} ${doctor.profile.last_name}`
     const bio = doctor.profile.bio
@@ -40,10 +40,9 @@ export const saveDoctor = (user, doctor) => {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "Authorization": `${user.token}`
+                "Authorization": `${localStorage.token}`
             },
             body: JSON.stringify({
-                user_id: user.id,
                 name: name,
                 bio: bio,
                 image: image_url,
@@ -63,13 +62,13 @@ export const saveDoctor = (user, doctor) => {
     }
 }
 
-export const fetchMyDoctors = user => {
+export const fetchMyDoctors = () => {
     return (dispatch) => {
         return fetch(FETCH_URL, {
             headers: {
                 "Content-Type": "application/json",
                 "Accepts": "application/json",
-                "Authorization": `${user.token}`
+                "Authorization": `${localStorage.token}`
             }
         })
         .then(res => res.json())
@@ -94,7 +93,7 @@ export const removeDoctor = (user, doctor) => {
             headers: {
                 "Content-Type": "application/json",
                 "Accepts": "application/json",
-                "Authorization": `${user.token}`
+                "Authorization": `${localStorage.token}`
             },
             body: JSON.stringify({
                 user: user

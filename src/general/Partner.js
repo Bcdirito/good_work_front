@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
-import { getPartner, createPartner, updatePartner, destroyPartner, messagePartner} from "../store/actions/partnerActions"
+import {createPartner, updatePartner, destroyPartner, messagePartner} from "../store/actions/partnerActions"
 import {Form, Input, Button, Card, TextArea} from "semantic-ui-react"
 import NavContainer from "../navigation/NavContainer"
 class Partner extends Component {
@@ -17,23 +17,11 @@ class Partner extends Component {
 
     componentDidMount(){
         if (this.props.user.id){
-            if(this.props.partner === undefined || this.props.partner.id === undefined){
-                this.props.getPartner(this.props.user)
-            }
-        } else {
             this.setState({
                 ...this.state,
                 name: this.props.partner.name,
                 email: this.props.partner.email
             })
-        }
-    }
-
-    componentDidUpdate(prevProps){
-        if(this.props !== prevProps && this.props.partner.name === undefined){
-            if (this.props.partner.id === undefined){
-                this.props.getPartner(this.props.user)
-            }
         }
     }
 
@@ -48,7 +36,7 @@ class Partner extends Component {
         if (this.state.editForm === true){
             this.props.updatePartner(this.state, this.props.partner)
         } else {
-            this.props.createPartner(this.state, this.props.user)
+            this.props.createPartner(this.state)
         }
         this.clearState()
     }
@@ -70,7 +58,7 @@ class Partner extends Component {
 
     messageHandler = e => {
         e.preventDefault()
-        this.props.messagePartner(this.state.subject, this.state.message, this.props.partner, this.props.user)
+        this.props.messagePartner(this.state.subject, this.state.message)
         this.clearState()
     }
 
@@ -157,11 +145,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getPartner: () => dispatch(getPartner()),
         createPartner: (data) => dispatch(createPartner(data)),
         updatePartner: (data, partner) => dispatch(updatePartner(data, partner)),
         destroyPartner: (partner) => dispatch(destroyPartner(partner)),
-        messagePartner: (subject, message, partner) => dispatch(messagePartner(subject, message, partner))
+        messagePartner: (subject, message) => dispatch(messagePartner(subject, message))
     }
 }
 

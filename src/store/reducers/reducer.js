@@ -62,7 +62,6 @@ const reducer = (state = initialState, action) => {
             }
 
         case "STORE_TASKS":
-            debugger
             return {
                 ...state,
                 tasks: action.tasks
@@ -77,10 +76,12 @@ const reducer = (state = initialState, action) => {
         case "EDIT_TASK":
             const editedTasks = state.tasks.map(task => {
                 if (action.task.id === task.id) {
-                    return {...task, ...action.task}
+                    return action.task
+                } else {
+                    return task
                 }
-                return task
             })
+
             return {
                 ...state,
                 tasks: editedTasks

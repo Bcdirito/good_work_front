@@ -8,33 +8,7 @@ export const editTask = task => ({type: "EDIT_TASK", task})
 
 const TASK_URL = "http://localhost:3000/api/v1/tasks"
 
-// http://localhost:3000/
 // https://git.heroku.com/good-work-backend.git/
-
-// export const getTasks = (list, user) => {
-//     const id = list.id
-//     return (dispatch) => {
-//         return fetch (TASK_URL, {
-//             headers: {
-//                 "Content-Type": "application/json",
-//                 "Accepts": "application/json",
-//                 "Authorization": `${user.token}`
-//             }
-//         })
-//         .then(res => res.json())
-//         .then(res => {
-//             if (res.errors){
-//                 console.log(res.errors)
-//             } else {
-//                 res.data.forEach(task => {
-//                     if (task.relationships.list.data !== null && task.relationships.list.data.id === id){
-//                         dispatch(loadTask(task))
-//                     }
-//                 })
-//             }
-//         })
-//     }
-// }
 
 export const createTask = (task, list) => {
     return (dispatch) => {
@@ -52,18 +26,18 @@ export const createTask = (task, list) => {
         })
     })
     .then(res => res.json())
-    .then(res => dispatch(addTask(res.data)))
+    .then(res => dispatch(addTask(res)))
     .catch(console.error)
 }}
 
-export const destroyTask = (id, user) => {
+export const destroyTask = (id) => {
     return (dispatch) => {
         return fetch(`${TASK_URL}/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "Authorization": `${user.token}`
+                "Authorization": `${localStorage.getItem("token")}`
             },
         })
         .then(res => res.json())
@@ -77,7 +51,7 @@ export const destroyTask = (id, user) => {
     }
 }
 
-export const updateTask = (data, id, listId) => {
+export const updateTask = (data, id) => {
     return (dispatch) => {
         return fetch(`${TASK_URL}/${id}`, {
             method: "PATCH",
@@ -87,14 +61,12 @@ export const updateTask = (data, id, listId) => {
                 "Authorization": `${localStorage.token}`
             },
             body: JSON.stringify({
-                list_id: listId,
                 title: data.title,
                 content: data.content
             })
         })
         .then(res => res.json())
-        .then(res => {
-            dispatch(editTask(res.data))})
+        .then(res => {dispatch(editTask(res))})
         .catch(console.error)
     }
 }

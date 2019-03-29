@@ -6,8 +6,8 @@ import {updateTask} from "../store/actions/taskActions"
 class TaskCard extends Component {
     state = {
         editData: {
-            title: this.props.task.attributes.title,
-            content: this.props.task.attributes.content
+            title: this.props.task.title,
+            content: this.props.task.content
         }
     }
 
@@ -25,15 +25,15 @@ class TaskCard extends Component {
 
     submitHandler = e => {
         e.preventDefault()
-        this.props.updateTask(this.state.editData, Number(this.props.task.id), Number(this.props.listId), this.props.user)
+        this.props.updateTask(this.state.editData, Number(this.props.task.id))
         this.resetComponent()
     }
 
     resetComponent = () => {
         this.setState({ 
             editData: {
-                title: this.props.task.attributes.title, 
-                content: this.props.task.attributes.content
+                title: this.props.task.title, 
+                content: this.props.task.content
             }}, () => this.props.resetComponent())
     }
     

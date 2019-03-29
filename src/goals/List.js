@@ -39,7 +39,7 @@ class List extends Component {
     }
 
     finishTask = (e) => {
-        const id = Number(e.target.parentElement.parentElement.id)
+        const id = Number(e.target.dataset.id)
         let result = window.confirm("Did You Finish This Task, You Rock Star?")
         if (result === true) {
             alert("I'm So Proud of You! You Amaze Me!")
@@ -83,7 +83,7 @@ class List extends Component {
             ...this.state,
             featuredClick: !this.state.featuredClick,
             featuredTask: this.props.tasks.find(task => {
-                return task.id === e.target.parentElement.parentElement.id
+                return task.id === Number(e.target.dataset.id)
             })
         })
     }
@@ -103,14 +103,15 @@ class List extends Component {
             tasks = this.props.tasks
         }
         
+
         if (tasks !== undefined && tasks.length !== 0) {
-            debugger
            taskComps = tasks.map(task => {
                         return <Table.Body>
-                            <Table.Row key={task.id} id={task.id}>
+                            <Table.Row key={task.id}>
                                 <Table.Cell>{task.title}</Table.Cell>
                                 <Table.Cell>{task.content}</Table.Cell>
-                                <Table.Cell><Button className="taskButton" id="finishedTask" onClick={e => this.finishTask(e)}>Finished!</Button><Button className="taskButton" id="editTask" onClick={e => this.featureTaskCard(e)}>Edit Task</Button></Table.Cell>
+                                <Table.Cell><Button data-id={task.id}
+                                className="taskButton" id="finishedTask" onClick={e => this.finishTask(e)}>Finished!</Button><Button data-id={task.id}className="taskButton" id="editTask" onClick={e => this.featureTaskCard(e)}>Edit Task</Button></Table.Cell>
                             </Table.Row>
                         </Table.Body>
                 })
@@ -137,7 +138,7 @@ class List extends Component {
                 <div className="underTaskButton">
                     {this.state.clicked === false && this.state.featuredClick === false && this.state.loading === false ?<Button id="addTask"  onClick={this.buttonHandler}>Add A Task</Button> : null}
                     {this.state.clicked === false && this.state.featuredClick === false && this.state.loading === false ? <Button id="backToGoal"  onClick={this.props.resetContainer}>Back to Goal</Button> : null}
-                    {taskComps !== undefined && (this.state.clicked === false && this.state.loading === false) ? <Button id="finishedList"  onClick={this.props.finishList}>Finished!</Button>: null}
+                    {(taskComps !== undefined && taskComps.length === 0) && (this.state.clicked === false && this.state.loading === false) ? <Button id="finishedList"  onClick={this.props.finishList}>Finished!</Button>: null}
                 </div>
                 {this.state.clicked === true ? this.renderForm() : null}
                 {this.state.featuredTask.id ? this.renderTaskCard() : null}

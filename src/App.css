@@ -473,7 +473,7 @@ Button {
   width: 100%;
   margin-top: 0;  
   position: fixed;
-  top: 50%;
+  top: 57%;
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);

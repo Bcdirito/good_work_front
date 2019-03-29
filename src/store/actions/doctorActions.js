@@ -1,5 +1,7 @@
 export const addDoctors = doctors => ({type: "ADD_DOCTORS", doctors})
 
+export const clearDoctors = () => ({type: "CLEAR_DOCTORS"})
+
 export const addPersonalDoctor = doctor => ({type: "ADD_PERSONAL", doctor})
 
 export const storePersonalDoctors = doctors => ({ type: "STORE_PERSONAL", doctors})
@@ -85,7 +87,7 @@ export const fetchMyDoctors = () => {
     }
 }
 
-export const removeDoctor = (user, doctor) => {
+export const removeDoctor = (doctor) => {
     const id = doctor.profile.id
     return (dispatch) => {
         return fetch(`${FETCH_URL}/${id}`, {
@@ -94,10 +96,7 @@ export const removeDoctor = (user, doctor) => {
                 "Content-Type": "application/json",
                 "Accepts": "application/json",
                 "Authorization": `${localStorage.token}`
-            },
-            body: JSON.stringify({
-                user: user
-            })
+            }
         })
         .then(res => res.json())
         .then(res => {

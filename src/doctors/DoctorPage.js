@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux"
-import {getDoctors, saveDoctor, fetchMyDoctors, removeDoctor} from "../store/actions/doctorActions"
+import {getDoctors, clearDoctors, saveDoctor, fetchMyDoctors, removeDoctor} from "../store/actions/doctorActions"
 import {Button, Loader} from "semantic-ui-react"
 import NavContainer from "../navigation/NavContainer"
 import DoctorSearchForm from "./DoctorSearchForm"
@@ -17,13 +17,13 @@ class DoctorPage extends Component {
   }
 
   componentDidMount = () => {
-    if (this.props.myDoctors === undefined && this.props.user.id){
+    if (this.props.myDoctors === undefined && localStorage.token){
       this.props.getMyDoctors(this.props.user)
     }
   }
 
   componentDidUpdate = (prevProps) => {
-    if (this.props.doctors !== undefined && ((this.props.doctors.length > 0 && prevProps.doctors === undefined) || (prevProps.doctors.length !== this.props.doctors.length))){
+    if (this.props.doctors !== undefined && ((this.props.doctors.length >= 0 && prevProps.doctors === undefined) || (prevProps.doctors.length !== this.props.doctors.length))){
       if (typeof this.props.doctors[0] === "string"){
         alert(this.props.doctors[0])
           this.setState({...this.state, loading: false})
@@ -32,13 +32,14 @@ class DoctorPage extends Component {
       }
     }
 
-    if (this.props.user.id !== prevProps.user.id){
-      this.props.getMyDoctors(this.props.user)
+    if (localStorage.token && (this.props.myDoctors === undefined)){
+      this.props.getMyDoctors()
     }
   }
 
   searchHandler = (e, data) => {
     e.preventDefault()
+    this.props.clearDoctors()
     this.loaderHandler()
     const state = data.state.toLocaleLowerCase()
     const city = data.city.toLocaleLowerCase().split(" ").join("-")
@@ -47,8 +48,8 @@ class DoctorPage extends Component {
   }
 
   saveHandler = (doctor) => {
-    if (this.props.user.id){
-      this.props.myDoctor(this.props.user, doctor)
+    if (localStorage.token){
+      this.props.myDoctor(doctor)
     } else {
       this.goToLogin()
     }
@@ -137,9 +138,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchDoctors: (location) => dispatch(getDoctors(location)),
-    myDoctor: (user, doctor) => dispatch(saveDoctor(user, doctor)),
-    getMyDoctors: (user) => dispatch(fetchMyDoctors(user)),
-    deleteDoc: (user, doctor) => dispatch(removeDoctor(user, doctor))
+    clearDoctors: () => dispatch(clearDoctors()),
+    myDoctor: (doctor) => dispatch(saveDoctor(doctor)),
+    getMyDoctors: () => dispatch(fetchMyDoctors()),
+    deleteDoc: (doctor) => dispatch(removeDoctor(doctor))
   }
 }
 

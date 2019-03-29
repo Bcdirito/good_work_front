@@ -170,6 +170,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 doctors: fetchedDoctors
             }
+
+        case "CLEAR_DOCTORS":
+            return {
+                ...state,
+                doctors: []
+            }
         
         case "ADD_PERSONAL":
             return {

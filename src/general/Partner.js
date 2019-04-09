@@ -127,7 +127,7 @@ class Partner extends Component {
         <div className="partners">
             <NavContainer />
                 <h2 id="partnerHeading"> Partners </h2>
-                {this.state.addForm === false && this.props.partner === undefined ||this.state.addForm === false && this.props.partner.name === undefined ? <Button name="add partner" className="partnerButton" onClick={e => this.clickHandler(e)}>Add a Partner</Button> : null}
+                {(this.state.addForm === false && this.props.partner === undefined) ||(this.state.addForm === false && this.props.partner.name === undefined) ? <Button name="add partner" className="partnerButton" onClick={e => this.clickHandler(e)}>Add a Partner</Button> : null}
                 {this.props.partner !== undefined && this.state.addForm === false && this.state.editForm === false && this.state.messageForm === false ? this.renderCard() : null}
                 {this.state.addForm === true || this.state.editForm === true ? this.renderForm() : null}
                 {this.state.messageForm === true ? this.renderMessageForm() : null}

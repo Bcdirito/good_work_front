@@ -4,9 +4,7 @@ export const deleteList = list => ({type: "DELETE_LIST", list})
 
 export const loadLists = lists => ({type: "LOAD_LISTS", lists})
 
-const LIST_URL = "http://localhost:3000/api/v1/lists"
-
-// https://good-work-backend.herokuapp.com/api/v1/lists
+const LIST_URL = "https://good-work-backend.herokuapp.com/api/v1/lists"
 
 export const createList = (list, goal) => {
     return (dispatch) => {

@@ -6,9 +6,7 @@ export const storeTasks = tasks => ({type: "STORE_TASKS", tasks})
 
 export const editTask = task => ({type: "EDIT_TASK", task})
 
-const TASK_URL = "http://localhost:3000/api/v1/tasks"
-
-// https://git.heroku.com/good-work-backend.git/
+const TASK_URL = "https://good-work-backend.herokuapp.com/api/v1/tasks"
 
 export const createTask = (task, list) => {
     return (dispatch) => {

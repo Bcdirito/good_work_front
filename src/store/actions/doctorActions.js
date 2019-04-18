@@ -16,7 +16,7 @@ const skipLimit = "&skip=0&limit=100"
 
 const API_KEY = "&user_key=" + process.env.REACT_APP_API_KEY
 
-const FETCH_URL = "http://localhost:3000/api/v1/doctors"
+const FETCH_URL = "https://good-work-backend.herokuapp.com/api/v1/doctors"
 
 export const getDoctors = location => {
     const FETCH_URL = DOCTOR_URL + "&location=" + location + skipLimit + API_KEY

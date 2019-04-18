@@ -6,7 +6,7 @@ export const featureGoal = goal => ({type: "FEATURE_GOAL", goal})
 
 export const loadGoals = goals => ({type: "LOAD_GOALS", goals})
 
-const GOAL_URL = "http://localhost:3000/api/v1/goals"
+const GOAL_URL = "https://good-work-backend.herokuapp.com/api/v1/goals"
 
 export const selectGoal = (id) => {
     let FETCH_URL = `${GOAL_URL}/${id}`

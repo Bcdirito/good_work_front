@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "npm": "6.4.1",
-    "node": "6.11.2"
+    "npm": "6.9.0",
+    "node": "11.2.0"
   },
   "dependencies": {
     "braces": "^2.3.2",
@@ -17,7 +17,8 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.84.0"
+    "semantic-ui-react": "^0.84.0",
+    "tar": "^4.4.8"
   },
   "scripts": {
     "start": "react-scripts start",

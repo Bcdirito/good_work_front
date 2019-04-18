@@ -88,6 +88,8 @@ export const fetchMyDoctors = () => {
 }
 
 export const removeDoctor = (doctor) => {
+    console.log(doctor)
+    debugger
     const id = doctor.profile.id
     return (dispatch) => {
         return fetch(`${FETCH_URL}/${id}`, {

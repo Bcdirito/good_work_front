@@ -12,10 +12,8 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch(action.type) {
         case "LOAD_GOALS":
-            return {
-                ...state,
-                goals: [...action.goals]
-            }
+            if (action.goals.data) return {...state, goals: [...action.goals.data]}
+            else return {...state, goals: [...action.goals]}
 
         case "ADD_GOAL":
             return {

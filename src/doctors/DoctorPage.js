@@ -58,7 +58,7 @@ class DoctorPage extends Component {
   deleteHandler = (doctor) => {
     let result = window.confirm("Are you sure you want to remove this doctor?")
     if (result === true){
-      this.props.deleteDoc(this.props.user, doctor)
+      this.props.deleteDoc(doctor)
       alert("Doctor Removed!")
     }
   }
@@ -90,7 +90,7 @@ class DoctorPage extends Component {
   }
 
   myDocHandler = () => {
-    if (this.props.myDoctors.data){
+    if (this.props.myDoctors.length === 0){
       this.props.user.id ? this.searchForDoctors() : this.goToLogin()
     } else {
       this.setState({...this.state, myDoc: true, doctors: false})
